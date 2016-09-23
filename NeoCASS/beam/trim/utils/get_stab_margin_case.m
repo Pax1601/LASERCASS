@@ -1,0 +1,99 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copyright (C) 2008 - 2011 
+% 
+% Sergio Ricci (sergio.ricci@polimi.it)
+%
+% Politecnico di Milano, Dipartimento di Ingegneria Aerospaziale
+% Via La Masa 34, 20156 Milano - ITALY
+% 
+% This file is part of NeoCASS Software (www.neocass.org)
+%
+% NeoCASS is free software; you can redistribute it and/or
+% modify it under the terms of the GNU General Public
+% License as published by the Free Software Foundation;
+% either version 2, or (at your option) any later version.
+%
+% NeoCASS is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied
+% warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+% PURPOSE.  See the GNU General Public License for more
+% details.
+%
+% You should have received a copy of the GNU General Public
+% License along with NeoCASS; see the file GNU GENERAL 
+% PUBLIC LICENSE.TXT.  If not, write to the Free Software 
+% Foundation, 59 Temple Place -Suite 330, Boston, MA
+% 02111-1307, USA.
+%
+%*******************************************************************************
+%  SimSAC Project
+%
+%  NeoCASS
+%  Next generation Conceptual Aero Structural Sizing
+%
+%                      Sergio Ricci             <ricci@aero.polimi.it>
+%                      Luca Cavagna             <cavagna@aero.polimi.it>
+%                      Luca Riccobene           <riccobene@aero.polimi.it>
+%                      Alessandro De Gaspari    <degaspari@aero.polimi.it>
+%
+%  Department of Aerospace Engineering - Politecnico di Milano (DIAPM)
+%  Warning: This code is released only to be used by SimSAC partners.
+%  Any usage without an explicit authorization may be persecuted.
+%
+%*******************************************************************************
+%
+% MODIFICATIONS:
+%     DATE        VERS      PROGRAMMER      DESCRIPTION
+%     121017      2.1.472   L.Cavagna       Creation
+%     121014      2.1.476   L.Riccobene     Modification
+%
+%*******************************************************************************
+%
+% function  [NEUX, MNEUX, SMARG, SMARGI] = get_stab_margin_case(ref_point, CG, CREF, SREF, FUSD, FUSL, STABDER)
+%
+%   DESCRIPTION: Compute longitudinal static stability margin
+%
+%         INPUT: NAME           TYPE       DESCRIPTION
+
+%                                       
+%        OUTPUT: NAME           TYPE       DESCRIPTION
+
+%    REFERENCES:
+%
+%*******************************************************************************
+function [NEUX, MNEUX, SMARG, SMARGI] = get_stab_margin_case(ref_point, CG, CREF, SREF, FUSD, FUSL, STABDER)
+%
+NEUX = 0;
+MNEUX = 0; 
+SMARG = 0;
+SMARGI = 0;
+dCmda_fus = 0;
+%
+if (~isempty(FUSD))
+  % Compute fuelage volume (considered as a cylinder from nose to tail)
+  V = (pi*(FUSD/2)^2)*FUSL;
+  % Very rough approximation
+  dCmda_fus = 2*V/SREF/CREF;
+end
+% neutral point: (cm/alpha) at P = 0 (aircraft)
+NEUX = ref_point(1)/CREF - (STABDER.Alpha.dcmm_dalpha + dCmda_fus)/STABDER.Alpha.dcl_dalpha;
+% maneuver neutral point: (cm/delta_elev) at P = 0
+nc = length(STABDER.Control.Name);
+CFOUND = 0;
+for i=1:nc
+  if strcmp(STABDER.Control.Name{i}(1:4),'elev')
+      MNEUX = ref_point(1)/CREF - STABDER.Control.dcmm_dDelta(i)/STABDER.Control.dcl_dDelta(i);
+      CFOUND = 1;
+    break;
+  end
+end
+% static margin
+SMARG = (NEUX - CG(1)/CREF);
+% static margin index
+if (CFOUND)
+  SMARGI = (NEUX - CG(1)/CREF)/(MNEUX-NEUX);
+else
+  SMARGI = 'Not available';
+end
+%
+end                                          

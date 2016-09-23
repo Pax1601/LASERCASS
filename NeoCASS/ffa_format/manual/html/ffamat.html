@@ -1,0 +1,1814 @@
+<HTML>
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+
+<style type="text/css">
+
+  body{ margin-left: 5%; margin-right: 5%; 
+        color: black; background: rgb(240,240,255);
+	font-family: Verdana, Ariel, sans-serif }
+	
+  pre { white-space: pre; font-family: "Courier new", monospace", monospace; }
+
+  .plain { color: rgb(0,0,0);
+           border: none; padding: 0.5em; width: 100% }
+  pre.plain { font-family:"Courier new", monospace; white-space: pre; }
+  
+  .bold { font: bold  
+          color: rgb(0,0,0);
+          border: none;
+          padding: 0.5em;
+          width: 100%;
+          background-color: rgb(225,225,255) }
+  pre.bold { font-family: "Courier new", monospace; white-space: pre; }
+  
+  A { text-decoration: none }
+  
+</style>
+
+<TITLE>On-line Maunal for the FFA Matlab Toolbox </TITLE>
+</HEAD>
+
+<BODY>
+
+<h1><a name="top">FFA Matlab Toolbox - Version 1.5</a></h1>
+
+<h2>Package Description</h2>
+<p>
+The <I>FFA Matlab Toolbox</I> is a set of special <I>Matlab</I> functions for handling <I>FFA-format</I> 
+datasets. The toolbox contains functions for creating and manipulating these datasets in <I>Matlab</I> and 
+for their import to and export from the <I>Matlab</I> workspace as <I>FFA-format</I> files. 
+The <I>FFA Matlab Toolbox</I> functions can be used either as interactive commands, or as functions in 
+another <I>Matlab</I> program.
+<!--
+</p><p><b>
+   The <I>FFA Matlab Toolbox</I> is available as a source download from the Edge homepage: <a href=http://www.edge.foi.se target="_blank"> www.Edge.FOI.se</a>. 
+</b></p>-->
+<p>        
+  <b>CONTACT: 
+Jonathan.Smith@foi.se, +44-8-5550-3214, FOI Stockholm. www.foi.se</b> 
+</p>
+<br><br><br><br><br>
+<h2><a name="getsta">Getting Started</a></h2> 
+
+<h3>Installation</h3>
+
+  The <i>FFA Matlab Toolbox</i> is supplied as "tar" archive file. Installation instructions are 
+  included in this archive as a plan text README file. All Matlab source files for the toolbox 
+  must reside in a directory called <B>ffa_format</B>  
+  and that directory should be on your Matlab <b>PATH</b>.
+ 
+<h3>Online Help</h3>
+
+  This browser-based manual is recommended. As for built-in Matlab functions, direct help
+  text is also provided. To get information
+  on a function called, say, <b>ffa_<i>whatever</i></b> you can also simply enter the command 
+  <b>help ffa_<i>whatever</i></b>.  Enter <b>help ffa</b> or simply <b>ffa</b> at the Matlab prompt
+  and you'll get a quick summary of the main functions in this toolbox.
+  
+  <BR><BR>      
+  
+<h3>FFA Matlab Functions</h3>
+<P>
+  The <B>FFA Matlab Toolbox</B> is a set of special Matlab functions for handling FFA
+  datasets. The most useful of these are the <b>Command Functions</b>. These functions 
+  are divided into four groups.<BR><BR>
+  
+  <b>Import/Export</b><BR>
+  - import to and export from the Matlab workspace as FFA-format files<BR><BR>
+   
+  <b>Inspection</b><BR>
+  - listing and comparing datasets<BR><BR>
+  
+  <B>Data Access</B><BR>
+  - finding data items and gettting them in and out of datasets<BR><BR>
+  
+  <B>Dataset Manipulation</B><BR>
+  - building and modifying dataset stuctures<BR><BR>
+    
+ The best way to learn how these functions work is to try them out. To find out about
+ any one function, use the online help (see above) or this manual. 
+ <BR><BR>
+ 
+ 
+<h3>Example FFA-format datafile</h3>
+  
+  To help illustrate how to use the various functions in this toolbox, a sample
+  FFA-format intput file is provided: <B>example.bfil</B>. You can copy this file 
+  into your current directory using this command. 
+<pre class="bold">
+>> ffa_helpdesk('dat')</pre>
+  <BR><BR>
+ 
+ 
+ 
+ 
+<h3>Matlab Source Code</h3>
+You should have <B>read access</B> to the <B>Matlab source code</B> of all the 
+functions in this package. To find out where these files are located, use the the 
+Matlab <B>which</B> command.  For example, to locate the source code for <B>ffa_list</B>
+enter <B>which ffa_list</B> at the Matlab prompt. 
+<BR><BR>
+<hr align=center noshade><br><br><br><br>
+
+
+<h2><a name="ffa_formatlab">FFA Matlab datasets</a></h2> 
+<p>
+      The <B>FFA</B> data format is a standard for heirarchical, link-list, data-structures 
+      as defined by <B>FFA</B>, the Aeronautics division of <B>FOI</B>. 
+      The accronym <B>FFA</B> stands for <I><B>Flexible Format Architecture</B></I>, 
+      the data-structure and for <I><B>FlygtekniskFörsöksAnstalten</B></I> 
+      the establishemt where it was invented. 
+</P><p> 
+      The FFA standard format is used in several major FOI-developed programs: 
+      the CFD systems <B>Edge</B> and <B>Euranus</B> and the IR ray tracing system <b>SIGGE</b>. 
+      Full details of FFA standard are given in the Edge Manual which can be found on
+      <a href=http://www.edge.foi.se target="_blank"> www.Edge.FOI.se </a>.
+</p><p>  
+      Within the Matlab environment, a FFA datasets are represented by nested cell-arrays. 
+      A cell-array is a special Matlab datatype. Each element of a cell-array can contain 
+      a varable of any type such as matrix, string or (!) another cell-array. For further 
+      explanation, see the Matlab manuals. 
+</P>
+<BR>
+<h3>FFA data-structure arrays</h3>
+<P>    
+   The Matlab representation of an FFA dataset comprises a hierarchy of 1D cell-arrays. 
+   At each each "level" of the data-structure there is a 1x5-cell array which is here 
+   denoted as <b>ds</b>. The contents of the five cells of this array are as follows.
+</P>    
+ <pre class="bold">
+   ds{1,1} :   name-string (16-chars)
+   
+   ds{1,2} :   type-string ( 4-chars)
+   
+   ds{1,3} :   [ndim nsiz nsub]    a vector of integers giving the "dimension"
+                                   and "size" of the data/matrix at this level 
+				   and the number of sub-datasets at the next.
+			       
+   ds{1,4} :   data/matrix  for this level ( usually a matrix or a string but
+                                             may also be a cell-array of strings )
+   
+   ds{1,5} :   cell-array  (nsub x 1) each cell of which contains
+                                      another cell-array just like "ds" ... and so on! 
+ </pre>   
+ <P>                  
+   This first two cells of <b>ds</b> each contain a simple string. The first is the dataset
+   name and the second contains a code defining the data type. 
+   The allowed values for the data type code are given below. 
+ </P> 
+ <pre class="bold">
+   ----------------------------------------------------------------------------
+   FFA-format data-type code (char*4 string)
+   ----------------------------------------------------------------------------
+   char(1)               char(2)                  char(3)
+   ----------------------------------------------------------------------------
+   B  binary*1           I  descriptor            N  node values
+   I  integer*4          F  field                 F  face values
+   R  real*4             B  boundary info         C  cell-centre value
+   D  real*8             C  constants          
+   A  character*1        T  data tables        --------------------------------   
+   S  character*16       L  data list             char(4)  not in general use
+   L  character*72                             --------------------------------
+   N  no data
+   ----------------------------------------------------------------------------
+   NOTE   Only char(1) is used by the functions in FFA Matlab Toolbox. 
+   ----------------------------------------------------------------------------
+</pre> 
+<P>
+  Cell-4 of <b>ds</b> contains a data matrix and cell 3 contains a vector of three integers.
+  The first two integers give the dimensions of the data matrix (in reverse order).  
+  For example, if the data matrix, in cell-4, is a <b>197 x 3</b> array then the 
+  vector in cell-3 is <b>[ 3 197 nsub ]</b>. If the data matrix is empty the vector 
+  is <b>[ 0 0 nsub ]</b>. 
+</P> 
+<P>
+  The third integer in the cell-3 vector is <b>nsub</b> the number of "sub-datasets" 
+  and the size of the <b>1xnsub</b> cell-array stored in cell-5. Each cell of the 
+  array stored in cell 5 of <b>ds</b> contains either an empty cell-array, or another 
+  "FFA dataset", that is, another cell array like <b>ds</b>. 
+</P> 
+<P>
+  The data-structure described above exactly reproduces the FFA standard.
+</P> 
+<BR>
+  <h3>FFA pointer arrays</h3>
+<P>  
+   Any cell in an FFA dataset "tree" can be referenced directly using the 
+   standard Matlab syntax for cell-arrays. For example, the assignment 
+   statements 
+</P>
+<pre class="bold">
+>> name = ds{1,5}{3,5}{4,5}{2,1};
+>> data = ds{1,5}{3,5}{4,5}{2,4}; 
+</pre>
+<P>
+   extract a name and data-matrix located in a third-level branch of the 
+   data-structure <b>ds</b>. However, to avoid having to write such clumsy 
+   expressions, a system of <b>pointers</b> is used. Using pointers, the 
+   example above can be written as
+</P>
+<pre class="bold">
+>> ip = [3 4 2];
+>> name = ffa_get(ds,ip,'name');
+>> data = ffa_get(ds,ip);
+</pre>
+<P>
+   where <B>ip</B> is the pointer. The function <B>ffa_get</B> takes care of all the 
+   messy cell-reference syntax. Full details of <B>ffa_get</B> are presented in the 
+   function reference section (see side-panel).
+</P> 
+<P>
+   Pointer vectors, like <B>ip</B> in the example above, are generated
+   automatically using the function <B>ffa_list</B>. For example, for a datset
+   <B>ds</B>, the pointers can be extracted to a cell-array <B>ps</B> like so.
+</P> 
+<pre class="bold">
+>> ps = ffa_list(ds); 
+>> ps = ffa_list(ds);
+================================================================================
+     1 N   ---         0 x 0    3/  wall
+     2 IB  ---         6 x 1          index            1 41 1 17 5 5
+     3 RFN ---       697 x 3          coordinates
+     4 RFC ---       640 x 1          pressure
+================================================================================
+>> ps'
+ 
+ans =
+ 
+     []    [1]    [2]    [3]
+</pre>
+<P> 
+  Notice that for the first "sub-dataset", called "wall", the "pointer" is 
+  [], the empty matrix. The is true for all FFA-datasets. 
+</P>
+<P>
+  The "pointer" for the "coordintes" sub-dataset is <B>ps{3}</B> (=[2]) so to 
+  extract this data and plot it we could write something like
+</P>
+<pre class="bold">
+>> xyz = ffa_get(ds,ps{3}); 
+>> plot3(xyz(:,1),xyz(:,2),xyz(:,3),'.');
+</pre> 	
+<P>
+  We could, of course, use "2" instead of "ps{3}" in this case. However, 
+  generally it is much easier to use cell-arrays of pointers generated by 
+  the function <B>ffa_list</B>, like "ps" in the example above.   
+</P>
+<BR><BR>
+<hr align=center noshade><br><br><br><br>
+
+<h2><a name="comfns">FFA Command Functions</a></h2> 
+
+<p>The FFA Command Functions are the ones most frequently used.<br>
+For information on any function, click it's name in the panel on the left.</p>
+<pre class="bold">
+  Import/Export
+   ffaaload       -   read an ASCII FFA-format file 
+   ffabload       -   read a binary FFA-format file 
+   ffa_load       -   read a binary FFA-format file (without listing it)  
+   ffa_dump       -   write a Matlab FFA-dataset out to a binary file 
+
+  Inspection
+   ffa_list       -   list dataset contents / get pointers
+   ffa_diff       -   compare two datasets
+
+  Data Access
+   ffa_get        -   extract items from a dataset
+   ffa_put        -   modify/place items in a dataset
+   ffa_find       -   find sub-datasets by name type or dimesion
+   
+  Datset Manipulation
+   ffa_create     -   creates a new dataset with no sub-datasets
+   ffa_getsub     -   extract a complete sub-dataset
+   ffa_putsub     -   build-in a new sub-dataset
+   ffa_delsub     -   delete a sub-datset 
+
+  HELP                is also available using commands like this ...
+   
+  >> help ffa_whatever
+  
+
+</pre><br><br><br><br><br><br>
+<hr align=center noshade><br><br><br><br>
+
+<h2><a name="ffaaload">ffaaload</a></h2>
+<p>
+ This function uses the program 'ffaa2b' in the <b>Edge</b> package.
+ It can be used, for example, to load the main (.ainp) Edge input 
+ file or the (.aboc) boundary data file.</p>
+<pre class="bold">
+ FFAALOAD  loads an FFA dataset from an ASCII file 
+
+ Usage:
+
+       [ds,ps] = ffaaload(filename,[option])
+
+        ds     :   dataset
+        ps     :   pointers 
+        
+ The pointer array, 'ps', is used by 'ffa_get' and other functions.
+
+ Option:   'mute' supresses detailed screen messages
+
+ Example:
+
+      [ds,ps] = ffaaload('massive.ainp','mute');
+
+ Error:  On error, both 'ds' & 'ps' are returned empty [].
+
+</pre>
+<p> <b>WARNING</b><br> Datasets with 
+ multiple strings are not handled correctly by this version of the FFA toolbox.
+ This will be corrected as soon as possible.
+</p>
+<br><br><br>
+
+
+<h2><a name="ffabload">ffabload</a></h2>
+<p> This function combines the operations of <b>ffa_load</b> and </b>ffa_list</b> 
+ to load and list an FFA dataset from a binary file. </p>
+<pre class="bold">
+  FFABLOAD loads an FFA dataset from file 
+  
+  Usage:   [ds,ps,ie] = ffabload(filename[,opt[,machinetype]])
+   
+  Arguments:   filename       filename string
+               opt            'mute' or ''
+
+               machinetype(*) DEFAULT is 'ieee-be'  ( Experts only! )
+   
+  Returns:     ds             FFA dataset 
+               ps             pointer array
+               ierr           >1 on error, =0 otherwise
+   
+  Example:
+  
+          [ds,ps] = ffabload('massive.bout','mute');
+          
+          The 'mute' option supresses the list output.
+ 
+  Notes:   
+        
+  The pointer array, 'ps', is used by 'ffa_get' abd other functions.            
+  
+  The command   
+
+  >> [ds,ps] = ffabload('big.bmsh'); 
+ 
+  is equivalent to 
+          
+  >> ds = ffa_load('big.bmsh');  ps = ffa_list(ds); 
+ 
+  See also :  ffa_load, ffa_list, ffaaload
+ 
+ (*)  The input 'machinetype' should not normally be necessary.
+      For a complete list of values for "machinetype" see Matlab's
+      online documentaion for the built-in 'fopen' function.
+
+</pre><br><br><br>
+
+<h2><a name="ffa_load">ffa_load</a></h2><p>
+ This function is mainly for programming. The functions 
+ <b>ffaaload</b> and <b>ffabload</b> are recommended for 
+ general use.</p>
+<pre class="bold">
+ FFA_LOAD   loads data from an FFA-format BIANRY file.   
+  
+ Usage:     [ds,ie] = ffa_load(filename[,machinetype]) 
+
+ Arguments: filename       string e.g. 'massive.bmsh'
+
+            machinetype(*) 'ieee-be'  DEFAULT  IEEE floating point big-endian 
+                           'ieee-le'           IEEE floating point little-endian
+                           'native'            local machine format 
+                            ...
+
+ Returns:   ds             FFA dataset  
+            ie             =0 if successful
+  
+ (*)  For a complete list of values for "machinetype" see Matlab's
+      online help information for the standard "fopen" function.
+      
+</pre>
+
+<h3>RESTRICTION</h3>
+  This function will only load data from <i>FFA-format</i> binary files
+  with UNIX standard record structure. Files created under other operating 
+  systems may be incompatible. To load <i>FFA-format</i> ASCII data, use the
+  Toolbox function <b>ffaaload</b> or the external FFA conversion program <b>ffaa2b</b>.
+  
+  
+  the first use the 
+  external program <i>ffaa2b</i> to convert it to binary.
+</b>  
+<br><br><br>
+
+<h3>EXAMPLE - ffa_load -</h3>
+   In this example, <B>ffa_load</B> is used to import the data, 
+   storing it as a Matlab FFA dataset <B>ds</B>. The Matlab size listing
+   of <B>ds</B> is shown and then  <B>ffa_list</B> is used to display
+   the structure of the dataset. 
+<pre class="bold">
+>> ds = ffa_load('example.bfil');
+>> whos ds
+  Name      Size           Bytes  Class
+ 
+  ds        1x5            68248  cell array
+ 
+Grand total is 7439 elements using 68248 bytes
+ 
+>> ffa_list(ds);
+================================================================================
+     1 N   ---         0 x 0    8/  wall_data
+     2 LI  ---         1 x 1          title            "-----------------------------EURANUS--------------------------------"
+     3 LI  ---         1 x 1          grid_ref         "Grid collected from ffanet-files"
+     4 N   ---         0 x 0    5/    free_stream_data
+     5 RC  ---         1 x 1            pressure         100000
+     6 RC  ---         1 x 1            temperature      293
+     7 RC  ---         1 x 3            velocity         230 0 0
+     8 RC  ---         1 x 1            gamma            1.400000e+00
+     9 RC  ---         1 x 1            rgas             287
+    10 RC  ---         1 x 1          total_time       3.299998e-02
+    11 RC  ---         1 x 1          displacement     -8.090077e-01
+    12 RC  ---         1 x 1          gen._forces      -5.229212e+00
+    13 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+    14 N   ---         0 x 0    6/    block
+    15 II  ---         1 x 1            n_dummy_cells    0
+    16 II  ---         3 x 1            struct_bl_size   41 17 3
+    17 N   ---         0 x 0    3/      wall
+    18 IB  ---         6 x 1              index            1 41 -2 -2 1 3
+    19 RFN ---       123 x 3              coordinates
+    20 RFC ---        80 x 1              pressure
+    21 N   ---         0 x 0    3/      wall
+    22 IB  ---         6 x 1              index            1 41 19 19 1 3
+    23 RFN ---       123 x 3              coordinates
+    24 RFC ---        80 x 1              pressure
+    25 N   ---         0 x 0    3/      wall
+    26 IB  ---         6 x 1              index            1 41 1 17 -2 -2
+    27 RFN ---       697 x 3              coordinates
+    28 RFC ---       640 x 1              pressure
+    29 N   ---         0 x 0    3/      wall
+    30 IB  ---         6 x 1              index            1 41 1 17 5 5
+    31 RFN ---       697 x 3              coordinates
+    32 RFC ---       640 x 1              pressure
+================================================================================
+>>
+</pre>
+
+<hr align=center noshade><br><br><br><br>
+
+
+<h2><a name="ffa_dump">ffa_dump</h2><pre class="bold">
+ FFA_DUMP   writes an FFA-dataset out to an FFA-format file
+
+ Usage:     ie = ffa_dump(ds[,filename,[machinetype]])
+
+ Arguments: ds             FFA dataset
+            filename       string     DEFAULT 'ffa_dump.bout'  
+
+            machinetype(*) 'ieee-be'  DEFAULT IEEE floating point big-endian 
+                           'ieee-le'          IEEE floating point little-endian
+                           'native'           local machine format 
+                            ...
+ 
+ Returns:   ie             0 if successful
+  
+ (*)  For a complete list of values for "machinetype" see Matlab's
+      online help information for the standard "fopen" function.
+      
+</pre><br>
+
+<h3>RESTRICTION</h3>
+<b>
+  This function will only output data as <i>FFA-format binary</i> files with 
+  UNIX record structure. This output may be incompatible with
+  programs compiled for other operating systems. To produce <i>FFA-format</i> 
+  ASCII files, use the external conversion program <i>ffab2a</i>.
+</b>
+<br><br><br>
+
+<h3>EXAMPLE - ffa_dump -</h3>
+   The Matlab FFA-dataset <B>ds</B> is here exported to an FFA-format-file 
+   <B>dumped_ds.bfil</B>. The structure of this <B><I>FFA-format file</I></B> 
+   is then verified using the <B><I>external</I></B> FFA "help" program 
+   <B><I>ffalist</I></B>.
+<pre class="bold"> 
+>> ffa_dump(ds,'dumped_ds.bfil');
+>> ! ls -l dumped_ds.bfil
+-rw-r--r--    1 shj      users       27220 Jun 13 18:17 dumped_ds.bfil
+>> ! ffalist dumped_ds.bfil
+ FFA-format file ?  dumped_ds.bfil
+ 
+ Reading file: dumped_ds.bfil
+ done.
+ 
+N   -       0 x 0   wall_data -  8
+LI  -       1 x 1       title  = "-----------------------------EURANUS--------------------------------"
+LI  -       1 x 1       grid_ref  = "Grid collected from ffanet-files"
+N   -       0 x 0       free_stream_data -  5
+RC  -       1 x 1           pressure  =  100000.000
+RC  -       1 x 1           temperature  =  293.000000
+RC  -       1 x 3           velocity  =  230.000000 0.00000000E+00 0.00000000E+00
+RC  -       1 x 1           gamma  =  1.39999998
+RC  -       1 x 1           rgas  =  287.000000
+RC  -       1 x 1       total_time  =  3.29999775E-02
+RC  -       1 x 1       displacement  =  -0.809007704
+RC  -       1 x 1       gen._forces  =  -5.22921181
+RC  -       1 x 1       displ._velocity  =  -203.824219
+N   -       0 x 0       block -  6
+II  -       1 x 1           n_dummy_cells  =  0
+II  -       3 x 1           struct_bl_size  =  41 17 3
+N   -       0 x 0           wall -  3
+IB  -       6 x 1               index  =  1 41 -2
+RFN -     123 x 3               coordinates  =  0.00000000E+00 0.00000000E+00 0.00000000E+00
+RFC -      80 x 1               pressure  =  108577.922 108577.930 106011.938
+N   -       0 x 0           wall -  3
+IB  -       6 x 1               index  =  1 41 19
+RFN -     123 x 3               coordinates  =  0.00000000E+00 0.00000000E+00 0.00000000E+00
+RFC -      80 x 1               pressure  =  106907.781 106907.766 102254.344
+N   -       0 x 0           wall -  3
+IB  -       6 x 1               index  =  1 41 1
+RFN -     697 x 3               coordinates  =  0.00000000E+00 0.206617191 0.378240287
+RFC -     640 x 1               pressure  =  108577.859 106010.070 104415.359
+N   -       0 x 0           wall -  3
+IB  -       6 x 1               index  =  1 41 1
+RFN -     697 x 3               coordinates  =  0.00000000E+00 0.206617191 0.378240287
+RFC -     640 x 1               pressure  =  108577.867 106010.047 104415.359
+>>
+</pre>
+
+
+<hr align=center noshade><br><br><br><br>
+
+
+
+<h2><a name="ffa_list">ffa_list</h2><pre class="bold">
+ FFA_LIST   constructs "pointer array" for an FFA dataset 
+            and prints a listing of it's contents (optional)
+
+ Usage:     [ps,ie,et] = ffa_list(ds[,option])
+
+ Arguments: ds      FFA dataset 
+            option  'mute' - suppress screen output -
+                          ... (other options may be added later)      
+
+ Returns:   ps      N by 1 cell-array of "pointer" vectors -
+                    - pointer for sub-dataset "n" is "ps{n}"
+            et      error table as per "---" entries in listing 
+            ie      =0 if successful and "errt" shows no errors
+
+
+ Screen Output:  ( similar to output for Fortran program "ffalist" )
+===================================================================
+   1 N   ---         0 x 0   N/  level_0_name         
+   2 LI  ---         1 x 1         level_1_set_1_name 
+   3 RCF ---   9876543 x 1         level_1_set_2_name 
+ ...etc.                                              
+===================================================================
+XXXX                                : index to data item
+     XXXX                           : type descriptor   
+         XXX                        : check code: (data vs descriptor)
+         ---                        :     ---   no error  
+         ---                        :     ?--   data "dims" mismatch
+         ---                        :     -?-   data "type" mismatch
+         ---                        :     --?   error in subset count
+             XXXXXXXXX x X          : "dims"      (nsize x ndimension) 
+                             XX     : no. sub-datasets (blank if none)
+                                 XXX: name of data item 
+===================================================================
+</pre>
+
+<h3>EXAMPLE 1(2) - ffa_list - 'mute' pointer extraction</h3>
+   The <B>ffa_list</B> function is is not just for "listing" datasets, 
+   It also produces a set of "pointers" to the sub-datasets. These 
+   pointers are used by other functions to access the data. To get
+   the pointers without showing a listing, we use the "mute" option.
+   To see how these pointers are used, you can look up some of 
+   the other functions, <B>ffa_get</B> and <B> ffa_getsub</B> for example.
+   Here we get the pointers <B>ps</B> for a dataset <B>ds</B> and simply 
+   display them. 
+   
+<pre class="bold">
+
+>> ps = ffa_list(ds,'mute');
+>> whos ps ds
+  Name      Size           Bytes  Class
+ 
+  ds        1x5            68248  cell array
+  ps       32x1             3472  cell array
+ 
+Grand total is 7537 elements using 71720 bytes
+
+>> ps{32}
+ 
+ans =
+ 
+     8     6     3
+
+>> for n=1:length(ps); disp([ -n ps{n} ]); end
+    -1
+
+    -2     1
+
+    -3     2
+
+    -4     3
+
+    -5     3     1
+
+    -6     3     2
+
+    -7     3     3
+
+    -8     3     4
+
+    -9     3     5
+ 
+   -10     4
+ 
+   -11     5
+ 
+   -12     6
+ 
+   -13     7
+ 
+   -14     8
+ 
+   -15     8     1
+ 
+   -16     8     2
+ 
+   -17     8     3
+ 
+   -18     8     3     1
+ 
+   -19     8     3     2
+ 
+   -20     8     3     3
+ 
+   -21     8     4
+ 
+   -22     8     4     1
+ 
+   -23     8     4     2
+ 
+   -24     8     4     3
+ 
+   -25     8     5
+ 
+   -26     8     5     1
+ 
+   -27     8     5     2
+ 
+   -28     8     5     3
+ 
+   -29     8     6
+ 
+   -30     8     6     1
+ 
+   -31     8     6     2
+ 
+   -32     8     6     3
+ 
+>>
+</pre><BR>
+
+<h3>EXAMPLE 2(2) - ffa_list - full ouptut </h3>
+
+From the previous example for <B>ffa_list</B> it should be clear that this Matlab 
+does NOT just simply so the same job as the Fortran 90 program <B>ffalist</B>. However,
+you can compare the "listing" features of the two by looking at the examples for 
+<B>ffa_load</B> and <B>ffa_dump</B>. 
+<P>
+Here we have extracted a small sub-dataset, <B>dss</B> (itself an FFA-dataset)
+from <B>ds</B> (in the <B>ffa_load</B> example). We then use <B>ffa_list</B>, 
+to display and keep <B>all</B> the output arguments. 
+</P>
+<pre class="bold"> 
+>> [pss,ie,et] = ffa_list(dss);   
+================================================================================
+     1 N   ---         0 x 0    5/  free_stream_data
+     2 RC  ---         1 x 1          pressure         100000
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================>> ie
+ 
+>> pss'
+ 
+ans =
+ 
+     []    [1]    [2]    [3]    [4]    [5]
+ 
+>> ie
+
+ie =
+ 
+     0
+ 
+>> et
+ 
+et =
+ 
+     0     0     0
+     0     0     0
+     0     0     0
+     0     0     0
+     0     0     0
+     0     0     0
+ 
+</pre>
+The pointers (in cell-array <B>pss</B>) here are all single element vectors, except
+for the first or "root" pointer, which is always the empty matrix. The error code
+<B>ie</B> is zero (no errors) and the "error table" <B>et</B> likewise shows no errors.
+<BR><BR>
+The outputs <B>ie</B> and <B>et</B> would typically be used in programming, to check
+a given data-structure. For programming you would normally use the "mute" option too.
+
+<hr align=center noshade><br><br><br><br>
+
+
+
+<h2><a name="ffa_diff">ffa_diff</h2><pre class="bold">
+ FFA_DIFF  compare data items in two FFA datasets 
+
+ Usage:     [idiff,itab] = ffa_diff(ds1,ds2[,option])   
+                                    
+
+ Arguments:      ds1, ds2    FFA datasets 
+                 option      options: 'mute' turns of screen output
+                             DEFAULT is opt='none' or ''       
+                
+ Returns:        idiff    0  datasets are identical (tolerance fixed by type)
+                          1  " have same structure but not all items match
+                          2  " contian internal errors 
+                          3  " are of different size
+                          4  " have same size but different structures
+
+                 itab     either: logic-matrix as in Screen Output ( idiff <= 1 )
+                          or:     empty                            ( idiff  > 1 )   
+
+ Screen Output:  If the two datasets have compatible structures then a
+                 "logic table" is displayed showing which of the names 
+                  types and data-items in the two datasets match up. 
+
+                 Any compatible(*) non-matching numeric data is flagged with 
+                 the value:
+                            delta = 0                         if a=b=0
+                                  = |a-b|/(((a^2+b^2)/2)^.5)  otherwise 
+
+                 where a & b are the pair of data values with maximum |a-b|
+
+             (*) Data is "compatible" if  the array sizes agree and "matching" 
+                 if "delta" is less than the resolution:  0     'I'  integer
+                                                          1e-9  'R'  real*4
+                                                          1e-16 'D'  real*8  
+							  
+</pre>
+<h3>EXAMPLES - ffa_diff - </h3>
+Here we use two small FFA datasets, the <B>dss</B> of the <B>ffa_list</B> example 2, 
+and another similar one <B>dss</B> that's been slightly altered. Here's a listing of
+the two datasets. 
+<pre class="bold"> 
+>> ffa_list(dss);
+================================================================================
+     1 N   ---         0 x 0    5/  free_stream_data
+     2 RC  ---         1 x 1          pressure         100000
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>> ffa_list(dsc);
+================================================================================
+     1 N   ---         0 x 0    5/  FREE_Stream_Data
+     2 RC  ---         1 x 1          pressure         100000
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         1.973200e+02 1.298000e+01 5.100000e+00
+     5 N   ---         0 x 0          gamma
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>>
+</pre>
+In this simple example, where all the data is on display, you can easily spot the 
+differences. For a huge "real world" dataset of course it's not so easy. Anyway,
+here's what <B>ffa_diff</B> can do with these two.
+<BR><BR>
+First we compare <B>dss</B> with itself.
+<pre class="bold">
+>> [idiff,itab] = ffa_diff(dss,dss)
+ 
+     n  name1            all    name type size ndim nsub data
+ 
+     1  free_stream_data   1    1    1    1    1    1    1
+     2  pressure           1    1    1    1    1    1    1
+     3  temperature        1    1    1    1    1    1    1
+     4  velocity           1    1    1    1    1    1    1
+     5  gamma              1    1    1    1    1    1    1
+     6  rgas               1    1    1    1    1    1    1
+ 
+                           1    1    1    1    1    1    1
+ 
+ 
+ 
+idiff =
+ 
+     0
+ 
+ 
+itab =
+ 
+     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1
+     
+     
+</pre>
+As you'd expect, all the entries in the "logic table" are ones. 
+The output variables <B>idiff</B> and <B>itab</B> would typically be used 
+by a calling m-file i.e. in programming rather than for interactive use. 
+<BR><BR>
+Now we can compare <B>dss</B> with <B>dsc</B>. 
+<pre class="bold"> 
+>> [idiff,itab] = ffa_diff(dss,dsc); idiff
+ 
+     n  name1            all    name type size ndim nsub data
+ 
+     1  free_stream_data   0    0    1    1    1    1    1
+     2  pressure           1    1    1    1    1    1    1
+     3  temperature        1    1    1    1    1    1    1
+     4  velocity           0    1    1    1    1    1    0   2e-01
+     5  gamma              0    1    0    0    0    1    0   2e-01
+     6  rgas               1    1    1    1    1    1    1
+ 
+                           0    0    0    0    0    1    0   DELTA
+ 
+ 
+ 
+idiff =
+ 
+     1
+ 
+>>
+</pre>
+The indicator <B>idiff</B> shows at once that the datasets differ and 
+the table shows where these differences occur. In this simple case you can 
+check the results against the <B>ffa_list</B> print-out (above).
+<BR><BR>
+Finally, note that if the two datasets to be compared are not of the same size 
+or have different structures, then the <B>itab</B> is returned empty. 
+For example, comparing <B>dss</B> with <B>ds</B> gives this result. 
+<BR>
+<pre class="bold"> 
+>> [idiff,itab] = ffa_diff(dss,ds)
+### ffa_diff: 3. datasets are of different size
+ 
+idiff =
+ 
+     3
+ 
+ 
+itab =
+ 
+     []
+ 
+>>
+</pre>
+<hr align=center noshade><br><br><br><br>
+
+
+<h2><a name="ffa_get">ffa_get</h2>
+<pre class="bold">
+ FFA_GET     copies data-items from an FFA dataset
+
+ Usage:      x = ffa_get(ds,ip[,option])
+
+ Arguments:  ds       FFA dataset  
+             ip       pointer (e.g. ip=ps{3} see "ffa_list")     
+             option   string: 'data'  'name'  'type' 'dims' or 'all'
+  
+ Returns:    x         data/value specified by "option"
+ 
+                    --option-----x-output-----------------------
+             DEFAULT  'data' -   data (matrix/string/cell-array)  
+             option=  'name' -   name-string
+                      'type' -   type-string 
+                      'dims' -   [ndim nsiz nsub]   
+                      'all'  -   x{1} = cname              char-16
+                                 x{2} = ctype              char-4
+                                 x{3} = [ndim nsiz nsub]   integer-vector 
+                                 x{4} = data               numeric/string
+
+</pre><br>
+<h3>EXAMPLES - ffa_get - </h3>
+ Here we take the imported dataset <b>ds</b> (as in the <b>ffa_load</b> example) list it
+ and then extract some data items from one of the "wall" sub-datasets. 
+<pre class="bold">
+>> ps = ffa_list(ds,'mute');         % list the dataset to get its pointers "ps"
+>> X = ffa_get(ds,ps{19},'name')     % get the data name for "row 19" in the list
+ 
+X =
+ 
+coordinates
+ 
+>> X = ffa_get(ds,ps{19},'type')     % get the data type-code 
+ 
+X =
+ 
+RFN
+ 
+>> X = ffa_get(ds,ps{19},'dims')     % get the data dimensions 
+ 
+X =
+ 
+     3   123     0
+ 
+>> xyz = ffa_get(ds,ps{19});         % get the coordinates - notice default of 'data'
+>> plot(xyz(:,1),xyz(:,2))                             % 2D plot
+>> plot3(xyz(:,1),xyz(:,2),xyz(:,3),'.'); axis equal   % 3D plot
+>>
+>>
+>>
+>>
+>> X = ffa_get(ds,ps{19},'all')      % extract all the data for "row 19" 
+ 
+X =
+ 
+    'coordinates     '    'RFN '    [1x3 double]    [123x3 double]
+
+>> xyz = X{4}; dims = X{3};
+>> whos X xyz dims
+  Name       Size           Bytes  Class
+ 
+  X          1x4             3384  cell array
+  dims       1x3               24  double array
+  xyz      123x3             2952  double array
+ 
+Grand total is 768 elements using 6360 bytes
+>>
+</pre><br><br>
+Notice that the 'data' is extracted by default. The other items must be specified. 
+<br><br>
+<hr align=center noshade><br><br><br><br>
+
+<h2><a name="ffa_put">ffa_put</h2><pre class="bold">
+  FFA_PUT    modify data-items in a given sub-dataset
+ 
+   Usage    [dso,ie] = ffa_put(ds,ip,[opt1,input1[opt2,input2...]...])
+ 
+   Arguments    ds         FFA dataset
+                ip         pointer       (e.g. ip=ps{3} see "ffa_list")
+                optN       option string -
+   recommended --------->  - 'auto' replace data and adjust automatically
+                           - 'data' replace data
+                           - 'dims' replace [ndim nsize]
+                           - 'name' replace data-name
+                           - 'type' replace data-type descriptor
+ 
+                inputN     replacement data/string/dimensions/cell-array
+ 
+   Returns     dso        FFA dataset updated with new inputs
+               ie         =0 if successful, >0 on error
+ 
+ 
+   NOTE  When using 'auto' the following adjustments are made.
+ 
+         Input: string
+          - data - string trimmed/padded to 1, 16 or 72 characters length
+          - dims - set to [1 1]
+          - type - first character set to 'A' 'S' or 'L' to match string length
+ 
+         Input: empty matrix
+          - dims - set to [0 0]
+          - type - set to 'N   '
+ 
+         Input: full matrix
+          - dims - set to match array size
+          - type - unchanged - must be set using the 'type' option -
+	 
+</pre><br><br>
+
+<h3>EXAMPLES - ffa_put - </h3>
+
+    To illustrate the use of this function, we use a subset of the "ds" dataset
+    for the ffa_list example.
+    <br><br>
+<pre class="bold">
+>> dss = ffa_getsub(ds,ps{4});   pss = ffa_list(dss);
+================================================================================
+     1 N   ---         0 x 0    5/  free_stream_data
+     2 RC  ---         1 x 1          pressure         100000
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+</pre>
+<br>
+  Using <b>ffa_put</b> we now make a series of changes to the items in this dataset.
+  <br><br> 
+  <pre class="bold">
+  
+>> %% Rename the "pressure" data and replace it with various strings ...
+>>
+>> dso = ffa_put(dso,pss{2},'name','P_string','auto','X'); pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    5/  Example
+     2 AC  ---         1 x 1          P_string         "X"
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>>
+>>  dso = ffa_put(dso,pss{2},'auto','The pressure data was here.'); pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    5/  Example
+     2 LC  ---         1 x 1          P_string         "The pressure data was here."
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>>
+>> dso = ffa_put(dso,pss{2},'auto','Cheers!'); pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    5/  Example
+     2 SC  ---         1 x 1          P_string         "Cheers!"
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>> 
+>>  dso = ffa_put(dso,pss{2},'auto','!'); pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    5/  Example
+     2 AC  ---         1 x 1          P_string         "!"
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>> 
+>> %% Replace the "Velocity" vector with a matrix of random integers
+>>
+>> dso = ffa_put(dso,pss{4},'auto', fix(rand(472,3)) ); pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    5/  Example
+     2 LC  ---         1 x 1          P_string         "The pressure data was here."
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---       472 x 3          velocity
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>>
+>> %% Re-name the data-item and re-set the type-descriptor
+>> dso = ffa_put(dso,pss{4},'name','I-field','type','ICF'); pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    5/  Example
+     2 LC  ---         1 x 1          P_string         "The pressure data was here."
+     3 RC  ---         1 x 1          temperature      293
+     4 ICF ---       472 x 3          I-field
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>>
+>>
+  </pre><br>
+  With the "auto" option the "size" descriptor is always set automatically. 
+  However, for all inputs except string data, is the "type" field must be set manually.
+  <br><br>
+  The "auto" option may be improved in future versions, with a default
+  re-set of the type desriptor for integer, real*4 and real*8 data.
+<br><br><br><br>
+
+
+<hr align=center noshade><br><br><br><br>
+
+<h2><a name="ffa_find">ffa_find</h2><pre class="bold">
+  FFA_FIND  searches an FFA cell-tree for matching items 
+ 
+  Usage:     [pc,in,ie] = ffa_find(ds,property,value)
+ 
+  Arguments:  ds         FFA dataset
+              property   string: 'name'  'type' or 'dims'  
+              value      value of "property" for which to search
+                         Note:- 
+                         - Values for 'name' are case-sensitive
+                           but values for 'type' are not.
+                         - For 'type' you can use "?" (or a blank) 
+                           to match any single character.
+                         - Value 'dims' is [ndim nsiz] - size last!                     
+              
+  Returns:    pc         pointers to matched items      ( 1xN-cell-array ) 
+              in         index in list of input dataset ( 1xN-integers   )  
+              ie         =0 if succesful , =1 on error
+ 
+  If no matching items are found, then "pc" and "in" are returned empty (ie=0).
+ 
+
+</pre><br><br>
+<h3>EXAMPLES - ffa_find - </h3>
+The most common use of <b>ffa_find</b> is to find all the sub-datsets with a given name. 
+You can also find datsets by any other attirbute, such as type or size. Here we take the <b>ds</b> dataset (from the <b>ffa_load</b> example) and find all the 
+"wall" sub-datasets. We then list their names and 
+ use <b>ffa_getsub</b> to extract and list two of them.
+ Finally we extract the <i>pressure</i> field from one wall.
+<br><br>
+<pre class="bold">
+>> psw = ffa_find(ds,'name','wall')    %%  find the "wall" sub-datasets
+ 
+psw =
+ 
+      [1x2 double]    [1x2 double]    [1x2 double]    [1x2 double]
+
+Check the 'name' on the four sub-datasets -
+      
+>> for n=1:length(psw)
+    fprintf('  %d  %s  \n',n, ffa_get(ds,psw{n},'name') );  %% list their names
+   end
+  1  wall_data
+  2  wall
+  3  wall
+  4  wall
+  5  wall
+>> 
+
+Extract one of them as a separate dataset.
+
+>> dsw1 = ffa_getsub(ds,psw{2});   ffa_list(dsw1)
+================================================================================
+     1 N   ---         0 x 0    3/  wall
+     2 IB  ---         6 x 1          index            1 41 -2 -2 1 3
+     3 RFN ---       123 x 3          coordinates
+     4 RFC ---        80 x 1          pressure
+================================================================================
+
+
+Extract the data (pressure field) for the first(!) wall.
+
+pc = ffa_find(ds,'name','pressure'); press = ffa_get(ds,pc{2}); whos press
+  Name        Size                    Bytes  Class
+
+  press      80x1                       640  double array
+
+Grand total is 80 elements using 640 bytes
+
+Note that the first dataset 'pressure' is the (scalar) free stream value.                                                                   
+ 
+
+
+
+<hr align=center noshade><br><br><br><br>
+
+
+
+
+<h2><a name="ffa_create">ffa_create</h2><pre class="bold">
+  FFA_CREATE   creates a single FFA dataset with no sub-datasets
+ 
+                                                      DEFAULTS
+  Usage:      ds = ffa_create(cname,ctype,data) %        -      
+        or    ds = ffa_create(cname)            %  ctype='N';  data=[];
+        or    ds = ffa_create                   %  cname='Nameless';   	                                                           
+ 
+  Arguments:  cname   data name string (internally trimmed to 16 chars)
+              ctype   data type string (FFA-format descriptor)
+              data    data matrix
+ 
+  Returns:    ds      FFA-dataset  (on error an empty cell-array is returned)
+
+
+</pre><br><br>
+<h3>EXAMPLES - ffa_create - </h3>
+  This simple function is provided in case you need to generate an FFA-dataset from scratch. 
+<pre class="bold"> 
+>> dsi = ffa_create;   
+>> ffa_list(dsi);
+================================================================================
+     1 N   ---         0 x 0        Nameless
+================================================================================
+>> dsi = ffa_create('Empty');   
+>> ffa_list(dsi);
+>>
+================================================================================
+     1 N   ---         0 x 0        Empty
+================================================================================
+>>
+>> dsi = ffa_create('Big Mat','R',rand(9756,74));   
+>> ffa_list(dsi);
+================================================================================
+     1 R   ---      9756 x74        Big Mat
+================================================================================
+>>
+</pre>
+   Single-entry datasets like these can form the building-blocks of more complicated 
+   structures, assembled using the functions <b>ffa_put</b> and <b>ffa_putsub</b>.
+<br><br><br>
+
+<hr align=center noshade><br><br><br><br>
+
+
+<h2><a name="ffa_getsub">ffa_getsub</h2><pre class="bold">
+ FFA_GETSUB:  copies a "child" sub-dataset from an FFA dataset
+
+ USAGE:     [dsub,ie] = ffa_getsub(ds,ip)
+
+ Arguments:  ds     FFA dataset
+             ip     pointer to sub-dataset  (e.g. ip=ps{3} see "ffa_list")                                    
+             
+ Returns:    dsub   FFA dataset - selected "child" sub-dataset of "ds"               
+             ie     =0 if successful
+
+</pre><br><br>
+<h3>EXAMPLES - ffa_getsub - </h3> 
+  In this example we take the dataset <b>ds</b> from the <b>ffa_load</b> example, and 
+  use  <b>ffa_getsub</b> to extract a smaller sub-dataset <b>dss</b>. To validate this
+  new datset, we use <b>ffa_list</b> to list it, then write it out to a file using  
+  <b>ffa_dump</b> and list that using the external FFA program <b>ffalist</b>.<br><br>
+<pre class="bold">
+>> dss = ffa_getsub(ds,ps{4});
+>> pss = ffa_list(dss);
+================================================================================
+     1 N   ---         0 x 0    5/  free_stream_data
+     2 RC  ---         1 x 1          pressure         100000
+     3 RC  ---         1 x 1          temperature      293
+     4 RC  ---         1 x 3          velocity         230 0 0
+     5 RC  ---         1 x 1          gamma            1.400000e+00
+     6 RC  ---         1 x 1          rgas             287
+================================================================================
+>> ffa_dump(dss,'pss.bfil');
+>> ! ls -l pss.bfil
+-rw-r--r--    1 shj      users         308 Jun 14 14:09 pss.bfil
+>> ! ffalist pss.bfil
+ FFA-format file ?  pss.bfil
+ 
+ Reading file: pss.bfil
+ done.
+ 
+N   -       0 x 0   free_stream_data -  5
+RC  -       1 x 1       pressure  =  100000.000
+RC  -       1 x 1       temperature  =  293.000000
+RC  -       1 x 3       velocity  =  230.000000 0.00000000E+00 0.00000000E+00
+RC  -       1 x 1       gamma  =  1.39999998
+RC  -       1 x 1       rgas  =  287.000000
+>>
+</pre>
+<br>
+Notice that the extracted dataset <b>dss</b> is itself an FFA-dataset and can be 
+handled as such, whether inside Matlab or exported to an FFA-format file. 
+<br><br><br>
+
+<hr align=center noshade><br><br><br><br>
+
+<h2><a name="ffa_putsub">ffa_putsub</h2><pre class="bold">
+ FFA_PUTSUB  build-in a new sub-dataset to an existing FFA-dataset
+  
+ Usage:     [dso,ie] = ffa_putsub(ds,dsb,[ip[,is]])     
+                                                         DEFAULTS
+ Arguments:  ds      FFA-dataset                         
+             dsb     FFA-dataset to be built-in          
+             ip      pointer to "adopting" sub-dataset      [] 
+                     ( e.g. >> ps = ffa_list(ds);   )     "first" 
+                     (      >> ip = ps{4};          )    
+             is      position in among "sibling"            [] 
+                     sub-datasets of "ds"                 "last" 
+		     (integer >0 or empty []        )
+  
+ Returns:    dso     new FFA dataset with "dsb" built-in                    
+             ie      =0 on successful completion, >0 on error
+	     
+</pre><br><br>
+<h3>EXAMPLES - ffa_putsub - </h3>
+Here we first list a "base" dataset <b>dsb</b> and a "test" dataset <b>dsb</b>. 
+We then use <b>ffa_putsub</b> to add <b>dst</b> into <b>dsb</b>. 
+<BR>Note the effect of different choices of the <b>ip</b> and <b>is</b> options. 
+<pre class="bold">
+>> psb = ffa_list(dsb);     %%%  list the "base" dataset
+================================================================================
+     1 N   ---         0 x 0    2/  wall_data
+     2 N   ---         0 x 0    5/    free_stream_data
+     3 RC  ---         1 x 1            pressure         100000
+     4 RC  ---         1 x 1            temperature      293
+     5 RC  ---         1 x 3            velocity         230 0 0
+     6 RC  ---         1 x 1            gamma            1.400000e+00
+     7 RC  ---         1 x 1            rgas             287
+     8 N   ---         0 x 0    3/    block
+     9 II  ---         1 x 1            n_dummy_cells    0
+    10 II  ---         3 x 1            struct_bl_size   41 17 3
+    11 N   ---         0 x 0    3/      wall
+    12 IB  ---         6 x 1              index            1 41 -2 -2 1 3
+    13 RFN ---       123 x 3              coordinates
+    14 RFC ---        80 x 1              pressure
+================================================================================
+>>
+>> pst = ffa_list(dst);   %%%  list the "test" dataset         
+================================================================================
+     1 R   ---        27 x 7    2/  TEST!!!
+     2 I   ---         1 x 6          TEST-yoyo        -10 98 76 5 4 321
+     3 R   ---       500 x 3          TEST-XYZ
+================================================================================
+>> 
+>> %%% EXAMPLE - ALL INPUTS 
+>> %%%  Add the test dataset at "position 2" in the "base" dataset -
+>> %%%                                   - as the third "sibling" sub-dataset.
+>> dso = ffa_putsub(dsb,dst,pst{2},3);
+>> ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    2/  wall_data
+     2 N   ---         0 x 0    6/    free_stream_data
+     3 RC  ---         1 x 1            pressure         100000
+     4 RC  ---         1 x 1            temperature      293
+     5 R   ---        27 x 7    2/      TEST!!!
+     6 I   ---         1 x 6              TEST-yoyo        -10 98 76 5 4 321
+     7 R   ---       500 x 3              TEST-XYZ
+     8 RC  ---         1 x 3            velocity         230 0 0
+     9 RC  ---         1 x 1            gamma            1.400000e+00
+    10 RC  ---         1 x 1            rgas             287
+    11 N   ---         0 x 0    3/    block
+    12 II  ---         1 x 1            n_dummy_cells    0
+    13 II  ---         3 x 1            struct_bl_size   41 17 3
+    14 N   ---         0 x 0    3/      wall
+    15 IB  ---         6 x 1              index            1 41 -2 -2 1 3
+    16 RFN ---       123 x 3              coordinates
+    17 RFC ---        80 x 1              pressure
+================================================================================
+>>
+>> %%% EXAMPLE - DEFAULT LAST
+>> %%%  Add the test dataset at "position 2" in the "base" dataset -
+>> %%%                                    - as the last "sibling" sub-dataset.
+>> dso = ffa_putsub(dsb,dst,pst{2});
+>> ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    2/  wall_data
+     2 N   ---         0 x 0    6/    free_stream_data
+     3 RC  ---         1 x 1            pressure         100000
+     4 RC  ---         1 x 1            temperature      293
+     5 RC  ---         1 x 3            velocity         230 0 0
+     6 RC  ---         1 x 1            gamma            1.400000e+00
+     7 RC  ---         1 x 1            rgas             287
+     8 R   ---        27 x 7    2/      TEST!!!
+     9 I   ---         1 x 6              TEST-yoyo        -10 98 76 5 4 321
+    10 R   ---       500 x 3              TEST-XYZ
+    11 N   ---         0 x 0    3/    block
+    12 II  ---         1 x 1            n_dummy_cells    0
+    13 II  ---         3 x 1            struct_bl_size   41 17 3
+    14 N   ---         0 x 0    3/      wall
+    15 IB  ---         6 x 1              index            1 41 -2 -2 1 3
+    16 RFN ---       123 x 3              coordinates
+    17 RFC ---        80 x 1              pressure
+================================================================================
+>> 
+>> %%% EXAMPLE - DEFAULT ALL
+>> %%% Add the test dataset at "all default" position - 
+>> %%%                                      - and list the new dataset.
+>> dso = ffa_putsub(dsb,dst);
+>> ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    3/  wall_data
+     2 N   ---         0 x 0    5/    free_stream_data
+     3 RC  ---         1 x 1            pressure         100000
+     4 RC  ---         1 x 1            temperature      293
+     5 RC  ---         1 x 3            velocity         230 0 0
+     6 RC  ---         1 x 1            gamma            1.400000e+00
+     7 RC  ---         1 x 1            rgas             287
+     8 N   ---         0 x 0    3/    block
+     9 II  ---         1 x 1            n_dummy_cells    0
+    10 II  ---         3 x 1            struct_bl_size   41 17 3
+    11 N   ---         0 x 0    3/      wall
+    12 IB  ---         6 x 1              index            1 41 -2 -2 1 3
+    13 RFN ---       123 x 3              coordinates
+    14 RFC ---        80 x 1              pressure
+    15 R   ---        27 x 7    2/    TEST!!!
+    16 I   ---         1 x 6            TEST-yoyo        -10 98 76 5 4 321
+    17 R   ---       500 x 3            TEST-XYZ
+================================================================================
+</pre>
+
+<hr align=center noshade><br><br><br><br>
+
+
+<h2><a name="ffa_delsub">ffa_delsub</h2><pre class="bold">
+ FFA_DELSUB   delete a sub-dataset
+  
+ Usage:     [dso,ie] = ffa_delsub(ds,ip)     
+  
+ Arguments:  ds      FFA-dataset 
+             ip      pointer to dataset to delete 
+                     ( e.g. >> ps = ffa_list(ds);   )    
+                     (      >> ip = ps{4};          )   
+  
+ Returns:    dso     new FFA-dataset (reduced by the specified deletion)      
+             ie      =0 on successful commletion, >0 otherwise
+
+</pre><br><br>
+<h3>EXAMPLES - ffa_delsub - </h3>
+ Starting with the dataset <b>ds</b> from the <b>ffa_load</b> example, 
+ we create a smaller dataset <b>dso</b> by using <b>ffa_delsub</b> to remove 
+ sub-datasets. The results of each removal are shown using <b>ffa_list</b>.
+<pre class="bold">
+>> dso=ds; pso=ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    8/  wall_data
+     2 LI  ---         1 x 1          title            "-----------------------------EURANUS--------------------------------"
+     3 LI  ---         1 x 1          grid_ref         "Grid collected from ffanet-files"
+     4 N   ---         0 x 0    5/    free_stream_data
+     5 RC  ---         1 x 1            pressure         100000
+     6 RC  ---         1 x 1            temperature      293
+     7 RC  ---         1 x 3            velocity         230 0 0
+     8 RC  ---         1 x 1            gamma            1.400000e+00
+     9 RC  ---         1 x 1            rgas             287
+    10 RC  ---         1 x 1          total_time       3.299998e-02
+    11 RC  ---         1 x 1          displacement     -8.090077e-01
+    12 RC  ---         1 x 1          gen._forces      -5.229212e+00
+    13 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+    14 N   ---         0 x 0    6/    block
+    15 II  ---         1 x 1            n_dummy_cells    0
+    16 II  ---         3 x 1            struct_bl_size   41 17 3
+    17 N   ---         0 x 0    3/      wall
+    18 IB  ---         6 x 1              index            1 41 -2 -2 1 3
+    19 RFN ---       123 x 3              coordinates
+    20 RFC ---        80 x 1              pressure
+    21 N   ---         0 x 0    3/      wall
+    22 IB  ---         6 x 1              index            1 41 19 19 1 3
+    23 RFN ---       123 x 3              coordinates
+    24 RFC ---        80 x 1              pressure
+    25 N   ---         0 x 0    3/      wall
+    26 IB  ---         6 x 1              index            1 41 1 17 -2 -2
+    27 RFN ---       697 x 3              coordinates
+    28 RFC ---       640 x 1              pressure
+    29 N   ---         0 x 0    3/      wall
+    30 IB  ---         6 x 1              index            1 41 1 17 5 5
+    31 RFN ---       697 x 3              coordinates
+    32 RFC ---       640 x 1              pressure
+================================================================================
+>>
+>> %%% Remove "wall" set at position 25:-
+>> dso = ffa_delsub(dso,pso{25});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    8/  wall_data
+     2 LI  ---         1 x 1          title            "-----------------------------EURANUS--------------------------------"
+     3 LI  ---         1 x 1          grid_ref         "Grid collected from ffanet-files"
+     4 N   ---         0 x 0    5/    free_stream_data
+     5 RC  ---         1 x 1            pressure         100000
+     6 RC  ---         1 x 1            temperature      293
+     7 RC  ---         1 x 3            velocity         230 0 0
+     8 RC  ---         1 x 1            gamma            1.400000e+00
+     9 RC  ---         1 x 1            rgas             287
+    10 RC  ---         1 x 1          total_time       3.299998e-02
+    11 RC  ---         1 x 1          displacement     -8.090077e-01
+    12 RC  ---         1 x 1          gen._forces      -5.229212e+00
+    13 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+    14 N   ---         0 x 0    5/    block
+    15 II  ---         1 x 1            n_dummy_cells    0
+    16 II  ---         3 x 1            struct_bl_size   41 17 3
+    17 N   ---         0 x 0    3/      wall
+    18 IB  ---         6 x 1              index            1 41 -2 -2 1 3
+    19 RFN ---       123 x 3              coordinates
+    20 RFC ---        80 x 1              pressure
+    21 N   ---         0 x 0    3/      wall
+    22 IB  ---         6 x 1              index            1 41 19 19 1 3
+    23 RFN ---       123 x 3              coordinates
+    24 RFC ---        80 x 1              pressure
+    25 N   ---         0 x 0    3/      wall
+    26 IB  ---         6 x 1              index            1 41 1 17 5 5
+    27 RFN ---       697 x 3              coordinates
+    28 RFC ---       640 x 1              pressure
+================================================================================
+>>
+>> %%% Remove "block" set at position 14:-
+>> dso = ffa_delsub(dso,pso{14});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    7/  wall_data
+     2 LI  ---         1 x 1          title            "-----------------------------EURANUS--------------------------------"
+     3 LI  ---         1 x 1          grid_ref         "Grid collected from ffanet-files"
+     4 N   ---         0 x 0    5/    free_stream_data
+     5 RC  ---         1 x 1            pressure         100000
+     6 RC  ---         1 x 1            temperature      293
+     7 RC  ---         1 x 3            velocity         230 0 0
+     8 RC  ---         1 x 1            gamma            1.400000e+00
+     9 RC  ---         1 x 1            rgas             287
+    10 RC  ---         1 x 1          total_time       3.299998e-02
+    11 RC  ---         1 x 1          displacement     -8.090077e-01
+    12 RC  ---         1 x 1          gen._forces      -5.229212e+00
+    13 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+================================================================================
+>>
+>> %%% Remove "free_stream_data" set at position 4:-
+>> dso = ffa_delsub(dso,pso{4});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    6/  wall_data
+     2 LI  ---         1 x 1          title            "-----------------------------EURANUS--------------------------------"
+     3 LI  ---         1 x 1          grid_ref         "Grid collected from ffanet-files"
+     4 RC  ---         1 x 1          total_time       3.299998e-02
+     5 RC  ---         1 x 1          displacement     -8.090077e-01
+     6 RC  ---         1 x 1          gen._forces      -5.229212e+00
+     7 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+================================================================================
+>>
+>>
+>> %%% Keep removing set at position 2 until you reach the "root" set:-
+>> dso = ffa_delsub(dso,pso{2});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    5/  wall_data
+     2 LI  ---         1 x 1          grid_ref         "Grid collected from ffanet-files"
+     3 RC  ---         1 x 1          total_time       3.299998e-02
+     4 RC  ---         1 x 1          displacement     -8.090077e-01
+     5 RC  ---         1 x 1          gen._forces      -5.229212e+00
+     6 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+================================================================================
+>> dso = ffa_delsub(dso,pso{2});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    4/  wall_data
+     2 RC  ---         1 x 1          total_time       3.299998e-02
+     3 RC  ---         1 x 1          displacement     -8.090077e-01
+     4 RC  ---         1 x 1          gen._forces      -5.229212e+00
+     5 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+================================================================================
+>> dso = ffa_delsub(dso,pso{2});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    3/  wall_data
+     2 RC  ---         1 x 1          displacement     -8.090077e-01
+     3 RC  ---         1 x 1          gen._forces      -5.229212e+00
+     4 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+================================================================================
+>> dso = ffa_delsub(dso,pso{2});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    2/  wall_data
+     2 RC  ---         1 x 1          gen._forces      -5.229212e+00
+     3 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+================================================================================
+>> dso = ffa_delsub(dso,pso{2});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0    1/  wall_data
+     2 RC  ---         1 x 1          displ._velocity  -2.038242e+02
+================================================================================
+>> dso = ffa_delsub(dso,pso{2});    pso = ffa_list(dso);
+================================================================================
+     1 N   ---         0 x 0        wall_data
+================================================================================
+>>
+>> %%% Try to delet the "root" set:-
+>>
+>> dso = ffa_delsub(dso,pso{1});    pso = ffa_list(dso);
+### ffa_delsub: cannot delete the root dataset
+================================================================================
+     1 N   ---         0 x 0        wall_data
+================================================================================
+>>
+</pre>
+<br><br><br>
+
+
+<hr align=center noshade><br><br><br><br>
+	     
+<h2><a name="lowfns">FFA Lowlevel Functions</a></h2> 
+      The FFA "Lowlevel Functions" are used in programming rather than
+      as interactive commands. If you're doing any serious Matlab 
+      programming using FFA datasets, it's worth having a look at these. 
+<pre class="bold">
+Lowlevel Functions
+   ffa_forti      -   read a single Fortran record 
+   ffa_forto      -   write a single Fortran record
+   ffa_refstring  -   convert pointer to cell-reference string
+   ok_ffa_dataset -   quick check for valid FFA dataset
+   ok_ffa_pointer -   quick check for valid FFA pointer  
+    
+</pre>
+<P>
+  Note that the functions <b>ffa_forti</b> and <b>ffa_forto</b> apply 
+  only to the set of Fortran records used in <b>FFA-format</b> files.
+</P>
+<br><br><br><br><br><br>
+
+<hr align=center noshade><br><br><br><br>
+  
+  <h2><a name="ffa_check_data">ffa_check_data</h2><pre class="bold">  
+  FFA_CHECK_DATA   check data size and type against FFA descriptor
+
+  Usage
+               ok = ffa_check_data(ctype,nsiz,ndim,data)
+
+  Arguments
+               ctype  char*4 FFA type diescriptor 
+               nsiz   data size
+               ndim   data dimension
+               data   data matrix (2D numeric or cell array or single string)
+
+  Returns
+               ok     1 x 2 logical [ size_ok type_ok ]
+	       
+</pre><br><br><br><br><br>
+  
+<hr align=center noshade><br><br><br><br>
+  
+  <h2><a name="ffa_forti">ffa_forti</h2><pre class="bold">
+ FFA_FORTI:  reads a single Fortran record from a file in FFA-format(*)
+
+ Usage: "DESCRIPTOR"  [rec,ie] = ffa_forti(ifi)                   
+        "DATA"        [rec,ie] = ffa_forti(ifi,ctype,ndim,nsiz)   
+                          
+ Arguments:   ifi      file identifier from Matlab "fopen" function   
+              ctype    FFA type descriptor  ( 4-char string )
+              ndim     dimension of data    ( integer > 0   )
+              nsiz     size of data         ( integer > 0   )
+    
+ Returns:     rec      data/descriptor
+              ie       error code (=0 on successful completion)      
+
+ "DESCRIPTOR" rec  is a 5-cell array containing the FFA-format
+                   descriptor-variables: CNAME, CTYPE, NDIM, NSIZ, NSUB. 
+ 
+ "DATA"       rec  depends on ctype            ctype(1)
+              ---                              --------    
+              numeric 2D-array or scalar       B I R D C Z       
+              string or cell-array of strings  A S L         
+              empty matrix                     N                                   
+
+
+ RESTRICTIONS:
+
+  The file must be FFA-format(*) Fortran BINARY output created under a 
+  UNIX / LINUX operating system. Files created using 
+  
+  (Use "ffa_a2b" to convert ascii data.) 
+  
+  Complex data inputs (types C & Z) are not supported in this release.
+  
+ REFERENCES:  
+ 
+ (*) "Standardized Data Format version 1" FFAP-A-950, 1992, S.Wallin.
+
+</pre><br><br><br><br><br>
+
+<hr align=center noshade><br><br><br><br>
+
+
+
+<h2><a name="ffa_forto">ffa_forto</h2><pre class="bold">
+ FFA_FORTO:  writes FFA-format(*) descriptor and data records to a file
+
+ Usage:       ie = ffa_forto(ifi,cname,ctype,nnn,data)
+                          
+ Arguments:   ifi      file identifier from Matlab "fopen" function  
+              cname    data name            16-char string 
+              ctype    FFA type descriptor   4-char string 
+              nnn     [ndim nsize nsub]  
+              data     numeric matrix / string / cell-array of strings    
+    
+ Returns:     ie       error code (=0 on successful completion)  
+
+ RESTRICTIONS:
+
+  Complex data inputs (types C & Z) are not supported in this release.
+  
+ REFERENCES:  
+ 
+ (*) "Standardized Data Format version 1" FFAP-A-950, 1992, S.Wallin.
+
+</pre><br><br><br><br><br>
+
+
+<hr align=center noshade><br><br><br><br>
+    
+<h2><a name="ffa_refstring">ffa_refstring</h2><pre class="bold">
+ FFA_REFSTRING  translate an "ip" pointer into a "cell-tree" referemce string
+
+ Usage:    [str,sa,as] = ffa_refstring(ip[,level])
+ 
+ Arguments:         ip     integer "pointer" vector 
+                    level  integer scalar            DEFAULT: 1
+		    
+ Returns:           str    full reference string 
+                    sa     opeing part of "str"
+		    as     closing part of "str" - always "}"
+
+ Examples:  
+            input:  ip  = [3 4 2]               
+            gives:  str = 'dset{1,5}{4,5}{2,:}        
+                    sa  = 'dset{1,5}{4,5}{2,'      
+                    as  = '}'                      
+
+            input:  ip = []
+            gives:  str= 'dset{1,:}'
+                    sa = 'dset{1,'
+                    as = '}'
+		    
+</pre><br><br><br><br><br>
+
+<hr align=center noshade><br><br><br><br>
+
+<h2><a name="ok_ffa_dataset">ok_ffa_dataset</h2><pre class="bold">
+  OK_FFA_DATASET   quick validity check for a Matlab FFA dataset
+  
+  Usage:        ok = ok_ffa_dataset(ds)
+  
+  Arguments:    ds    FFA dataset
+  
+  Returns:      ok    1 if OK, 0 otherwise
+ 
+</pre><br><br><br><br><br>
+
+<hr align=center noshade><br><br><br><br>
+
+<h2><a name="ok_ffa_pointer">ok_ffa_pointer</h2><pre class="bold">
+  OK_FFA_POINTER   quick validity check on a pointer for a Matlab FFA dataset
+  
+  Usage:        ok = ok_ffa_pointer(ip)
+  
+  Arguments:    ds    FFA cell-tree dataset
+  
+  Returns:      ok    1 if OK, 0 otherwise
+ 
+</pre><br><br><br><br><br>
+
+<h2><a name="release">RELEASE NOTES - FFA Matlab Toolbox - version 1.4 </a></h2>
+The following features are new in the current release. 
+<ul>
+ <li>The HTML-based online help pages you're reading now.</li>
+ <li>Function <b>ffa_create</b> has been added so that with this and 
+    <b>ffa_putsub</b> you can construct FFA datasets from scratch. </li>
+</ul>
+<P> Note the file I/O restrictions that apply for the functions 
+<B>ffa_load</B> and <B>ffa_dump</B>. File I/O is restricted to
+FFA-format BINARY with UNIX/LINUX record structure. The default 
+byte-ordering is IEEE bigendian.  
+</P>
+
+<P>The orignal release history is contained in the CHANGE_LOG file printed here. <BR><BR>
+</P>
+<B>CHANGE_LOG </B>
+<hr align=center noshade>
+<pre class="bold">
+ DATE        VER   SIG   CHANGE TYPE      FUNCTIONS        DESCRIPTION OF CHANGES
+                                                                                                           
+ 2002-01-30  1.0   SHJ   First release    ffa_load         
+                                          ffa_dump       
+                                          ffa_list       
+                                          ffa_diff       
+                                          ffa_get        
+                                          ffa_put       
+                                          ffa_getsub     
+                                          ffa_putsub     
+                                          ffa_delsub     
+                                          ffa_refstring  
+                                          ffa_forti      
+                                          ffa_forto      
+                                          ok_ffa_dataset 
+                                          ok_ffa_pointer 
+                                                                                                               
+ 2002-01-31  1.1   SHJ   New function  	  ffa_find
+                                                                                                                 
+ 2002-04-10  1.1   SHJ   Bugfix           ffa_delsub       logical error fixed "subt" introduced -
+                                                           previously failed to delete some datasets
+                                                                                                                
+ 2002-04-10  1.1   SHJ   Bugfix           ffa_forto        padding of output strings to fixed lengths
+                                                                                                                
+ 2002-04-11  1.1   SHJ   Bugfix           ffa_load         ierr not transferred from  ffa_forti
+                                                                                                                
+ 2002-04-12  1.2   SHJ   Online Help      ffa & ALL        Improved online help text for all functions
+                                                           and added a "dummy" function "ffa.m" to allow
+			 				   the user to get a simple help page by entering
+							   >> help ffa 	
+                                                                                                               
+ 2002-06-04  1.3   SHJ   New function     ffa_create	   Creates a new dataset from scratch
+                         Bugfix           ffa_delsub       can now delete isolated sub-datasets
+			 Bugfix           ffa_list         can now list even a "null" dataset
+			 Bugfix           ffa_putsub       sensible default for insert-position 
+                                                                                                               
+ 2002-06-12  1.4   SHJ   New function     ffa_helpdesk     HTML-based online help 
+                         Tidy-up          ALL              help text consistent with HTML files 	
+                                                                                                               
+ 2002-06-12  1.4.1 SHJ 	 Bugfix           ffa_put        | Corrected bug affecting single-string data-
+                                          ffa_list       | -entries and moved the common function
+                                          ffa_create     | "check_data" into an separate m-file
+					  ffa_check_data | "ffa_check_data" (joins the low-level functions)
+					  
+ 2002-08-13  1.4.2 SHJ   Bugfix/Enhance   ffa_find         Location of "name" now uses an EXACT string match
+                                                           (strings trimmed leading and trailing blanks) and
+							   the list index given as an additional argument. 
+							   
+							   			
+ 2002-10-25  1.4.3 SHJ   Bugfix           ffa_delsub     | Replaced "subs" by "subz" throughout because 
+                                          ffa_list       | of name conflict with "symbolic" toolbox (as
+                                          ffa_putsub     | discovered by Anders Karlsson of SAAB Aeroespace).
+					  
+ 2003-10-28  1.4.4 SHJ   Bugfix           ffa_create       fixed problem with A/S/L type character data	
+ 
+ 2004-01-12  1.4.5 SHJ   Bugfix           ffa_diff         loop change 2:LA to fix bug (Yann le Moigne)			  
+		  
+                                                                                                               
+ DATE        VER   SIG   CHANGE TYPE      FUNCTIONS        DESCRIPTION OF CHANGES
+</pre>
+<hr align=center noshade>
+
+
+
+
+</BODY>
+</HTML>

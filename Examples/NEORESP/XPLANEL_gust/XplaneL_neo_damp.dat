@@ -1,0 +1,6 @@
+INCLUDE GustSolverParam.inc
+INCLUDE XplaneL.inc
+INCLUDE XplaneLCONM_CONF3.inc
+SDAMPING= 1
+TABDMP1 1       G
+        0.0     0.05    100.0   0.05    ENDT

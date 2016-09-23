@@ -1,0 +1,3 @@
+INCLUDE ForceSolverParam.inc
+INCLUDE XplaneL.inc
+INCLUDE XplaneLCONM_CONF3.inc

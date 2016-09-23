@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- Written on 03-Mar-2009 15:36:27 using the XML Toolbox for Matlab -->
+<root xml_tb_version="3.2.1" idx="1" type="struct" size="1 1">
+  <Engines1 idx="1" type="struct" size="1 1">
+    <Thrust_to_weight_ratio idx="1" type="double" size="1 1">0.</Thrust_to_weight_ratio>
+  </Engines1>
+  <Baggage idx="1" type="struct" size="1 1">
+    <installation_type idx="1" type="double" size="1 1">0</installation_type>
+    <gross_volume idx="1" type="double" size="1 1">-1</gross_volume>
+    <Baggage_combined_length idx="1" type="double" size="1 1">0.</Baggage_combined_length>
+    <Baggage_apex_per_fuselgt idx="1" type="double" size="1 1">0.</Baggage_apex_per_fuselgt>
+  </Baggage>
+  <cabin idx="1" type="struct" size="1 1">
+    <Cabin_length_to_aft_cab idx="1" type="double" size="1 1">0.</Cabin_length_to_aft_cab>
+    <Cabin_max_internal_height idx="1" type="double" size="1 1">0.</Cabin_max_internal_height>
+    <Cabin_max_internal_width idx="1" type="double" size="1 1">0.</Cabin_max_internal_width>
+    <Cabin_floor_width idx="1" type="double" size="1 1">0.</Cabin_floor_width>
+    <Cabin_volume idx="1" type="double" size="1 1">0.</Cabin_volume>
+    <Cabin_attendant_number idx="1" type="double" size="1 1">1</Cabin_attendant_number>
+    <Flight_crew_number idx="1" type="double" size="1 1">1</Flight_crew_number>
+    <Passenger_accomodation idx="1" type="double" size="1 1">1</Passenger_accomodation>
+    <Seats_abreast_in_fuselage idx="1" type="double" size="1 1">2</Seats_abreast_in_fuselage>
+    <Seat_pitch idx="1" type="double" size="1 1">0.3</Seat_pitch>
+    <Maximum_cabin_altitude idx="1" type="double" size="1 1">0</Maximum_cabin_altitude>
+    <Max_pressure_differential idx="1" type="double" size="1 1">0</Max_pressure_differential>
+  </cabin>
+  <weight_balance idx="1" type="struct" size="1 1">
+    <Fuel idx="1" type="struct" size="1 1">
+      <Maximum_fuel_in_wings idx="1" type="double" size="1 1">0.</Maximum_fuel_in_wings>
+      <Maximum_fuel_in_auxiliary idx="1" type="double" size="1 1">0</Maximum_fuel_in_auxiliary>
+      <Maximum_fuel_in_central_wingbox idx="1" type="double" size="1 1">0.</Maximum_fuel_in_central_wingbox>
+    </Fuel>
+    <MFW_decrement_to_MTOW idx="1" type="double" size="1 1">0.</MFW_decrement_to_MTOW>
+    <System idx="1" type="struct" size="1 1">
+      <Aux_Landing_gear idx="1" type="double" size="1 1">0</Aux_Landing_gear>
+    </System>
+    <IXXINER idx="1" type="double" size="1 1">0.</IXXINER>
+    <IYYINER idx="1" type="double" size="1 1">0.</IYYINER>
+    <IZZINER idx="1" type="double" size="1 1">0.</IZZINER>
+    <IXYINER idx="1" type="double" size="1 1">0</IXYINER>
+    <IYZINER idx="1" type="double" size="1 1">0</IYZINER>
+    <IXZINER idx="1" type="double" size="1 1">0</IXZINER>
+  </weight_balance>
+  <miscellaneous idx="1" type="struct" size="1 1">
+    <main_landing_gear_x_cg idx="1" type="double" size="1 1">0</main_landing_gear_x_cg>
+    <main_landing_gear_z_cg idx="1" type="double" size="1 1">0</main_landing_gear_z_cg>
+    <aux_landing_gear_x_cg idx="1" type="double" size="1 1">0</aux_landing_gear_x_cg>
+    <aux_landing_gear_z_cg idx="1" type="double" size="1 1">0</aux_landing_gear_z_cg>
+  </miscellaneous>
+  <fuel idx="1" type="struct" size="1 1">
+    <box_ea_loc_root idx="1" type="double" size="1 1">0.</box_ea_loc_root>
+    <box_ea_loc_kink1 idx="1" type="double" size="1 1">0.</box_ea_loc_kink1>
+    <box_ea_loc_kink2 idx="1" type="double" size="1 1">0.</box_ea_loc_kink2>
+    <box_ea_loc_tip idx="1" type="double" size="1 1">0.</box_ea_loc_tip>
+    <box_semispan_root idx="1" type="double" size="1 1">0.</box_semispan_root>
+    <box_semispan_kink1 idx="1" type="double" size="1 1">0.</box_semispan_kink1>
+    <box_semispan_kink2 idx="1" type="double" size="1 1">0.</box_semispan_kink2>
+    <box_semispan_tip idx="1" type="double" size="1 1">0.</box_semispan_tip>
+    <Centre_tank_portion_used idx="1" type="double" size="1 1">100</Centre_tank_portion_used>
+  </fuel>
+</root>

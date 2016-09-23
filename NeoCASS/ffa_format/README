@@ -1,0 +1,78 @@
+    
+     "FFA Matlab Toolbox"   README    issued 2005-06-07     www.foi.se
+    ----------------------------------------------------------------------
+    
+    1. INSTALLATION
+     
+    1.1 Install Directory
+          
+    Make sure that the entire package is installed in a directory
+    called "ffa_format". The directory structure is -
+     
+       ffa_format/*
+                  manual/
+                         ffa-data/*                                
+                         html/*
+             
+    
+    1.2 Path Setup
+    
+    Set up your system so that the installation directory "ffa_format" is
+    on the Matlab path. You can do this using the Matlab command "addpath" 
+    in your "startup.m" file. If you are using Matlab 6+ you should add
+    a command to set the root property "RecursionLimit". 
+    
+    Example startup.m 
+    ----------------------------------------------------------------------   
+      addpath /home/kalle/matlab/ffa_format 
+      fprintf('  For info on FFA-format tools type: ffa or ffa_helpdesk \n\n')
+      set(0,'RecursionLimit',4096);  
+    ----------------------------------------------------------------------
+   
+    You can also set-up the Matlab path using the environment variable
+    MATLABPATH - with a suitable command in one of your login scripts   
+   
+   
+    1.4 On-line Manual
+    
+    The browser-based on-line help files are stored in the directory
+
+      ffa_format/manual/html
+    
+    The file "index.html" in this directory can be opened in any browser.
+    
+    There is a ready-made Matlab command to open this manual "ffa_helpdesk"
+    however, you may need to change the BROWSER definition in this to suit 
+    your system. The standard browser is "konqueror" for Linux with KDE.
+       
+    
+    2. GETTING STARTED
+  
+    If you have installed the package correctly (see above) you should
+    be able to get all the information you need by using the on-line help.
+    
+    Start Matlab(*) and then use any one of these on-line help commands.
+    
+    >> ffa_helpdesk                 % opens the browser-based manual
+    
+    >> ffa                          % prints a single-page intro text 
+    
+    >> help ffa                     % ""  ""  same as previous command
+    
+    >> help ffa_format              % prints the text in "Contents.m"
+    
+    You can also get help on any one "ffa_" function using the standard
+    Matlab help command, for example
+    
+    >> help ffa_load 
+    
+    The best way to learn how to use this toolbox is to load up some FFA-
+    format data from a file and then try out some of the "ffa_" functions.
+    
+    A sample FFA-format data file is provided. An easy way to get at this 
+    is to use the "ffa_helpdesk" command. To find out how, enter this
+    
+    >> help ffa_helpdesk
+    
+ ------------------------------------------------------------------------------
+   CONTACT  Jonathan Smith@foi.se   www.foi.se 

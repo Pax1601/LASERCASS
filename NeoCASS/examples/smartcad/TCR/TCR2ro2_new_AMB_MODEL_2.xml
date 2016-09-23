@@ -1,0 +1,462 @@
+<?xml version="1.0"?>
+<!-- Written on 11-May-2008 12:18:57 using the XML Toolbox for Matlab -->
+<root xml_tb_version="3.2.1" idx="1" type="struct" size="1 1">
+  <Fuselage idx="1" type="struct" size="1 1">
+    <Forefuse_X_sect_vertical_diameter idx="1" type="double" size="1 1">3.7</Forefuse_X_sect_vertical_diameter>
+    <Forefuse_Xs_distortion_coefficient idx="1" type="double" size="1 1">0.5</Forefuse_Xs_distortion_coefficient>
+    <Forefuse_X_sect_horizontal_diameter idx="1" type="double" size="1 1">3.7</Forefuse_X_sect_horizontal_diameter>
+    <omega_nose idx="1" type="double" size="1 1">30</omega_nose>
+    <phi_nose idx="1" type="double" size="1 1">10</phi_nose>
+    <epsilon_nose idx="1" type="double" size="1 1">2.7</epsilon_nose>
+    <shift_fore idx="1" type="double" size="1 1">0</shift_fore>
+    <fraction_fore idx="1" type="double" size="1 1">0.5</fraction_fore>
+    <Total_fuselage_length idx="1" type="double" size="1 1">60</Total_fuselage_length>
+    <Aftfuse_X_sect_vertical_diameter idx="1" type="double" size="1 1">3.7</Aftfuse_X_sect_vertical_diameter>
+    <Aftfuse_Xs_distortion_coefficient idx="1" type="double" size="1 1">0.5</Aftfuse_Xs_distortion_coefficient>
+    <Aftfuse_X_sect_horizontal_diameter idx="1" type="double" size="1 1">3.7</Aftfuse_X_sect_horizontal_diameter>
+    <omega_tail idx="1" type="double" size="1 1">15</omega_tail>
+    <phi_tail idx="1" type="double" size="1 1">10</phi_tail>
+    <epsilon_tail idx="1" type="double" size="1 1">2.7</epsilon_tail>
+    <Nose_length idx="1" type="double" size="1 1">10</Nose_length>
+    <Tail_length idx="1" type="double" size="1 1">9.4</Tail_length>
+    <a0_fore idx="1" type="double" size="1 1">1.85</a0_fore>
+    <a1_fore idx="1" type="double" size="1 1">7.024553426791e-017</a1_fore>
+    <b1_fore idx="1" type="double" size="1 1">-1.4049106853582e-016</b1_fore>
+    <a0_aft idx="1" type="double" size="1 1">1.85</a0_aft>
+    <a1_aft idx="1" type="double" size="1 1">7.024553426791e-017</a1_aft>
+    <b1_aft idx="1" type="double" size="1 1">-1.4049106853582e-016</b1_aft>
+    <X_sect_chord_at_fuse_wing idx="1" type="double" size="1 1">2.1620857637936</X_sect_chord_at_fuse_wing>
+    <geometry_matrix idx="1" type="double" size="6 4">0.49093631254556 0.49093631254556 3.7 0.52319224722352 0.52319224722352 3.7 0.57639702342662 0.57639702342662 0 0.54874886635259 0.54874886635259 0 24.15382765659 24.15382765659 20.01 23.061071412974 23.061071412974 20.01 9.99 9.99 20.01 9.99 9.99 20.01</geometry_matrix>
+  </Fuselage>
+  <Sponson idx="1" type="struct" size="1 1">
+    <X_locale idx="1" type="double" size="1 1">0</X_locale>
+    <Z_locale idx="1" type="double" size="1 1">0</Z_locale>
+    <length idx="1" type="double" size="1 1">0</length>
+    <XZ_slenderness idx="1" type="double" size="1 1">0</XZ_slenderness>
+    <width idx="1" type="double" size="1 1">0</width>
+  </Sponson>
+  <Wing1 idx="1" type="struct" size="1 1">
+    <configuration idx="1" type="double" size="1 1">0</configuration>
+    <placement idx="1" type="double" size="1 1">0.16</placement>
+    <aerofoil_technology idx="1" type="double" size="1 1">0</aerofoil_technology>
+    <apex_locale idx="1" type="double" size="1 1">0.217</apex_locale>
+    <area idx="1" type="double" size="1 1">489</area>
+    <AR idx="1" type="double" size="1 1">4.07876400818</AR>
+    <Span idx="1" type="double" size="1 1">44.66</Span>
+    <airfoil idx="1" type="char" size="1 11">N64A206.dat</airfoil>
+    <spanwise_kink1 idx="1" type="double" size="1 1">0.1956</spanwise_kink1>
+    <spanwise_kink2 idx="1" type="double" size="1 1">0.3809</spanwise_kink2>
+    <taper_kink1 idx="1" type="double" size="1 1">0.4607</taper_kink1>
+    <taper_kink2 idx="1" type="double" size="1 1">0.3027</taper_kink2>
+    <taper_tip idx="1" type="double" size="1 1">0.074</taper_tip>
+    <root_incidence idx="1" type="double" size="1 1">1</root_incidence>
+    <kink1_incidence idx="1" type="double" size="1 1">1</kink1_incidence>
+    <kink2_incidence idx="1" type="double" size="1 1">1</kink2_incidence>
+    <tip_incidence idx="1" type="double" size="1 1">-2</tip_incidence>
+    <quarter_chord_sweep_inboard idx="1" type="double" size="1 1">71.491252930391</quarter_chord_sweep_inboard>
+    <quarter_chord_sweep_midboard idx="1" type="double" size="1 1">41.192224434664</quarter_chord_sweep_midboard>
+    <quarter_chord_sweep_outboard idx="1" type="double" size="1 1">46.522490930266</quarter_chord_sweep_outboard>
+    <LE_sweep_inboard idx="1" type="double" size="1 1">76</LE_sweep_inboard>
+    <LE_sweep_midboard idx="1" type="double" size="1 1">50</LE_sweep_midboard>
+    <LE_sweep_outboard idx="1" type="double" size="1 1">50</LE_sweep_outboard>
+    <dihedral_inboard idx="1" type="double" size="1 1">3</dihedral_inboard>
+    <dihedral_midboard idx="1" type="double" size="1 1">3</dihedral_midboard>
+    <dihedral_outboard idx="1" type="double" size="1 1">3</dihedral_outboard>
+    <thickness_root idx="1" type="double" size="1 1">0.1</thickness_root>
+    <thickness_kink1 idx="1" type="double" size="1 1">0.1</thickness_kink1>
+    <thickness_kink2 idx="1" type="double" size="1 1">0.1</thickness_kink2>
+    <thickness_tip idx="1" type="double" size="1 1">0.1</thickness_tip>
+    <Fractional_change_vortex_induced_drag_factor idx="1" type="double" size="1 1">0</Fractional_change_vortex_induced_drag_factor>
+    <winglet idx="1" type="struct" size="1 1">
+      <Span idx="1" type="double" size="1 1">0</Span>
+      <taper_ratio idx="1" type="double" size="1 1">0</taper_ratio>
+      <LE_sweep idx="1" type="double" size="1 1">0</LE_sweep>
+      <Cant_angle idx="1" type="double" size="1 1">0</Cant_angle>
+      <root_incidence idx="1" type="double" size="1 1">0</root_incidence>
+      <tip_incidence idx="1" type="double" size="1 1">0</tip_incidence>
+    </winglet>
+    <flap idx="1" type="struct" size="1 1">
+      <root_chord idx="1" type="double" size="1 1">20</root_chord>
+      <kink1_chord idx="1" type="double" size="1 1">20</kink1_chord>
+      <kink2_chord idx="1" type="double" size="1 1">20</kink2_chord>
+    </flap>
+    <aileron idx="1" type="struct" size="1 1">
+      <chord idx="1" type="double" size="1 1">25</chord>
+      <Span idx="1" type="double" size="1 1">0.485</Span>
+      <position idx="1" type="double" size="1 1">2</position>
+      <limit_deflection_up idx="1" type="double" size="1 1">0</limit_deflection_up>
+      <limit_deflection_down idx="1" type="double" size="1 1">0</limit_deflection_down>
+    </aileron>
+    <slat idx="1" type="struct" size="1 1">
+      <chord idx="1" type="double" size="1 1">20</chord>
+      <root_position idx="1" type="double" size="1 1">1</root_position>
+      <tip_position idx="1" type="double" size="1 1">1</tip_position>
+    </slat>
+    <Span_matrix_partition_in_mid_outboard idx="1" type="double" size="3 1">4.367748 4.137749 13.824503</Span_matrix_partition_in_mid_outboard>
+    <Weighted_taper_ratio idx="1" type="double" size="1 1">0.13040537504385</Weighted_taper_ratio>
+    <longitudinal_location idx="1" type="double" size="1 1">13.02</longitudinal_location>
+    <vertical_location idx="1" type="double" size="1 1">-1.258</vertical_location>
+    <Root_Airfoil idx="1" type="double" size="1 142">33.160596755173 -0.57882036941999 33.094391325737 -0.57103060933012 32.895832919464 -0.54434526938497 32.564863654319 -0.50208040926008 32.108173531689 -0.44103573335381 31.525646787499 -0.36784336101719 30.824031305176 -0.27598693697307 30.009901322034 -0.16889828497085 29.086515015709 -0.049951346722999 28.063994211341 0.09062841068622 26.945307676383 0.23288674716676 25.743661767501 0.37327607489533 24.465630722007 0.50836457012253 23.124478778604 0.63792070470059 21.733470175995 0.76171295048175 20.299121269457 0.87299342404108 18.831438120052 0.97490453894329 17.346885262086 1.0605247656526 15.858726934259 1.1296225760213 14.373479491849 1.1754500866244 12.904407173557 1.1977757693142 11.4681481598 1.1996262735815 10.07127668789 1.1775697756768 8.7272306426403 1.141322926479 7.4459582030779 1.0907120798772 6.2374075482291 1.0255635897607 5.114842916796 0.94564592798155 4.0850700742405 0.86079150949253 3.1546053758396 0.76425245086871 2.3334548826569 0.65917116567476 1.6251083004787 0.5554379509003 1.0427141039333 0.44618915904652 0.58301411538198 0.33479873182589 0.2526983362128 0.22446696484005 0.058341003739822 0.11176203433957 0 0 0.07459079346558 -0.097497017439668 0.28217126617351 -0.17741295830391 0.61599353469886 -0.24626417786988 1.0759418349678 -0.31068279548862 1.6620161669802 -0.37066881116011 2.3675844113851 -0.42610646081048 3.1858986847577 -0.48351209971688 4.1137586914961 -0.53619572649133 5.1378423108616 -0.58724187266158 6.2582074248909 -0.63333447855211 7.4582158531696 -0.67750019365374 8.734609418059 -0.716365076254 10.070865703219 -0.74632365649266 11.460236825223 -0.77389228964687 12.889574309445 -0.79220732821784 14.352361800607 -0.79452088878064 15.831961118294 -0.78385962082608 17.314992259731 -0.76662411555743 18.794880987602 -0.73938254922528 20.25830518117 -0.70521945335739 21.688510895946 -0.6737935967956 23.082297836329 -0.63841497815193 24.422912057829 -0.60874236626822 25.697089321745 -0.5845442329967 26.898139626688 -0.56902087393902 28.02263114891 -0.56874652640925 29.050725412395 -0.58005783851023 29.9828275914 -0.57974239251335 30.805441919076 -0.5808328989729 31.511936276072 -0.58321359381499 32.099052484749 -0.58351053532717 32.56010054372 -0.58492401911107 32.891764393309 -0.58739616312976 33.094101915552 -0.5876109077077 33.160480991099 -0.58545248877102</Root_Airfoil>
+    <Kink1_Airfoil idx="1" type="double" size="1 142">32.795167325998 -0.037758571043845 32.764666484656 -0.034169828570439 32.673190626887 -0.021875892457713 32.520713086434 -0.0024044713981758 32.310315946938 0.025718810791844 32.04194587589 0.059438536727325 31.718711623184 0.10175679128445 31.34364193995 0.15109253326187 30.918237868627 0.20589138771266 30.447162534054 0.27065648195109 29.931783647399 0.33619489756767 29.378185377177 0.40087226085222 28.789396474518 0.46310753060339 28.171527774192 0.52279404180351 27.53069011097 0.57982512943489 26.869885569728 0.63109204360367 26.193723942797 0.67804249423912 25.509790441132 0.7174877326841 24.824195899502 0.74932109392096 24.139942402784 0.77043382805581 23.463140785747 0.780719270071 22.801456258109 0.78157179738693 22.157917571 0.77141036880225 21.538715557954 0.75471144537682 20.948433345047 0.73139502834739 20.391654058358 0.70138111895069 19.874488532657 0.66456305216905 19.400072184092 0.62547062157116 18.971407097539 0.58099507726316 18.593103065329 0.5325841291743 18.26676779492 0.48479423712771 17.998458788571 0.43446331872068 17.786675003846 0.38314574890013 17.634498524383 0.33231590384975 17.544958101312 0.28039274236819 17.518080400889 0.22890397314794 17.552444379439 0.18398709721349 17.648076703215 0.14716982325733 17.801868622325 0.11545006640329 18.013766804259 0.085772409266339 18.283771249017 0.058136851846482 18.608826539214 0.032596726652556 18.985823924957 0.0061499488083783 19.413289030062 -0.018121398046611 19.885084353503 -0.041638357587246 20.401236561537 -0.062873221121015 20.954080444445 -0.083220366068333 21.542114959789 -0.10112541748227 22.157728230362 -0.11492733539822 22.79781150627 -0.12762820469237 23.456307285251 -0.13606594296201 24.130213482429 -0.1371318003133 24.811864888087 -0.13222015416663 25.495097334947 -0.12427975688936 26.176882071878 -0.11172956728014 26.851081597855 -0.095990629013806 27.509977370652 -0.081512736895788 28.152095014086 -0.065213807286648 28.769715985931 -0.051543634991823 29.356729451417 -0.040395554993636 29.910053326905 -0.03324394347576 30.428106571192 -0.033117551568796 30.901749598379 -0.03832867305372 31.331169072247 -0.038183347082955 31.710147493007 -0.038685743408868 32.035629443276 -0.039782529522621 32.306113880613 -0.039919330477283 32.518518721381 -0.040570522456527 32.671316256887 -0.041709439205934 32.764533153384 -0.041808372032994 32.795113993489 -0.040813988428866</Kink1_Airfoil>
+    <Kink2_Airfoil idx="1" type="double" size="1 142">32.486970274683 0.27054528364514 32.466929891193 0.27290324402434 32.406826261614 0.28098089642574 32.306641865055 0.29377446958554 32.168401764935 0.31225269298237 31.992070919469 0.33440802408867 31.779691912969 0.36221296364682 31.533254767072 0.39462869860789 31.253745732148 0.43063393681552 30.944228684665 0.47318742938329 30.605602270534 0.51624902783595 30.241864053915 0.55874487733938 29.855004056444 0.59963616484466 29.449037363176 0.63885280678144 29.027979059166 0.67632471957939 28.593801645157 0.71000931892581 28.149533955832 0.7408578134067 27.700159805726 0.76677505603162 27.249694279893 0.78769096323022 26.800109879075 0.80156295068978 26.355421688328 0.80832093483998 25.920666084864 0.80888108248168 25.497833090317 0.80220458056594 25.09099035242 0.79123265931376 24.703149184964 0.77591275604741 24.337320901741 0.75619230808913 23.997520587807 0.73200123186858 23.685808348365 0.70631579939196 23.404156684159 0.67709342634653 23.155594429873 0.64528532131832 22.941177919447 0.61388527720609 22.764887196153 0.58081566791195 22.625736009619 0.54709778559227 22.525749423264 0.51370035972565 22.466917458724 0.47958457726316 22.449257636892 0.44575420946857 22.471836270074 0.41624186228958 22.534670879163 0.39205130698997 22.635718879846 0.37121004282736 22.774945230337 0.35171052727417 22.952349930637 0.3335527603304 23.165925438219 0.31677178378124 23.413629168769 0.29939509688427 23.694492392808 0.28344776305964 24.00448250439 0.26799609461391 24.343617024407 0.25404386281084 24.706859575647 0.24067490084958 25.093223907739 0.22891050088648 25.497708685257 0.21984203864824 25.918271323888 0.21149701339246 26.350931780362 0.20595305121703 26.793717553936 0.20525273643467 27.2415922674 0.20847990224451 27.690505793913 0.21369708968934 28.13846811184 0.22194311181808 28.581446615233 0.23228428093729 29.014369885095 0.24179688771854 29.436269191949 0.25250599558198 29.842073116797 0.26148789519918 30.227766574585 0.26881267014047 30.591324501891 0.27351159092723 30.931708085668 0.27359463592449 31.242912219224 0.27017070175152 31.525059548809 0.27026618725478 31.774064905797 0.26993609094947 31.987920747659 0.26921545462077 32.165640824026 0.26912557042503 32.305200071476 0.26869770888365 32.405594718747 0.26794939088919 32.46684228673 0.26788438770545 32.486935232898 0.26853774111758</Kink2_Airfoil>
+    <Tip_Airfoil idx="1" type="double" size="1 142">41.378542912855 1.255957234497 41.37361800623 1.2562766282828 41.358834717205 1.2574801980561 41.334201614931 1.2593225554009 41.300200907087 1.2620662270378 41.256849731979 1.2652204361349 41.204621728134 1.2692930978288 41.144016241537 1.274055962008 41.075287229754 1.279272209409 40.999145150578 1.2857037127365 40.915886807339 1.2918867106471 40.826502322852 1.2976100913339 40.731491043102 1.3026456046856 40.631834521753 1.3070275273114 40.528514312468 1.3107901358206 40.422038330385 1.3134597916857 40.313134171599 1.3153075907798 40.203045916495 1.3158856020324 40.092755118736 1.3152281020528 39.98276969346 1.3128614523135 39.874071194329 1.3088199294239 39.767877994272 1.3033917675615 39.664689439274 1.2963487166149 39.56546137554 1.2884612184413 39.470929968319 1.2797549804976 39.38183138286 1.2702557102408 39.299147172825 1.2599976842802 39.22334240759 1.2497342061682 39.154925002292 1.2389916373776 39.094622553026 1.2280410737813 39.042654740751 1.2176272497795 39.000020257437 1.2072936651496 38.966465145514 1.1972771391551 38.942471612662 1.1878401985168 38.928539004865 1.1787545931232 38.924658752972 1.1702657113903 38.930551191957 1.1633465378298 38.946207752667 1.1582424608576 38.971154796576 1.1544455653372 39.005409461987 1.1514650744366 39.048971748902 1.1493009881558 39.101350880488 1.1479361681901 39.162073218217 1.146862699403 39.230876235369 1.1465627894741 39.306786947432 1.1467567733782 39.389796785255 1.1476900395313 39.478687375909 1.1490743537559 39.573204761826 1.1511465353155 39.672113431774 1.1541091268648 39.774939747225 1.157454213267 39.880685016211 1.1616382947448 39.988841323596 1.1671350098258 40.098190296451 1.1736561243322 40.207767519418 1.1806765848229 40.317073646512 1.1884246414093 40.425135693221 1.1966206290661 40.530752424923 1.2044855367838 40.633661314896 1.212501572242 40.732661128519 1.2198897244314 40.826770312126 1.2266157167425 40.915506658038 1.2324170224548 40.998641916144 1.2367942955841 41.074695186796 1.2399415096324 41.143606485927 1.2435763835116 41.204428536483 1.2466830869486 41.256670561632 1.2492444816387 41.300078603805 1.2514973868457 41.334170455322 1.2531792758489 41.358700727769 1.2542815794959 41.373660851992 1.2550496862029 41.378560051159 1.2554664576651</Tip_Airfoil>
+    <thickness_coefs_matrix idx="1" type="double" size="2 3">1 0.1 1 0.1 1 0.1</thickness_coefs_matrix>
+    <Original_estimated_fuse_wing_chrd idx="1" type="double" size="1 1">28.734324679696</Original_estimated_fuse_wing_chrd>
+    <Original_planform_tip_chord idx="1" type="double" size="1 1">2.4538841598828</Original_planform_tip_chord>
+    <Fuse_wing_junct_BL_locale idx="1" type="double" size="1 1">1.0810428818968</Fuse_wing_junct_BL_locale>
+    <Total_exposed_area idx="1" type="double" size="1 1">380.31903461816</Total_exposed_area>
+  </Wing1>
+  <Fairing1 idx="1" type="struct" size="1 1">
+    <Forward_chord_fraction idx="1" type="double" size="1 1">0</Forward_chord_fraction>
+    <Aft_chord_fraction idx="1" type="double" size="1 1">0</Aft_chord_fraction>
+    <flushness idx="1" type="double" size="1 1">0</flushness>
+  </Fairing1>
+  <Reference_wing idx="1" type="struct" size="1 1">
+    <convention idx="1" type="double" size="1 1">2</convention>
+    <taper_ratio idx="1" type="double" size="1 1">0.13040537504385</taper_ratio>
+    <planform_AR idx="1" type="double" size="1 1">4.1990972779311</planform_AR>
+    <Weighted_area idx="1" type="double" size="1 1">474.9867573877</Weighted_area>
+    <LE_sweep idx="1" type="double" size="1 1">50</LE_sweep>
+    <MAC idx="1" type="double" size="1 1">12.73362561562</MAC>
+    <relative_apex idx="1" type="double" size="1 1">0.42221335050572</relative_apex>
+    <Orig_root_chrd_at_ac_CL idx="1" type="double" size="1 1">33.160596755173</Orig_root_chrd_at_ac_CL>
+    <Half_chord_sweep idx="1" type="double" size="1 1">39.534648541453</Half_chord_sweep>
+    <Quarter_chord_sweep idx="1" type="double" size="1 1">45.243982659956</Quarter_chord_sweep>
+    <non_dim_MAC_y_bar idx="1" type="double" size="1 1">0.37178720068713</non_dim_MAC_y_bar>
+    <Weighted_aspect_ratio idx="1" type="double" size="1 1">4.1990972779311</Weighted_aspect_ratio>
+    <mean_thickness idx="1" type="double" size="1 1">0.1</mean_thickness>
+    <Wing_area_for_weight_balance_analysis idx="1" type="double" size="1 1">880.05543105392</Wing_area_for_weight_balance_analysis>
+  </Reference_wing>
+  <Wing2 idx="1" type="struct" size="1 1">
+    <configuration idx="1" type="double" size="1 1">0</configuration>
+    <placement idx="1" type="double" size="1 1">0</placement>
+    <Apex_locale idx="1" type="double" size="1 1">0</Apex_locale>
+    <aerofoil_technology idx="1" type="double" size="1 1">0</aerofoil_technology>
+    <area idx="1" type="double" size="1 1">0</area>
+    <AR idx="1" type="double" size="1 1">0</AR>
+    <spanwise_kink1 idx="1" type="double" size="1 1">0</spanwise_kink1>
+    <spanwise_kink2 idx="1" type="double" size="1 1">0</spanwise_kink2>
+    <taper_kink1 idx="1" type="double" size="1 1">0</taper_kink1>
+    <taper_kink2 idx="1" type="double" size="1 1">0</taper_kink2>
+    <taper_tip idx="1" type="double" size="1 1">0</taper_tip>
+    <root_incidence idx="1" type="double" size="1 1">0</root_incidence>
+    <kink1_incidence idx="1" type="double" size="1 1">0</kink1_incidence>
+    <kink2_incidence idx="1" type="double" size="1 1">0</kink2_incidence>
+    <tip_incidence idx="1" type="double" size="1 1">0</tip_incidence>
+    <quarter_chord_sweep_inboard idx="1" type="double" size="1 1">0</quarter_chord_sweep_inboard>
+    <quarter_chord_sweep_midboard idx="1" type="double" size="1 1">0</quarter_chord_sweep_midboard>
+    <quarter_chord_sweep_outboard idx="1" type="double" size="1 1">0</quarter_chord_sweep_outboard>
+    <LE_sweep_inboard idx="1" type="double" size="1 1">0</LE_sweep_inboard>
+    <LE_sweep_midboard idx="1" type="double" size="1 1">0</LE_sweep_midboard>
+    <LE_sweep_outboard idx="1" type="double" size="1 1">0</LE_sweep_outboard>
+    <dihedral_inboard idx="1" type="double" size="1 1">0</dihedral_inboard>
+    <dihedral_midboard idx="1" type="double" size="1 1">0</dihedral_midboard>
+    <dihedral_outboard idx="1" type="double" size="1 1">0</dihedral_outboard>
+    <Span idx="1" type="double" size="1 1">0</Span>
+    <flap idx="1" type="struct" size="1 1">
+      <root_chord idx="1" type="double" size="1 1">0</root_chord>
+      <kink1_chord idx="1" type="double" size="1 1">0</kink1_chord>
+      <kink2_chord idx="1" type="double" size="1 1">0</kink2_chord>
+    </flap>
+    <aileron idx="1" type="struct" size="1 1">
+      <chord idx="1" type="double" size="1 1">0</chord>
+      <Span idx="1" type="double" size="1 1">0</Span>
+      <position idx="1" type="double" size="1 1">0</position>
+    </aileron>
+    <slat idx="1" type="struct" size="1 1">
+      <chord idx="1" type="double" size="1 1">0</chord>
+      <root_position idx="1" type="double" size="1 1">0</root_position>
+      <tip_position idx="1" type="double" size="1 1">0</tip_position>
+    </slat>
+    <Weighted_reference_wing_area idx="1" type="double" size="1 1">0</Weighted_reference_wing_area>
+    <Weighted_reference_aspect_ratio idx="1" type="double" size="1 1">0</Weighted_reference_aspect_ratio>
+    <Weighted_taper_ratio idx="1" type="double" size="1 1">0</Weighted_taper_ratio>
+    <Reference_quarter_chord_sweep idx="1" type="double" size="1 1">0</Reference_quarter_chord_sweep>
+    <Wing_mean_thickness idx="1" type="double" size="1 1">0</Wing_mean_thickness>
+  </Wing2>
+  <Fairing2 idx="1" type="struct" size="1 1">
+    <Forward_chord_fraction idx="1" type="double" size="1 1">0</Forward_chord_fraction>
+    <Aft_chord_fraction idx="1" type="double" size="1 1">0</Aft_chord_fraction>
+    <flushness idx="1" type="double" size="1 1">0</flushness>
+  </Fairing2>
+  <Vertical_tail idx="1" type="struct" size="1 1">
+    <area idx="1" type="double" size="1 1">96.76</area>
+    <AR idx="1" type="double" size="1 1">1.5</AR>
+    <Span idx="1" type="double" size="1 1">8.192</Span>
+    <spanwise_kink idx="1" type="double" size="1 1">0.35</spanwise_kink>
+    <taper_kink idx="1" type="double" size="1 1">0.825</taper_kink>
+    <taper_tip idx="1" type="double" size="1 1">0.5</taper_tip>
+    <quarter_chord_sweep_inboard idx="1" type="double" size="1 1">55.538946325077</quarter_chord_sweep_inboard>
+    <quarter_chord_sweep_outboard idx="1" type="double" size="1 1">55.538946325077</quarter_chord_sweep_outboard>
+    <LE_sweep_inboard idx="1" type="double" size="1 1">62.03</LE_sweep_inboard>
+    <LE_sweep_outboard idx="1" type="double" size="1 1">62.03</LE_sweep_outboard>
+    <vertical_locale idx="1" type="double" size="1 1">0.45</vertical_locale>
+    <apex_locale idx="1" type="double" size="1 1">0.691</apex_locale>
+    <thickness_root idx="1" type="double" size="1 1">0.1</thickness_root>
+    <thickness_kink idx="1" type="double" size="1 1">0.1</thickness_kink>
+    <thickness_tip idx="1" type="double" size="1 1">0.1</thickness_tip>
+    <Rudder idx="1" type="struct" size="1 1">
+      <chord idx="1" type="double" size="1 1">30</chord>
+      <Span idx="1" type="double" size="1 1">0.95</Span>
+      <limit_deflection idx="1" type="double" size="1 1">0</limit_deflection>
+    </Rudder>
+    <Dorsal_location idx="1" type="double" size="1 1">0</Dorsal_location>
+    <Dorsal_sweep idx="1" type="double" size="1 1">0</Dorsal_sweep>
+    <dihedral_inboard idx="1" type="double" size="1 1">0</dihedral_inboard>
+    <dihedral_outboard idx="1" type="double" size="1 1">0</dihedral_outboard>
+    <root_incidence idx="1" type="double" size="1 1">0</root_incidence>
+    <kink_incidence idx="1" type="double" size="1 1">0</kink_incidence>
+    <tip_incidence idx="1" type="double" size="1 1">0</tip_incidence>
+    <Bullet_more_vertical_tip_chord idx="1" type="double" size="1 1">0</Bullet_more_vertical_tip_chord>
+    <Bullet_fairing_slenderness idx="1" type="double" size="1 1">0</Bullet_fairing_slenderness>
+    <airfoil idx="1" type="char" size="1 11">N64A006.dat</airfoil>
+    <original_root_chord idx="1" type="double" size="1 1">13.958333333333</original_root_chord>
+    <reference_wing_area idx="1" type="double" size="1 1">85.76</reference_wing_area>
+    <reference_wing_taper_ratio idx="1" type="double" size="1 1">0.5</reference_wing_taper_ratio>
+    <reference_wing_LE_sweep idx="1" type="double" size="1 1">62.03</reference_wing_LE_sweep>
+    <reference_wing_quarter_chord_sweep idx="1" type="double" size="1 1">55.538946325077</reference_wing_quarter_chord_sweep>
+    <reference_wing_Half_chord_sweep idx="1" type="double" size="1 1">45.878776818088</reference_wing_Half_chord_sweep>
+    <reference_wing_MAC idx="1" type="double" size="1 1">10.856481481481</reference_wing_MAC>
+    <reference_Y_bar_non_dim idx="1" type="double" size="1 1">0.44444444444444</reference_Y_bar_non_dim>
+    <reference_wing_mean_thickness idx="1" type="double" size="1 1">0.1</reference_wing_mean_thickness>
+    <Moment_arm_to_VT idx="1" type="double" size="1 1">12.620138895295</Moment_arm_to_VT>
+    <Span_matrix_partition_in_mid_outboard idx="1" type="double" size="3 1">2.8672 4.9152 0.4096</Span_matrix_partition_in_mid_outboard>
+    <longitudinal_location idx="1" type="double" size="1 1">41.46</longitudinal_location>
+    <vertical_location idx="1" type="double" size="1 1">1.665</vertical_location>
+    <thickness_coefs_matrix idx="1" type="double" size="2 3">1 0.1 1 0.1 1 0.1</thickness_coefs_matrix>
+    <Root_Airfoil idx="1" type="double" size="1 142">13.958333472917 1.4283093073076e-019 13.930417085417 0.0027944583333333 13.846667504167 0.0069903333333333 13.707085147917 0.016775125 13.513065570833 0.029357027083333 13.267400439583 0.044735760416667 12.970089754167 0.062911325 12.625321154167 0.085279135416667 12.234490333333 0.11044321875 11.801784791667 0.13840315625 11.32999605625 0.16776283541667 10.823311766667 0.19991767083333 10.285919283333 0.23347141041667 9.72200610625 0.26842363541667 9.1357593166667 0.30058642708333 8.5327623875 0.33135506041667 7.9158068458333 0.35933342291667 7.29187171875 0.38312498333333 6.6665403395833 0.40272918333333 6.04260395625 0.41395824375 5.4256460416667 0.41820743958333 4.8226456229167 0.41408023958333 4.2363946458333 0.40436803125 3.6724765833333 0.39046608958333 3.1350787958333 0.3709781625 2.6283890625 0.34869549791667 2.15659474375 0.32222184375 1.7238834791667 0.29295261458333 1.333047075 0.26228336458333 0.98827289166667 0.22881784166667 0.69095690208333 0.19395173958333 0.44528674583333 0.15908047291667 0.25126228333333 0.12280820833333 0.11167504166667 0.083738833333333 0.027921133333333 0.044663875 0 0 0.0279122 -0.044669458333333 0.11165829166667 -0.083761166666667 0.25123771666667 -0.12285845833333 0.44525492083333 -0.15916952708333 0.69091809791667 -0.19408992708333 0.98822710833333 -0.22901549166667 1.3329945916667 -0.26254996875 1.7238248541667 -0.29329738541667 2.15653025625 -0.32265315625 2.6283192708333 -0.34922116875 3.1350045375 -0.37160517083333 3.6723984166667 -0.39120057708333 4.2363136875 -0.40521530208333 4.8225627104167 -0.41504476041667 5.4255622916667 -0.41929256041667 6.04252104375 -0.41516675625 6.6664596604167 -0.40406248333333 7.2917949479167 -0.38458335 7.9157348208333 -0.36091657708333 8.5326959458333 -0.33306160625 9.1356990166667 -0.30241357291667 9.7219522270833 -0.27036803125 10.285872383333 -0.23552858958333 10.823271566667 -0.20208232916667 11.329962277083 -0.17002883125 11.801756875 -0.14076351041667 12.234468 -0.11289011458333 12.625303845833 -0.087804197916667 12.9700769125 -0.065505341666667 13.267391227083 -0.047389239583333 13.513059429167 -0.032059639583333 13.70708151875 -0.019516541666667 13.846665829167 -0.0097596666666667 13.930416247917 -0.0055805416666667 13.95833319375 -0.0027916666666667</Root_Airfoil>
+    <Kink_Airfoil idx="1" type="double" size="1 142">16.914862177132 -1.2620790914089e-019 16.891831157444 0.002305428125 16.822737752913 0.005767025 16.707582309007 0.013839478125 16.547516157913 0.02421954734375 16.344842424632 0.03690700234375 16.099561109163 0.051901843125 15.815127014163 0.07035528671875 15.492691586975 0.09111565546875 15.1357095151 0.11418260390625 14.746483808382 0.13840433921875 14.328469269476 0.1649320784375 13.885120470726 0.19261391359375 13.419892099632 0.22144949921875 12.936238498225 0.24798380234375 12.438766031663 0.27336792484375 11.929777709788 0.29645007390625 11.415031229944 0.31607811125 10.899132842132 0.33225157625 10.384385325882 0.34151555109375 9.8753950463505 0.34502113765625 9.3779197008817 0.34161619765625 8.894262644788 0.33360362578125 8.4290302432255 0.32213452390625 7.985677068538 0.3060569840625 7.567658038538 0.28767378578125 7.1784277255693 0.26583302109375 6.821440932288 0.24168590703125 6.4990008988505 0.21638377578125 6.2145621976005 0.188774719375 5.9692765061942 0.16001018515625 5.766598627288 0.13124139015625 5.6065284457255 0.101316771875 5.4913689713505 0.0690845375 5.4222719969755 0.036847696875 5.3992370619755 0 5.4222646269755 -0.036852303125 5.4913551526005 -0.0691029625 5.6065081782255 -0.101358228125 5.766572371663 -0.13131485984375 5.9692444927567 -0.16012418984375 6.2145244263505 -0.188937780625 6.4989576001005 -0.21660372421875 6.821392566663 -0.24197034296875 7.1783745233818 -0.26618885390625 7.567600460413 -0.28810746421875 7.985615805413 -0.3065742659375 8.4289657557255 -0.32274047609375 8.894195854163 -0.33430262421875 9.3778512980692 -0.34241192734375 9.8753259526005 -0.34591636234375 10.384316923069 -0.34251257390625 10.899066281819 -0.33335154875 11.414967894007 -0.31728126375 11.929718289163 -0.29775617609375 12.438711217288 -0.27477582515625 12.936188750725 -0.24949119765625 13.419847649319 -0.22305362578125 13.885081778226 -0.19431108640625 14.328436104476 -0.1667179215625 14.746455940569 -0.14027378578125 15.135686483851 -0.11612989609375 15.492673161976 -0.09313434453125 15.815112734788 -0.07243846328125 16.099550514788 -0.054041906875 16.344834824319 -0.03909612265625 16.547511091038 -0.02644920265625 16.707579314944 -0.016101146875 16.822736371038 -0.008051725 16.891830466507 -0.004603946875 16.914861946819 -0.002303125</Kink_Airfoil>
+    <Tip_Airfoil idx="1" type="double" size="1 142">22.405558342103 7.1415465365378e-020 22.391600148353 0.0013972291666667 22.349725357728 0.0034951666666667 22.279934179603 0.0083875625 22.182924391061 0.014678513541667 22.060091825436 0.022367880208333 21.911436482728 0.0314556625 21.739052182728 0.042639567708333 21.543636772311 0.055221609375 21.327284001478 0.069201578125 21.091389633769 0.083881417708333 20.838047488978 0.099958835416667 20.569351247311 0.11673570520833 20.287394658769 0.13421181770833 19.994271263978 0.15029321354167 19.692772799394 0.16567753020833 19.384295028561 0.17966671145833 19.072327465019 0.19156249166667 18.759661775436 0.20136459166667 18.447693583769 0.206979121875 18.139214626478 0.20910371979167 17.837714417103 0.20704011979167 17.544588928561 0.202184015625 17.262629897311 0.19523304479167 16.993931003561 0.18548908125 16.740586136894 0.17434774895833 16.504688977519 0.161110921875 16.288333345228 0.14647630729167 16.092915143144 0.13114168229167 15.920528051478 0.11440892083333 15.771870056686 0.096975869791667 15.649034978561 0.079540236458333 15.552022747311 0.061404104166667 15.482229126478 0.041869416666667 15.440352172311 0.0223319375 15.426391605644 0 15.440347705644 -0.022334729166667 15.482220751478 -0.041880583333333 15.552010463978 -0.061429229166667 15.649019066061 -0.079584763541667 15.771850654603 -0.097044963541667 15.920505159811 -0.11450774583333 16.092888901478 -0.131274984375 16.288304032728 -0.14664869270833 16.504656733769 -0.161326578125 16.740551241061 -0.174610584375 16.993893874394 -0.18580258541667 17.262590813978 -0.19560028854167 17.544548449394 -0.20260765104167 17.837672960853 -0.20752238020833 18.139172751478 -0.20964628020833 18.447652127519 -0.207583378125 18.759621435853 -0.20203124166667 19.072289079603 -0.192291675 19.384259016061 -0.18045828854167 19.692739578561 -0.166530803125 19.994241113978 -0.15120678645833 20.287367719186 -0.135184015625 20.569327797311 -0.11776429479167 20.838027388978 -0.10104116458333 21.091372744186 -0.085014415625 21.327270043144 -0.070381755208333 21.543625605644 -0.056445057291667 21.739043528561 -0.043902098958333 21.911430061894 -0.032752670833333 22.060087219186 -0.023694619791667 22.182921320228 -0.016029819791667 22.279932365019 -0.0097582708333333 22.349724520228 -0.0048798333333333 22.391599729603 -0.0027902708333333 22.405558202519 -0.0013958333333333</Tip_Airfoil>
+  </Vertical_tail>
+  <Ventral_fin idx="1" type="struct" size="1 1">
+    <X_locale idx="1" type="double" size="1 1">0</X_locale>
+    <Z_locale idx="1" type="double" size="1 1">0</Z_locale>
+    <chord_fraction_at_midfuse idx="1" type="double" size="1 1">0</chord_fraction_at_midfuse>
+    <Span idx="1" type="double" size="1 1">0</Span>
+    <spanwise_kink idx="1" type="double" size="1 1">0</spanwise_kink>
+    <taper_kink idx="1" type="double" size="1 1">0</taper_kink>
+    <taper_tip idx="1" type="double" size="1 1">0</taper_tip>
+    <LE_sweep_inboard idx="1" type="double" size="1 1">0</LE_sweep_inboard>
+    <LE_sweep_outboard idx="1" type="double" size="1 1">0</LE_sweep_outboard>
+    <cant_inbord idx="1" type="double" size="1 1">0</cant_inbord>
+    <cant_outboard idx="1" type="double" size="1 1">0</cant_outboard>
+  </Ventral_fin>
+  <Horizontal_tail idx="1" type="struct" size="1 1">
+    <empennage_layout idx="1" type="double" size="1 1">1</empennage_layout>
+    <area idx="1" type="double" size="1 1">56.863</area>
+    <AR idx="1" type="double" size="1 1">2.1093557989108</AR>
+    <Span idx="1" type="double" size="1 1">10.358</Span>
+    <spanwise_kink idx="1" type="double" size="1 1">0.35</spanwise_kink>
+    <taper_kink idx="1" type="double" size="1 1">0.79</taper_kink>
+    <taper_tip idx="1" type="double" size="1 1">0.4</taper_tip>
+    <root_incidence idx="1" type="double" size="1 1">0</root_incidence>
+    <kink_incidence idx="1" type="double" size="1 1">0</kink_incidence>
+    <tip_incidence idx="1" type="double" size="1 1">0</tip_incidence>
+    <quarter_chord_sweep_inboard idx="1" type="double" size="1 1">48.337826564917</quarter_chord_sweep_inboard>
+    <quarter_chord_sweep_outboard idx="1" type="double" size="1 1">48.337826564917</quarter_chord_sweep_outboard>
+    <LE_sweep_inboard idx="1" type="double" size="1 1">53</LE_sweep_inboard>
+    <LE_sweep_outboard idx="1" type="double" size="1 1">53</LE_sweep_outboard>
+    <dihedral_inboard idx="1" type="double" size="1 1">0</dihedral_inboard>
+    <dihedral_outboard idx="1" type="double" size="1 1">0</dihedral_outboard>
+    <vertical_locale idx="1" type="double" size="1 1">0</vertical_locale>
+    <apex_locale idx="1" type="double" size="1 1">0</apex_locale>
+    <Elevator idx="1" type="struct" size="1 1">
+      <chord idx="1" type="double" size="1 1">30</chord>
+      <Span idx="1" type="double" size="1 1">0.95</Span>
+      <limit_deflection_up idx="1" type="double" size="1 1">0</limit_deflection_up>
+      <limit_deflection_down idx="1" type="double" size="1 1">0</limit_deflection_down>
+    </Elevator>
+    <thickness_root idx="1" type="double" size="1 1">0.1</thickness_root>
+    <thickness_kink idx="1" type="double" size="1 1">0.1</thickness_kink>
+    <thickness_tip idx="1" type="double" size="1 1">0.1</thickness_tip>
+    <tailplane_deflection idx="1" type="double" size="1 1">0</tailplane_deflection>
+    <limit_tailplane_deflection_up idx="1" type="double" size="1 1">0</limit_tailplane_deflection_up>
+    <limit_tailplane_deflection_down idx="1" type="double" size="1 1">0</limit_tailplane_deflection_down>
+    <airfoil idx="1" type="char" size="1 11">N64A006.dat</airfoil>
+    <original_root_chord idx="1" type="double" size="1 1">7.0150056547044</original_root_chord>
+    <reference_wing_area idx="1" type="double" size="1 1">50.863</reference_wing_area>
+    <reference_wing_taper_ratio idx="1" type="double" size="1 1">0.4</reference_wing_taper_ratio>
+    <reference_wing_LE_chord_sweep idx="1" type="double" size="1 1">53</reference_wing_LE_chord_sweep>
+    <reference_wing_quarter_chord_sweep idx="1" type="double" size="1 1">48.337826564917</reference_wing_quarter_chord_sweep>
+    <reference_wing_half_chord_sweep idx="1" type="double" size="1 1">42.635519477911</reference_wing_half_chord_sweep>
+    <reference_wing_MAC idx="1" type="double" size="1 1">5.2111470577804</reference_wing_MAC>
+    <reference_wing_Y_bar_non_dim idx="1" type="double" size="1 1">0.42857142857143</reference_wing_Y_bar_non_dim>
+    <reference_wing_mean idx="1" type="struct" size="1 1">
+      <thickness idx="1" type="double" size="1 1">0.1</thickness>
+    </reference_wing_mean>
+    <Moment_arm_to_HT idx="1" type="double" size="1 1">34.161897987081</Moment_arm_to_HT>
+    <Span_matrix_partition_in_mid_outboard idx="1" type="double" size="3 1">1.81265 3.1074 0.25895</Span_matrix_partition_in_mid_outboard>
+    <longitudinal_location idx="1" type="double" size="1 1">57.584308272311</longitudinal_location>
+    <vertical_location idx="1" type="double" size="1 1">9.857</vertical_location>
+    <thickness_coefs_matrix idx="1" type="double" size="2 3">1 0.1 1 0.1 1 0.1</thickness_coefs_matrix>
+    <Root_Airfoil idx="1" type="double" size="1 142">7.0150057248545 -4.4628048408461e-020 7.0009758538452 0.0014044041320718 6.9588860303671 0.003513114831876 6.8887364648705 0.0084306337958238 6.7912285176206 0.014753889742918 6.6677651897484 0.022482742373045 6.518346481254 0.031617191686205 6.3450769639837 0.042858527797699 6.148658068353 0.055505179992001 5.9311942960583 0.069556937818939 5.6940885780804 0.084312160412931 5.439445486266 0.10047213788928 5.1693694521612 0.11733515923234 4.8859649774626 0.13490101399195 4.5913363534163 0.15106499002152 4.2882896524343 0.16652830728629 3.9782278054975 0.1805893249207 3.6646582452831 0.19254619160897 3.3503869740532 0.20239862675089 3.0368167824883 0.20804198834993 2.7267537430006 0.21017749637133 2.4237052882672 0.20810329949935 2.1290745597192 0.20322225856481 1.8456676297686 0.19623559353295 1.5755889299617 0.18644159338813 1.320943102295 0.17524304881113 1.0838345783149 0.16193824878631 0.86636792986787 0.14722848342896 0.6699462282349 0.13181511300444 0.49667390496235 0.11499642649712 0.34725253076573 0.097473854322401 0.22378667749152 0.079948686595592 0.12627627498966 0.061719422751221 0.056124254241028 0.042084421923703 0.014032256111218 0.022446615093923 0 0 0.014027766507599 -0.022449421096185 0.056115836234243 -0.04209564593275 0.1262639285797 -0.061744676771578 0.22377068327863 -0.079993442331669 0.34723302905001 -0.097543302878382 0.4966508957438 -0.11509575897719 0.66991985181364 -0.13194909961245 0.86633846684412 -0.14740175406863 1.0838021689888 -0.16215501246104 1.3209080272667 -0.17550723392409 1.5755516101316 -0.18675670744214 1.8456283457369 -0.1966047231305 2.1290338726864 -0.20364806940805 2.4236636191336 -0.20858803639009 2.7267116529667 -0.21072284291093 3.0367751133548 -0.20864934753951 3.3503464273205 -0.20306870009103 3.664619662752 -0.19327911939977 3.9781916080683 -0.18138496686205 4.2882562610074 -0.16738596187764 4.5913060485918 -0.15198325426172 4.8859378995407 -0.13587820427965 5.1693458817422 -0.11836903076573 5.4394252830497 -0.10156002496621 5.6940716017667 -0.085450976430916 5.9311802660469 -0.07074317527515 6.1486468443439 -0.05673491048327 6.3450682653767 -0.044127542320636 6.5183400274488 -0.032920860337076 6.6677605598447 -0.023816294948004 6.7912254310181 -0.016112135137782 6.888734640969 -0.0098083809064077 6.9588851885665 -0.0049048919537693 7.0009754329449 -0.0028045992607508 7.0150055845544 -0.0014030011309409</Root_Airfoil>
+    <Kink_Airfoil idx="1" type="double" size="1 142">7.9473223185453 2.7952087259392e-020 7.9362387204479 0.0011094792643367 7.9029877599003 0.002775360717182 7.8475696031579 0.0066602006987008 7.7705383248305 0.011655572896905 7.6730022958115 0.017761366474706 7.5549615161009 0.024977581432102 7.4180785974573 0.033858236960183 7.2629076699091 0.043849092193681 7.0911112897963 0.054949980876962 6.9037977725938 0.066606606726216 6.7026297300603 0.07937298893253 6.4892696631176 0.092694775793548 6.2653801281057 0.10657180105364 6.0326235151091 0.119341342117 5.7932166213333 0.13155736275617 5.5482677622532 0.14266556668735 5.3005478096839 0.15211149137109 5.0522735054122 0.1598949151332 4.804553054076 0.16435317079644 4.5596032528807 0.16604022213335 4.3201949736413 0.16440160660449 4.0874366980884 0.1605455842662 3.8635452234274 0.15502611889103 3.6501830505799 0.14728885877663 3.4490128467233 0.13844200856079 3.261697112779 0.12793121654118 3.0898984605059 0.11631050190888 2.9347253162158 0.10413393927351 2.7978401808305 0.090847176932723 2.6797972952152 0.077004344914697 2.5822592711285 0.063159462410518 2.5052260531521 0.048758343973464 2.4498059567606 0.033246693319725 2.4165532782381 0.017732825924199 2.4054677959102 0 2.4165497314512 -0.017735042665986 2.4497993065353 -0.033255560286873 2.5052162994882 -0.048778294649546 2.5822466357003 -0.063194819442019 2.6797818888597 -0.077059209273922 2.7978220035478 -0.090925649591979 2.934704478843 -0.10423978869383 3.0898751847171 -0.11644738571422 3.2616715094114 -0.12810245984422 3.4489851374509 -0.13865071480003 3.6501535679142 -0.14753779887929 3.8635141890424 -0.15531773127309 4.0874045553325 -0.16088197483236 4.3201620550258 -0.16478454874817 4.5595700017539 -0.16647104589964 4.8045201354605 -0.16483298455622 5.0522414734934 -0.16042427307191 5.3005173294844 -0.15269050432582 5.5482391662842 -0.14329412382102 5.7931902421061 -0.13223490988333 6.0325995742978 -0.12006677086676 6.2653587365474 -0.10734378138092 6.4892510424866 -0.093511534304926 6.7026137695195 -0.080232419723306 6.903784361306 -0.067506271380424 7.0911002060873 -0.055887108467368 7.2628988029419 -0.044820579281784 7.4180717255578 -0.034860758433302 7.5549564175948 -0.02600747966629 7.6729986381876 -0.018814873008923 7.7705358864146 -0.012728586758848 7.8475681622758 -0.0077486209160621 7.9029870948777 -0.0038748646434778 7.9362383879367 -0.0022156334159932 7.9473222077082 -0.0011083708934433</Kink_Airfoil>
+    <Tip_Airfoil idx="1" type="double" size="1 142">9.6787674211139 1.2705494208815e-020 9.6731554727102 0.00056176165282873 9.656319543319 0.0014052459327504 9.6282597171203 0.0033722535183295 9.5892565382203 0.0059015558971671 9.5398712070715 0.008993096949218 9.4801037236737 0.012646876674482 9.4107959167656 0.01714341111908 9.3322283585133 0.0222020719968 9.2452428495954 0.027822775127576 9.1504005624043 0.033724864165173 9.0485433256785 0.040188855155711 8.9405129120366 0.046934063692936 8.8271511221571 0.053960405596778 8.7092996725386 0.060425996008606 8.5880809921458 0.066611322914517 8.4640562533711 0.072235729968278 8.3386284292854 0.077018476643588 8.2129199207934 0.080959450700356 8.0874918441674 0.083216795339972 7.9634666283723 0.084070998548534 7.842247246479 0.083241319799741 7.7243949550598 0.081288903425923 7.6110321830795 0.07849423741318 7.5030007031568 0.074576637355253 7.4011423720901 0.070097219524453 7.3062989624981 0.064775299514523 7.2193123031193 0.058891393371583 7.1407436224661 0.052726045201776 7.071434693157 0.045998570598847 7.0116661434784 0.03898954172896 6.9622798021687 0.031979474638237 6.923275641168 0.024687769100488 6.8952148328685 0.016833768769481 6.8783780336166 0.0089786460375693 6.8727651311721 0 6.8783762377751 -0.0089797684384741 6.8952114656658 -0.0168382583731 6.923270702604 -0.024697870708631 6.9622734044836 -0.031997376932668 7.0116583427921 -0.039017321151353 7.0714254894696 -0.046038303590875 7.1407330718976 -0.052779639844978 7.2193005179098 -0.058960701627452 7.3062859987676 -0.064862004984415 7.4011283420788 -0.070202893569636 7.5029857752247 -0.074702682976857 7.6110164694669 -0.0786418892522 7.7243786802467 -0.08145922776322 7.8422305788255 -0.083435214556037 7.9634497923588 -0.084289137164373 8.087475176514 -0.083459739015806 8.2129037021003 -0.081227480036411 8.3386129962729 -0.07731164775991 8.4640417743994 -0.072553986744821 8.588067635575 -0.066954384751055 8.7092875506088 -0.060793301704687 8.8271402909884 -0.054351281711858 8.940503483869 -0.047347612306292 9.048535244392 -0.040624009986484 9.1503937718788 -0.034180390572366 9.2452372375909 -0.02829727011006 9.3322238689097 -0.022693964193308 9.4107924373228 -0.017651016928254 9.4801011421516 -0.01316834413483 9.53986935511 -0.0095265179792017 9.5892553035794 -0.0064448540551127 9.6282589875597 -0.0039233523625631 9.6563192065987 -0.0019619567815077 9.67315530435 -0.0011218397043003 9.6787673649939 -0.00056120045237635</Tip_Airfoil>
+  </Horizontal_tail>
+  <Engines1 idx="1" type="struct" size="1 1">
+    <Number_of_engines idx="1" type="double" size="1 1">2</Number_of_engines>
+    <Layout_and_config idx="1" type="double" size="1 1">4</Layout_and_config>
+    <Propulsion_type idx="1" type="double" size="1 1">0</Propulsion_type>
+    <Y_locale idx="1" type="double" size="1 1">0.3141</Y_locale>
+    <X_locale idx="1" type="double" size="1 1">0.73</X_locale>
+    <Z_locale idx="1" type="double" size="1 1">0</Z_locale>
+    <toe_in idx="1" type="double" size="1 1">0</toe_in>
+    <pitch idx="1" type="double" size="1 1">2</pitch>
+    <Nacelle_body_type idx="1" type="double" size="1 1">1</Nacelle_body_type>
+    <Fan_cowl_length_ratio idx="1" type="double" size="1 1">0</Fan_cowl_length_ratio>
+    <fineness_ratio idx="1" type="double" size="1 1">1.5</fineness_ratio>
+    <d_max idx="1" type="double" size="1 1">3.7</d_max>
+    <Propeller_diameter idx="1" type="double" size="1 1">0</Propeller_diameter>
+    <Max_thrust idx="1" type="double" size="1 1">10.24</Max_thrust>
+    <Bypass_ratio_to_emulate idx="1" type="double" size="1 1">6.5</Bypass_ratio_to_emulate>
+    <Thrust_reverser_effectivness idx="1" type="double" size="1 1">0</Thrust_reverser_effectivness>
+    <Thrust_to_weight_ratio idx="1" type="double" size="1 1">0.41</Thrust_to_weight_ratio>
+    <Nacelle1 idx="1" type="struct" size="1 1">
+      <longitudinal_location idx="1" type="double" size="1 1">43.8</longitudinal_location>
+      <vertical_location idx="1" type="double" size="1 1">0</vertical_location>
+      <lateral_location idx="1" type="double" size="1 1">7.013853</lateral_location>
+      <d_max idx="1" type="double" size="1 1">3.7</d_max>
+      <fineness_ratio idx="1" type="double" size="1 1">1.5</fineness_ratio>
+      <toe_in idx="1" type="double" size="1 1">0</toe_in>
+      <pitch idx="1" type="double" size="1 1">2</pitch>
+    </Nacelle1>
+    <Nacelle_length_array idx="1" type="double" size="1 1">5.55</Nacelle_length_array>
+    <Nacelle2 idx="1" type="struct" size="1 1">
+      <longitudinal_location idx="1" type="double" size="1 1">43.8</longitudinal_location>
+      <vertical_location idx="1" type="double" size="1 1">0</vertical_location>
+      <lateral_location idx="1" type="double" size="1 1">-7.013853</lateral_location>
+      <d_max idx="1" type="double" size="1 1">3.7</d_max>
+      <fineness_ratio idx="1" type="double" size="1 1">1.5</fineness_ratio>
+      <toe_in idx="1" type="double" size="1 1">0</toe_in>
+      <pitch idx="1" type="double" size="1 1">2</pitch>
+    </Nacelle2>
+  </Engines1>
+  <Engines2 idx="1" type="struct" size="1 1">
+    <Number_of_engines idx="1" type="double" size="1 1">0</Number_of_engines>
+    <Layout_and_config idx="1" type="double" size="1 1">0</Layout_and_config>
+    <Propulsion_type idx="1" type="double" size="1 1">0</Propulsion_type>
+    <Y_locale idx="1" type="double" size="1 1">0</Y_locale>
+    <X_locale idx="1" type="double" size="1 1">0</X_locale>
+    <Z_locale idx="1" type="double" size="1 1">0</Z_locale>
+    <toe_in idx="1" type="double" size="1 1">0</toe_in>
+    <pitch idx="1" type="double" size="1 1">0</pitch>
+    <Nacelle_body_type idx="1" type="double" size="1 1">0</Nacelle_body_type>
+    <fineness_ratio idx="1" type="double" size="1 1">0</fineness_ratio>
+    <Fan_cowl_length_ratio idx="1" type="double" size="1 1">0</Fan_cowl_length_ratio>
+    <d_max idx="1" type="double" size="1 1">0</d_max>
+    <Propeller_diameter idx="1" type="double" size="1 1">0</Propeller_diameter>
+    <Max_thrust idx="1" type="double" size="1 1">0</Max_thrust>
+    <Bypass_ratio_to_emulate idx="1" type="double" size="1 1">0</Bypass_ratio_to_emulate>
+    <Thrust_reverser_effectivness idx="1" type="double" size="1 1">0</Thrust_reverser_effectivness>
+    <Nacelle_length_array idx="1" type="double" size="1 1">0</Nacelle_length_array>
+    <Nacelle3 idx="1" type="struct" size="1 1">
+      <longitudinal_location idx="1" type="double" size="1 1">0</longitudinal_location>
+      <lateral_location idx="1" type="double" size="1 1">0</lateral_location>
+      <vertical_location idx="1" type="double" size="1 1">0</vertical_location>
+    </Nacelle3>
+  </Engines2>
+  <fuel idx="1" type="struct" size="1 1">
+    <Fore_wing_spar_loc_root idx="1" type="double" size="1 1">0.15</Fore_wing_spar_loc_root>
+    <Fore_wing_spar_loc_kik1 idx="1" type="double" size="1 1">0.15</Fore_wing_spar_loc_kik1>
+    <Fore_wing_spar_loc_kin2 idx="1" type="double" size="1 1">0.15</Fore_wing_spar_loc_kin2>
+    <Fore_wing_spar_loc_tip idx="1" type="double" size="1 1">0.15</Fore_wing_spar_loc_tip>
+    <Aux_wing_spar_loc_root idx="1" type="double" size="1 1">0</Aux_wing_spar_loc_root>
+    <Aft_wing_spar_loc_root idx="1" type="double" size="1 1">0.65</Aft_wing_spar_loc_root>
+    <Aft_wing_spar_loc_kin1 idx="1" type="double" size="1 1">0.65</Aft_wing_spar_loc_kin1>
+    <Aft_wing_spar_loc_kin2 idx="1" type="double" size="1 1">0.65</Aft_wing_spar_loc_kin2>
+    <Aft_wing_spar_loc_tip idx="1" type="double" size="1 1">0.65</Aft_wing_spar_loc_tip>
+    <Wing_fuel_tank_cutout_opt idx="1" type="double" size="1 1">0</Wing_fuel_tank_cutout_opt>
+    <Outboard_fuel_tank_span idx="1" type="double" size="1 1">0.7</Outboard_fuel_tank_span>
+    <Unusable_fuel_option idx="1" type="double" size="1 1">44.308967974408</Unusable_fuel_option>
+    <Assumed_fuel_density idx="1" type="double" size="1 1">0.809</Assumed_fuel_density>
+    <Incr_weight_for_wing_tanks idx="1" type="double" size="1 1">0</Incr_weight_for_wing_tanks>
+    <Centre_tank_portion_used idx="1" type="double" size="1 1">85.25</Centre_tank_portion_used>
+    <Increment_for_centre_tank idx="1" type="double" size="1 1">0</Increment_for_centre_tank>
+    <Fore_fairing_tank_length idx="1" type="double" size="1 1">0</Fore_fairing_tank_length>
+    <Aft_fairing_tank_length idx="1" type="double" size="1 1">0</Aft_fairing_tank_length>
+    <Aft_fuse_bladder_length idx="1" type="double" size="1 1">0</Aft_fuse_bladder_length>
+    <Increment_for_aux_tanks idx="1" type="double" size="1 1">0</Increment_for_aux_tanks>
+    <max_weight_wing idx="1" type="double" size="1 1">207476.7321582</max_weight_wing>
+    <max_vol_wing idx="1" type="double" size="1 1">256460.73196316</max_vol_wing>
+    <max_weight_cent_wing_box idx="1" type="double" size="1 1">65805.683623409</max_weight_cent_wing_box>
+    <max_vol_cent_wing_box idx="1" type="double" size="1 1">81342.006951062</max_vol_cent_wing_box>
+    <max_weight_aux idx="1" type="double" size="1 1">0</max_weight_aux>
+    <max_vol_aux idx="1" type="double" size="1 1">0</max_vol_aux>
+  </fuel>
+  <Baggage idx="1" type="struct" size="1 1">
+    <installation_type idx="1" type="double" size="1 1">0</installation_type>
+    <gross_volume idx="1" type="double" size="1 1">-1</gross_volume>
+    <Baggage_combined_length idx="1" type="double" size="1 1">0</Baggage_combined_length>
+    <Baggage_apex_per_fuselgt idx="1" type="double" size="1 1">0</Baggage_apex_per_fuselgt>
+  </Baggage>
+  <cabin idx="1" type="struct" size="1 1">
+    <Cabin_length_to_aft_cab idx="1" type="double" size="1 1">40.6</Cabin_length_to_aft_cab>
+    <Cabin_max_internal_height idx="1" type="double" size="1 1">0</Cabin_max_internal_height>
+    <Cabin_max_internal_width idx="1" type="double" size="1 1">0</Cabin_max_internal_width>
+    <Cabin_floor_width idx="1" type="double" size="1 1">0</Cabin_floor_width>
+    <Cabin_volume idx="1" type="double" size="1 1">0</Cabin_volume>
+    <Cabin_attendant_number idx="1" type="double" size="1 1">2</Cabin_attendant_number>
+    <Flight_crew_number idx="1" type="double" size="1 1">6</Flight_crew_number>
+    <Passenger_accomodation idx="1" type="double" size="1 1">200</Passenger_accomodation>
+    <Seats_abreast_in_fuselage idx="1" type="double" size="1 1">4</Seats_abreast_in_fuselage>
+    <Seat_pitch idx="1" type="double" size="1 1">0.3</Seat_pitch>
+    <Maximum_cabin_altitude idx="1" type="double" size="1 1">8000</Maximum_cabin_altitude>
+    <Max_pressure_differential idx="1" type="double" size="1 1">7.45</Max_pressure_differential>
+  </cabin>
+  <miscellaneous idx="1" type="struct" size="1 1">
+    <Design_classification idx="1" type="double" size="1 1">0</Design_classification>
+    <Spoiler_effectivity idx="1" type="double" size="1 1">100</Spoiler_effectivity>
+    <Undercarriage_layout idx="1" type="double" size="1 1">0</Undercarriage_layout>
+    <Target_operating_ceiling idx="1" type="double" size="1 1">350</Target_operating_ceiling>
+  </miscellaneous>
+  <weight_balance idx="1" type="struct" size="1 1">
+    <Ramp_increment idx="1" type="double" size="1 1">46</Ramp_increment>
+    <Weight_cont_allow_perc_of_MEW idx="1" type="double" size="1 1">0</Weight_cont_allow_perc_of_MEW>
+    <Manufacturer_weights_tolerance idx="1" type="double" size="1 1">872</Manufacturer_weights_tolerance>
+    <Fuel idx="1" type="struct" size="1 1">
+      <Fuel_in_wing_x_cg idx="1" type="double" size="1 1">0.65</Fuel_in_wing_x_cg>
+      <Fuel_in_wing_y_cg idx="1" type="double" size="1 1">0</Fuel_in_wing_y_cg>
+      <Fuel_in_wing_z_cg idx="1" type="double" size="1 1">-0.26960079074755</Fuel_in_wing_z_cg>
+      <Fuel_in_fairings_x_cg idx="1" type="double" size="1 1">0.58082593418208</Fuel_in_fairings_x_cg>
+      <Fuel_in_fairings_y_cg idx="1" type="double" size="1 1">0</Fuel_in_fairings_y_cg>
+      <Fuel_in_fairings_z_cg idx="1" type="double" size="1 1">0</Fuel_in_fairings_z_cg>
+      <Fuel_in_auxiliary_tanks_x_cg idx="1" type="double" size="1 1">0</Fuel_in_auxiliary_tanks_x_cg>
+      <Fuel_in_auxiliary_tanks_y_cg idx="1" type="double" size="1 1">0</Fuel_in_auxiliary_tanks_y_cg>
+      <Fuel_in_auxiliary_tanks_z_cg idx="1" type="double" size="1 1">0</Fuel_in_auxiliary_tanks_z_cg>
+    </Fuel>
+  </weight_balance>
+  <flight_envelope_prediction idx="1" type="struct" size="1 1">
+    <VD_Flight_envelope_dive idx="1" type="double" size="1 1">365</VD_Flight_envelope_dive>
+    <VMO_Flight_envelope idx="1" type="double" size="1 1">285</VMO_Flight_envelope>
+  </flight_envelope_prediction>
+  <Wetted_areas idx="1" type="struct" size="1 1">
+    <increment_fuselage_fairing idx="1" type="double" size="1 1">0</increment_fuselage_fairing>
+    <increment_wings idx="1" type="double" size="1 1">0</increment_wings>
+    <increment_winglet idx="1" type="double" size="1 1">0</increment_winglet>
+    <increment_Vertical_tail idx="1" type="double" size="1 1">0</increment_Vertical_tail>
+    <increment_pylons idx="1" type="double" size="1 1">0</increment_pylons>
+    <increment_powerplant idx="1" type="double" size="1 1">0</increment_powerplant>
+    <increment_Horizontal_tail idx="1" type="double" size="1 1">0</increment_Horizontal_tail>
+    <anciliary_final idx="1" type="double" size="1 1">0</anciliary_final>
+    <Total_wetted_area idx="1" type="double" size="1 1">1708.2849647469</Total_wetted_area>
+    <Fuselage_fairing idx="1" type="double" size="1 1">414.65275971169</Fuselage_fairing>
+    <Wings idx="1" type="double" size="1 1">880.05543105392</Wings>
+    <Winglet idx="1" type="double" size="1 1">0</Winglet>
+    <Vertical_tail idx="1" type="double" size="1 1">200.34060102742</Vertical_tail>
+    <Dorsal_fin idx="1" type="double" size="1 1">0</Dorsal_fin>
+    <Horizontal_tail idx="1" type="double" size="1 1">106.049355</Horizontal_tail>
+    <Pylons idx="1" type="double" size="1 1">0</Pylons>
+    <Powerplant idx="1" type="double" size="1 1">107.18681795383</Powerplant>
+  </Wetted_areas>
+  <Engines_results idx="1" type="struct" size="1 1">
+    <wing_chord_at_engine_location idx="1" type="double" size="1 1">11.92648868956</wing_chord_at_engine_location>
+  </Engines_results>
+  <aero idx="1" type="struct" size="1 1">
+    <datcom idx="1" type="struct" size="1 1">
+      <table idx="1" type="double" size="0 0" />
+    </datcom>
+    <Tornado idx="1" type="struct" size="1 1">
+      <table idx="1" type="double" size="0 0" />
+    </Tornado>
+  </aero>
+</root>

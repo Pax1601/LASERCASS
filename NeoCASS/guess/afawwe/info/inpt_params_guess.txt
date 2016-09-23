@@ -1,0 +1,268 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copyright (C) 2008 - 2011 
+% 
+% Sergio Ricci (sergio.ricci@polimi.it)
+%
+% Politecnico di Milano, Dipartimento di Ingegneria Aerospaziale
+% Via La Masa 34, 20156 Milano - ITALY
+% 
+% This file is part of NeoCASS Software (www.neocass.org)
+%
+% NeoCASS is free software; you can redistribute it and/or
+% modify it under the terms of the GNU General Public
+% License as published by the Free Software Foundation;
+% either version 2, or (at your option) any later version.
+%
+% NeoCASS is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied
+% warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+% PURPOSE.  See the GNU General Public License for more
+% details.
+%
+% You should have received a copy of the GNU General Public
+% License along with NeoCASS; see the file GNU GENERAL 
+% PUBLIC LICENSE.TXT.  If not, write to the Free Software 
+% Foundation, 59 Temple Place -Suite 330, Boston, MA
+% 02111-1307, USA.
+%
+
+%
+%--------------------------------------------------------------------------
+% Collection of main input parameters to GUESS module
+% 
+%--------------------------------------------------------------------------
+
+% --fuselage--
+INPT.aircraft.fuselage.Total_fuselage_length = aircraft.fuselage.Total_fuselage_length;
+INPT.aircraft.fuselage.Nose_length = aircraft.fuselage.Nose_length;
+INPT.aircraft.fuselage.Tail_length = aircraft.fuselage.Tail_length;
+INPT.aircraft.fuselage.Aftfuse_X_sect_vertical_diameter = aircraft.fuselage.Aftfuse_X_sect_vertical_diameter;
+
+% --wing--
+INPT.aircraft.wing1.longitudinal_location = aircraft.wing1.longitudinal_location;
+INPT.aircraft.wing1.area = aircraft.wing1.area;
+INPT.aircraft.wing1.span = aircraft.wing1.span;
+INPT.aircraft.wing1.spanwise_kink1 = aircraft.wing1.spanwise_kink1;
+INPT.aircraft.wing1.spanwise_kink2 = aircraft.wing1.spanwise_kink2;
+INPT.aircraft.wing1.taper_kink1 = aircraft.wing1.taper_kink1;
+INPT.aircraft.wing1.taper_kink2 = aircraft.wing1.taper_kink2;
+INPT.aircraft.wing1.taper_tip = aircraft.wing1.taper_tip;
+INPT.aircraft.wing1.thickness_root = aircraft.wing1.thickness_root;
+INPT.aircraft.wing1.thickness_kink1 = aircraft.wing1.thickness_kink1;
+INPT.aircraft.wing1.thickness_kink2 = aircraft.wing1.thickness_kink2;
+INPT.aircraft.wing1.thickness_tip = aircraft.wing1.thickness_tip;
+INPT.aircraft.wing1.quarter_chord_sweep_inboard = aircraft.wing1.quarter_chord_sweep_inboard;
+INPT.aircraft.wing1.quarter_chord_sweep_midboard = aircraft.wing1.quarter_chord_sweep_midboard;
+INPT.aircraft.wing1.quarter_chord_sweep_outboard = aircraft.wing1.quarter_chord_sweep_outboard;
+INPT.aircraft.wing1.LE_sweep_inboard = aircraft.wing1.LE_sweep_inboard;
+INPT.aircraft.wing1.LE_sweep_midboard = aircraft.wing1.LE_sweep_midboard;
+INPT.aircraft.wing1.LE_sweep_outboard = aircraft.wing1.LE_sweep_outboard;
+INPT.aircraft.wing1.dihedral_inboard = aircraft.wing1.dihedral_inboard;
+INPT.aircraft.wing1.dihedral_midboard = aircraft.wing1.dihedral_midboard;
+INPT.aircraft.wing1.dihedral_outboard = aircraft.wing1.dihedral_outboard;
+INPT.aircraft.wing1.root_incidence = aircraft.wing1.root_incidence;
+INPT.aircraft.wing1.kink1_incidence = aircraft.wing1.kink1_incidence;
+INPT.aircraft.wing1.kink2_incidence = aircraft.wing1.kink2_incidence;
+INPT.aircraft.wing1.tip_incidence = aircraft.wing1.tip_incidence;
+INPT.aircraft.wing1.airfoil = aircraft.wing1.airfoil;
+
+% --Vertical_tail--
+INPT.aircraft.Vertical_tail.area = aircraft.Vertical_tail.area;
+INPT.aircraft.Vertical_tail.longitudinal_location = aircraft.Vertical_tail.longitudinal_location;
+INPT.aircraft.Vertical_tail.vertical_location = aircraft.Vertical_tail.vertical_location;
+INPT.aircraft.Vertical_tail.span = aircraft.Vertical_tail.span;
+INPT.aircraft.Vertical_tail.spanwise_kink = aircraft.Vertical_tail.spanwise_kink;
+INPT.aircraft.Vertical_tail.taper_kink = aircraft.Vertical_tail.taper_kink;
+INPT.aircraft.Vertical_tail.taper_tip = aircraft.Vertical_tail.taper_tip;
+INPT.aircraft.Vertical_tail.thickness_root = aircraft.Vertical_tail.thickness_root;
+INPT.aircraft.Vertical_tail.thickness_kink = aircraft.Vertical_tail.thickness_kink;
+INPT.aircraft.Vertical_tail.thickness_tip = aircraft.Vertical_tail.thickness_tip;
+INPT.aircraft.Vertical_tail.quarter_chord_sweep_inboard = aircraft.Vertical_tail.quarter_chord_sweep_inboard;
+INPT.aircraft.Vertical_tail.quarter_chord_sweep_outboard = aircraft.Vertical_tail.quarter_chord_sweep_outboard;
+INPT.aircraft.Vertical_tail.LE_sweep_inboard = aircraft.Vertical_tail.LE_sweep_inboard;
+INPT.aircraft.Vertical_tail.LE_sweep_outboard = aircraft.Vertical_tail.LE_sweep_outboard;
+INPT.aircraft.Vertical_tail.Rudder_limit_deflection = aircraft.Vertical_tail.Rudder_limit_deflection;
+INPT.aircraft.Vertical_tail.airfoil = aircraft.Vertical_tail.airfoil;
+
+% --Horizontal_tail--
+INPT.aircraft.Horizontal_tail.vertical_location = aircraft.Horizontal_tail.vertical_location;
+INPT.aircraft.Horizontal_tail.longitudinal_location = aircraft.Horizontal_tail.longitudinal_location;
+INPT.aircraft.Horizontal_tail.area = aircraft.Horizontal_tail.area;
+INPT.aircraft.Horizontal_tail.span = aircraft.Horizontal_tail.span;
+INPT.aircraft.Horizontal_tail.spanwise_kink = aircraft.Horizontal_tail.spanwise_kink;
+INPT.aircraft.Horizontal_tail.taper_kink = aircraft.Horizontal_tail.taper_kink;
+INPT.aircraft.Horizontal_tail.taper_tip = aircraft.Horizontal_tail.taper_tip;
+INPT.aircraft.Horizontal_tail.thickness_root = aircraft.Horizontal_tail.thickness_root;
+INPT.aircraft.Horizontal_tail.thickness_kink = aircraft.Horizontal_tail.thickness_kink;
+INPT.aircraft.Horizontal_tail.thickness_tip = aircraft.Horizontal_tail.thickness_tip;
+INPT.aircraft.Horizontal_tail.quarter_chord_sweep_inboard = aircraft.Horizontal_tail.quarter_chord_sweep_inboard;
+INPT.aircraft.Horizontal_tail.quarter_chord_sweep_outboard = aircraft.Horizontal_tail.quarter_chord_sweep_outboard;
+INPT.aircraft.Horizontal_tail.LE_sweep_inboard = aircraft.Horizontal_tail.LE_sweep_inboard;
+INPT.aircraft.Horizontal_tail.LE_sweep_outboard = aircraft.Horizontal_tail.LE_sweep_outboard;
+INPT.aircraft.Horizontal_tail.dihedral_inboard = aircraft.Horizontal_tail.dihedral_inboard;
+INPT.aircraft.Horizontal_tail.dihedral_outboard = aircraft.Horizontal_tail.dihedral_outboard;
+INPT.aircraft.Horizontal_tail.root_incidence = aircraft.Horizontal_tail.root_incidence;
+INPT.aircraft.Horizontal_tail.kink_incidence = aircraft.Horizontal_tail.kink_incidence;
+INPT.aircraft.Horizontal_tail.tip_incidence = aircraft.Horizontal_tail.tip_incidence;
+INPT.aircraft.Horizontal_tail.limit_elevator_deflection_up = aircraft.Horizontal_tail.limit_elevator_deflection_up;
+INPT.aircraft.Horizontal_tail.limit_elevator_deflection_down = aircraft.Horizontal_tail.limit_elevator_deflection_down;
+INPT.aircraft.Horizontal_tail.limit_tailplane_deflection_up = aircraft.Horizontal_tail.limit_tailplane_deflection_up;
+INPT.aircraft.Horizontal_tail.limit_tailplane_deflection_down = aircraft.Horizontal_tail.limit_tailplane_deflection_down;
+INPT.aircraft.Horizontal_tail.airfoil = aircraft.Horizontal_tail.airfoil;
+
+% --weight_balance--
+INPT.aircraft.weight_balance.Struct.Fuselage = aircraft.weight_balance.Struct.Fuselage;
+INPT.aircraft.weight_balance.Fuel.Maximum_fuel_in_wings = aircraft.weight_balance.Fuel.Maximum_fuel_in_wings;
+INPT.aircraft.weight_balance.MTOW_Maximum_takeoff_weight = aircraft.weight_balance.MTOW_Maximum_takeoff_weight;
+INPT.aircraft.weight_balance.COG = aircraft.weight_balance.COG;
+
+% --cabin--
+INPT.aircraft.cabin.Cabin_length_to_aft_cab = aircraft.cabin.Cabin_length_to_aft_cab;
+
+% --fuel--
+INPT.aircraft.fuel.Aft_wing_spar_loc_root = aircraft.fuel.Aft_wing_spar_loc_root;
+INPT.aircraft.fuel.Aft_wing_spar_loc_kin1 = aircraft.fuel.Aft_wing_spar_loc_kin1;
+INPT.aircraft.fuel.Aft_wing_spar_loc_kin2 = aircraft.fuel.Aft_wing_spar_loc_kin2;
+INPT.aircraft.fuel.Aft_wing_spar_loc_tip = aircraft.fuel.Aft_wing_spar_loc_tip;
+INPT.aircraft.fuel.Fore_wing_spar_loc_root = aircraft.fuel.Fore_wing_spar_loc_root;
+INPT.aircraft.fuel.Fore_wing_spar_loc_kik1 = aircraft.fuel.Fore_wing_spar_loc_kik1;
+INPT.aircraft.fuel.Fore_wing_spar_loc_kin2 = aircraft.fuel.Fore_wing_spar_loc_kin2;
+INPT.aircraft.fuel.Fore_wing_spar_loc_tip = aircraft.fuel.Fore_wing_spar_loc_tip;
+
+% --engines1--
+INPT.aircraft.engines1.Number_of_engines = aircraft.engines1.Number_of_engines;
+INPT.aircraft.engines1.nacelle_length = aircraft.engines1.nacelle_length;
+INPT.aircraft.engines1.Max_thrust = aircraft.engines1.Max_thrust;
+INPT.aircraft.engines1.Engine_spanwise_location = aircraft.engines1.Engine_spanwise_location;
+INPT.aircraft.engines1.Location_engines_nacelles_on_X = aircraft.engines1.Location_engines_nacelles_on_X;
+INPT.aircraft.engines1.Location_engines_nacelles_on_Y = aircraft.engines1.Location_engines_nacelles_on_Y;
+INPT.aircraft.engines1.Location_engines_nacelles_on_Z = aircraft.engines1.Location_engines_nacelles_on_Z;
+
+% --engines2--
+INPT.aircraft.engines2.Number_of_engines = aircraft.engines2.Number_of_engines;
+INPT.aircraft.engines2.nacelle_length = aircraft.engines2.nacelle_length;
+INPT.aircraft.engines2.Max_thrust = aircraft.engines2.Max_thrust;
+INPT.aircraft.engines2.Engine_spanwise_location = aircraft.engines2.Engine_spanwise_location;
+INPT.aircraft.engines2.Location_engines_nacelles_on_X = aircraft.engines2.Location_engines_nacelles_on_X;
+INPT.aircraft.engines2.Location_engines_nacelles_on_Y = aircraft.engines2.Location_engines_nacelles_on_Y;
+INPT.aircraft.engines2.Location_engines_nacelles_on_Z = aircraft.engines2.Location_engines_nacelles_on_Z;
+
+clear aircraft
+aircraft = INPT.aircraft;
+
+%**********************************************************************************************************************
+% % % % --fuselage--
+% % % aircraft.fuselage.Total_fuselage_length
+% % % aircraft.fuselage.Nose_length
+% % % aircraft.fuselage.Tail_length
+% % % aircraft.fuselage.Aftfuse_X_sect_vertical_diameter
+% % % 
+% % % % --wing--
+% % % aircraft.wing1.longitudinal_location
+% % % aircraft.wing1.area
+% % % aircraft.wing1.span
+% % % aircraft.wing1.spanwise_kink1
+% % % aircraft.wing1.spanwise_kink2
+% % % aircraft.wing1.taper_kink1
+% % % aircraft.wing1.taper_kink2
+% % % aircraft.wing1.taper_tip 
+% % % aircraft.wing1.thickness_root 
+% % % aircraft.wing1.thickness_kink1 
+% % % aircraft.wing1.thickness_kink2 
+% % % aircraft.wing1.thickness_tip 
+% % % aircraft.wing1.quarter_chord_sweep_inboard 
+% % % aircraft.wing1.quarter_chord_sweep_midboard 
+% % % aircraft.wing1.quarter_chord_sweep_outboard 
+% % % aircraft.wing1.LE_sweep_inboard 
+% % % aircraft.wing1.LE_sweep_midboard 
+% % % aircraft.wing1.LE_sweep_outboard 
+% % % aircraft.wing1.dihedral_inboard 
+% % % aircraft.wing1.dihedral_midboard 
+% % % aircraft.wing1.dihedral_outboard 
+% % % aircraft.wing1.root_incidence 
+% % % aircraft.wing1.kink1_incidence 
+% % % aircraft.wing1.kink2_incidence 
+% % % aircraft.wing1.tip_incidence 
+% % % aircraft.wing1.airfoil 
+% % % 
+% % % % --Vertical_tail--
+% % % aircraft.Vertical_tail.area 
+% % % aircraft.Vertical_tail.longitudinal_location 
+% % % aircraft.Vertical_tail.vertical_location 
+% % % aircraft.Vertical_tail.span 
+% % % aircraft.Vertical_tail.spanwise_kink 
+% % % aircraft.Vertical_tail.taper_kink 
+% % % aircraft.Vertical_tail.taper_tip 
+% % % aircraft.Vertical_tail.thickness_root 
+% % % aircraft.Vertical_tail.thickness_kink 
+% % % aircraft.Vertical_tail.thickness_tip 
+% % % aircraft.Vertical_tail.quarter_chord_sweep_inboard 
+% % % aircraft.Vertical_tail.quarter_chord_sweep_outboard 
+% % % aircraft.Vertical_tail.LE_sweep_inboard 
+% % % aircraft.Vertical_tail.LE_sweep_outboard 
+% % % aircraft.Vertical_tail.Rudder_limit_deflection 
+% % % aircraft.Vertical_tail.airfoil 
+% % % 
+% % % % --Horizontal_tail--
+% % % aircraft.Horizontal_tail.vertical_location 
+% % % aircraft.Horizontal_tail.longitudinal_location 
+% % % aircraft.Horizontal_tail.area 
+% % % aircraft.Horizontal_tail.span 
+% % % aircraft.Horizontal_tail.spanwise_kink 
+% % % aircraft.Horizontal_tail.taper_kink 
+% % % aircraft.Horizontal_tail.taper_tip 
+% % % aircraft.Horizontal_tail.thickness_root 
+% % % aircraft.Horizontal_tail.thickness_kink 
+% % % aircraft.Horizontal_tail.thickness_tip 
+% % % aircraft.Horizontal_tail.quarter_chord_sweep_inboard
+% % % aircraft.Horizontal_tail.quarter_chord_sweep_outboard  
+% % % aircraft.Horizontal_tail.LE_sweep_inboard 
+% % % aircraft.Horizontal_tail.LE_sweep_outboard
+% % % aircraft.Horizontal_tail.dihedral_inboard  
+% % % aircraft.Horizontal_tail.dihedral_outboard 
+% % % aircraft.Horizontal_tail.root_incidence 
+% % % aircraft.Horizontal_tail.kink_incidence 
+% % % aircraft.Horizontal_tail.tip_incidence 
+% % % aircraft.Horizontal_tail.limit_elevator_deflection_up 
+% % % aircraft.Horizontal_tail.limit_elevator_deflection_down 
+% % % aircraft.Horizontal_tail.limit_tailplane_deflection_up 
+% % % aircraft.Horizontal_tail.limit_tailplane_deflection_down 
+% % % aircraft.Horizontal_tail.airfoil 
+% % % 
+% % % % --weight_balance--
+% % % aircraft.weight_balance.Struct.Fuselage 
+% % % aircraft.weight_balance.Fuel.Maximum_fuel_in_wings 
+% % % aircraft.weight_balance.MTOW_Maximum_takeoff_weight 
+% % % aircraft.weight_balance.COG 
+% % % 
+% % % % --cabin--
+% % % aircraft.cabin.Cabin_length_to_aft_cab 
+% % % 
+% % % % --fuel--
+% % % aircraft.fuel.Aft_wing_spar_loc_root 
+% % % aircraft.fuel.Aft_wing_spar_loc_kin1 
+% % % aircraft.fuel.Aft_wing_spar_loc_kin2 
+% % % aircraft.fuel.Aft_wing_spar_loc_tip 
+% % % aircraft.fuel.Fore_wing_spar_loc_root 
+% % % aircraft.fuel.Fore_wing_spar_loc_kik1 
+% % % aircraft.fuel.Fore_wing_spar_loc_kin2 
+% % % aircraft.fuel.Fore_wing_spar_loc_tip 
+% % % 
+% % % % --engines1--
+% % % aircraft.engines1.Number_of_engines 
+% % % aircraft.engines1.nacelle_length 
+% % % aircraft.engines1.Max_thrust 
+% % % aircraft.engines1.Engine_spanwise_location 
+% % % aircraft.engines1.Location_engines_nacelles_on_X 
+% % % aircraft.engines1.Location_engines_nacelles_on_Y 
+% % % aircraft.engines1.Location_engines_nacelles_on_Z 
+% % % 
+% % % % --engines2--
+% % % aircraft.engines2.Number_of_engines 
+% % % aircraft.engines2.nacelle_length 
+% % % aircraft.engines2.Max_thrust 
+% % % aircraft.engines2.Engine_spanwise_location 
+% % % aircraft.engines2.Location_engines_nacelles_on_X 
+% % % aircraft.engines2.Location_engines_nacelles_on_Y 
+% % % aircraft.engines2.Location_engines_nacelles_on_Z 
+%**********************************************************************************************************************
