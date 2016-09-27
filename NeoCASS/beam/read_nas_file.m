@@ -2005,7 +2005,7 @@ else
                     end
                     
                 case keyword{23} % AEROS card (steady VLM)
-                    
+                    naeros
                     if naeros
                         fclose(fp);error('Multiple AEROS cards given.');
                     end

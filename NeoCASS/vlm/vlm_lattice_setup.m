@@ -841,8 +841,8 @@ for j=0:(ny-1);
         a3 = norm(refp - C1(t,:)) / mschord;
       end
       %
-      lemma_1_S(t) = interp1(X_1_S,lemma_1_S_tot,a3,'cubic'); %element inboard camber slope  
-      lemma_2_S(t) = interp1(X_2_S,lemma_2_S_tot,a3,'cubic'); %element outboard camber slope 
+      lemma_1_S(t) = interp1(X_1_S,lemma_1_S_tot,a3,'pchip'); %element inboard camber slope  
+      lemma_2_S(t) = interp1(X_2_S,lemma_2_S_tot,a3,'pchip'); %element outboard camber slope 
       S(t)=(lemma_1_S(t)*(ny-j)+lemma_2_S(t)*(j))/ny; %average slope for panels on
 
       if sym==1
