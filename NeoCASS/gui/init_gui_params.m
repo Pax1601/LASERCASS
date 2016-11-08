@@ -156,5 +156,4 @@ guess.model.EnvPoints = [];
 guess.model.guessstd = false;
 %-------------------------------------------------------------------------------
 path = neoguiscratchpath();
-%
 save(fullfile(path, filename), 'solver', 'plot', 'guess');
