@@ -157,4 +157,7 @@ guess.model.guessstd = false;
 %-------------------------------------------------------------------------------
 path = neoguiscratchpath();
 %
+if ~exist(path,'dir')
+    mkdir(path);
+end    
 save(fullfile(path, filename), 'solver', 'plot', 'guess');
