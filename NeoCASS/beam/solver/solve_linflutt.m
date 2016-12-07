@@ -69,7 +69,7 @@ if (~isempty(find(beam_model.Param.MSOL == 145)))
     if isempty(beam_model.Param.EIG_FILE)
 %
       solve_eig;    
-%
+%       
     else 
       % load data from external files
       filename = [beam_model.Param.EIG_FILE, '.mas'];  beam_model.Res.Mmm = load(filename);
@@ -128,7 +128,7 @@ if (~isempty(find(beam_model.Param.MSOL == 145)))
       end
 %
     end  
-		beam_model.Res.SOL = 'Linear flutter';  
+	beam_model.Res.SOL = 'Linear flutter';  
     NMODES = size(beam_model.Res.NDispl, 3); 
     NMACH  = length(dlm_model.aero.M);
     NK     = length(dlm_model.aero.k); 

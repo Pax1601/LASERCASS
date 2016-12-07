@@ -67,7 +67,7 @@ lattice.gamma = [];     % sending box dihedral angle
 lattice.dx = [];        % sending box mean chord
 lattice.N = [];         % box normal
 lattice.COLLOC = [];    % boc collocation 3/4c
-lattice.XYZ = [];     % nodes
+lattice.XYZ = [];       % nodes
 lattice.DOUBLET = [];   % doublet line
 lattice.MID_DPOINT = [];% doublet midpoint 
 lattice.area = [];      % panel area
@@ -564,6 +564,12 @@ if flapped==1
 end
 if flapped==0
 	[p]=flat_mesh(wingx,wingy,wingz,nx,ny,meshtype);
+    wingx
+    wingy 
+    wingz
+    nx
+    ny
+    meshtype
 	PX(:,:)=p(:,:,1);
 	PY(:,:)=p(:,:,2);
 	PZ(:,:)=p(:,:,3);

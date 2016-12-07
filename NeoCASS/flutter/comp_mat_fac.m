@@ -46,6 +46,7 @@ function [A, PERM, INDER] = comp_mat_fac(A, N, NRDIM);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 NR = N + 1;
+PERM = 0;
 % look for minimum number in each row and store its reciprocal
 for I=1:NR
   X = 0;

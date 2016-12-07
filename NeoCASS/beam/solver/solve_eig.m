@@ -53,16 +53,16 @@ global beam_model;
 SUP_SHAPE = 0;
 fid = beam_model.Param.FID; 
 EPS = 1.0e-4;
-
 if (~isempty(find(beam_model.Param.MSOL == 103)))
 
 		fprintf(fid,'\nSolving vibration modes analysis...');
 %
 %   assembly stifness matrix
 %
+        beam_model.Bar
 		fprintf(fid, '\n\t - Assemblying stiffness matrix...');
 		K = st_lin_matrix(beam_model.Info, beam_model.Node.DOF, beam_model.Node.R, beam_model.Node.Coord, beam_model.Bar, beam_model.Beam, beam_model.Celas);
-		fprintf(fid, 'done.');
+        fprintf(fid, 'done.');
 %
 %   assembly mass matrix
 %
@@ -127,7 +127,7 @@ if (~isempty(find(beam_model.Param.MSOL == 103)))
     Freq = Omega./(2*pi);
 %
     V = real(V(:, index));
-    V2 = real(V2(:, index));
+%    V2 = real(V2(:, index));
     NAVM = length(index);
     OID = [1:NAVM]; 
 		fprintf(fid, '\n\n\t\tID     Frequency [Hz]');
@@ -166,7 +166,7 @@ if (~isempty(find(beam_model.Param.MSOL == 103)))
     % set eigenvectors
     Omega = Omega(index);
     V = V(:,index);
-    V2 = V2(:,index);
+%    V2 = V2(:,index);
 		fprintf(fid, '\n\t\tID     Frequency [Hz]');
     for m=1:NMODES
   		fprintf(fid, '\n\t\t%d      %g', OID(m), Omega(m)/2/pi);
@@ -187,9 +187,9 @@ if (~isempty(find(beam_model.Param.MSOL == 103)))
 		    fprintf(fid, '\n\n\t\tNormalization: unity generalized mass.');
         for m=1:NMODES
           mscale(m) = V(:,m)' * M * V(:,m);
-          mscale2 = V2(:,m)' * M2 * V2(:,m);
+%          mscale2 = V2(:,m)' * M2 * V2(:,m);
           V(:,m) = V(:,m) / sqrt(mscale(m));
-          V2(:,m) = V2(:,m) / sqrt(mscale2);
+%          V2(:,m) = V2(:,m) / sqrt(mscale2);
         end
         if ~isempty(beam_model.RBE2)
             MODES = get_mode_shapes(beam_model.Info.ngrid, beam_model.Node.DOF, NMODES, V2);
@@ -283,80 +283,80 @@ if (~isempty(find(beam_model.Param.MSOL == 103)))
 %   Overwrite rigid body modes using SUPORT data
 %
     beam_model.Res.ID = OID;
-    MINDEX = find(OID<=6);
+    MINDEX = find(OID<=6)
 %
-    if (isempty(MINDEX) )
-      fprintf(fid, '\n\t - No rigid mode available.');
-    end
-%
-    if (~isempty(MINDEX))
-%
-      if (~isempty(beam_model.Param.SUPORT)) && SUP_SHAPE
-%       get rigid modes at suport point through K matrix
-        [RMODE, RINDEX, KEPS] = get_suport_shapes(K, beam_model.Node, beam_model.Param.SUPORT, beam_model.Param.SUP_MAMPL);
-      else
-%       get rigid modes at CG as simple kinematics for DOF and DOF2
-        [RMODE, RMODE2, RINDEX, KEPS] = get_CG_shapes(beam_model.Node, beam_model.RBE2, beam_model.WB.CG, beam_model.Param.SUPORT);
-        nrsup = length(RINDEX);
-        MODES(:,:,1:nrsup) = get_mode_shapes(beam_model.Info.ngrid, beam_model.Node.DOF, nrsup, RMODE2);
-      end
-%
-      if (~isempty(beam_model.Param.MSELECT))
-        [dummy, id, jd] = intersect(beam_model.Param.MSELECT, RINDEX);
-        nrsup = length(jd);
-      else
-        nrsup = size(RMODE,2);
-        jd = [1:nrsup];
-      end
-      fprintf(fid, '\nSUPORT required: %d rigid body modes overwritten.', nrsup); 
-%
-      nr = find(KEPS > EPS);
-      if (~isempty(nr))
-        fprintf(fid, '\n### Warning: %d SUPORT rigid modes exceed deformation energy tolerance %g.', length(nr), EPS);
-      end
-%
-      nr = find((beam_model.Res.Omega/2/pi) < EPS);
-      if (length(nr) < nrsup)
-        fprintf(fid, '\n### Warning: number of extracted rigid modes is less than SUPORT dofs.');
-      end
-%
-%      MASS matrix
-%
-      if SUP_SHAPE
-        beam_model.Res.Mmm(1:nrsup,1:nrsup) = RMODE' * M * RMODE;
-        if ~isempty(beam_model.RBE2)
-            RMODE2 = zeros(ndof,nrsup);
-            for jeig = 1:nrsup
-                RMODE2(:,jeig) = RBE2disp(beam_model.RBE2,RMODE(:,jd(jeig)),ndof); 
-            end
-            MODES(:,:,1:nrsup) = get_mode_shapes(beam_model.Info.ngrid, beam_model.Node.DOF, nrsup, RMODE2);
-        else
-            MODES(:,:,1:nrsup) = get_mode_shapes(beam_model.Info.ngrid, beam_model.Node.DOF, nrsup, RMODE);
-        end
-      else
-
-        beam_model.Res.Mmm(1:nrsup,1:nrsup) = beam_model.WB.MCG(RINDEX,RINDEX);
-        beam_model.Res.Mmm(1:nrsup,1:nrsup) = RMODE' * M * RMODE;
-
-      end
+%     if (isempty(MINDEX) )
+%       fprintf(fid, '\n\t - No rigid mode available.');
+%     end
+% %
+%     if (~isempty(MINDEX))
+% %
+%       if (~isempty(beam_model.Param.SUPORT)) && SUP_SHAPE
+% %       get rigid modes at suport point through K matrix
+%         [RMODE, RINDEX, KEPS] = get_suport_shapes(K, beam_model.Node, beam_model.Param.SUPORT, beam_model.Param.SUP_MAMPL);
+%       else
+% %       get rigid modes at CG as simple kinematics for DOF and DOF2
+%         [RMODE, RMODE2, RINDEX, KEPS] = get_CG_shapes(beam_model.Node, beam_model.RBE2, beam_model.WB.CG, beam_model.Param.SUPORT);
+%         nrsup = length(RINDEX);
+%         MODES(:,:,1:nrsup) = get_mode_shapes(beam_model.Info.ngrid, beam_model.Node.DOF, nrsup, RMODE2);
+%       end
+% %
+%       if (~isempty(beam_model.Param.MSELECT))
+%         [dummy, id, jd] = intersect(beam_model.Param.MSELECT, RINDEX);
+%         nrsup = length(jd);
+%       else
+%         nrsup = size(RMODE,2);
+%         jd = [1:nrsup];
+%       end
+%       fprintf(fid, '\nSUPORT required: %d rigid body modes overwritten.', nrsup); 
+% %
+%       nr = find(KEPS > EPS);
+%       if (~isempty(nr))
+%         fprintf(fid, '\n### Warning: %d SUPORT rigid modes exceed deformation energy tolerance %g.', length(nr), EPS);
+%       end
+% %
+%       nr = find((beam_model.Res.Omega/2/pi) < EPS);
+%       if (length(nr) < nrsup)
+%         fprintf(fid, '\n### Warning: number of extracted rigid modes is less than SUPORT dofs.');
+%       end
+% %
+% %      MASS matrix
+% %
+%       if SUP_SHAPE
+%         beam_model.Res.Mmm(1:nrsup,1:nrsup) = RMODE' * M * RMODE;
+%         if ~isempty(beam_model.RBE2)
+%             RMODE2 = zeros(ndof,nrsup);
+%             for jeig = 1:nrsup
+%                 RMODE2(:,jeig) = RBE2disp(beam_model.RBE2,RMODE(:,jd(jeig)),ndof); 
+%             end
+%             MODES(:,:,1:nrsup) = get_mode_shapes(beam_model.Info.ngrid, beam_model.Node.DOF, nrsup, RMODE2);
+%         else
+%             MODES(:,:,1:nrsup) = get_mode_shapes(beam_model.Info.ngrid, beam_model.Node.DOF, nrsup, RMODE);
+%         end
+%       else
 % 
-      beam_model.Res.V(:,1:nrsup) = RMODE(:,jd);
-%
-		  % store MODAL nodal displacement
-		  beam_model.Res.NDispl = MODES(:,:,:);
-		  % set MODAL delta Rot
-		  for n = 1:beam_model.Info.ngrid
-        for m = 1:nrsup
-			    beam_model.Res.NRd(:,:,n,m) = Rmat(MODES(n, 4:6, m));
-          crossR(:,:,n,m) = crossm(MODES(n, 4:6, m));
-        end
-		  end
-%
-      beam_model.Res.Kmm(1:nrsup,1:nrsup) = 0.0;
-      beam_model.Res.Omega(1:nrsup) = 0.0;
-		  fprintf(fid, 'done.');
-%
-    end
+%         beam_model.Res.Mmm(1:nrsup,1:nrsup) = beam_model.WB.MCG(RINDEX,RINDEX);
+%         beam_model.Res.Mmm(1:nrsup,1:nrsup) = RMODE' * M * RMODE;
+% 
+%       end
+% % 
+%       beam_model.Res.V(:,1:nrsup) = RMODE(:,jd);
+% %
+% 		  % store MODAL nodal displacement
+% 		  beam_model.Res.NDispl = MODES(:,:,:);
+% 		  % set MODAL delta Rot
+% 		  for n = 1:beam_model.Info.ngrid
+%         for m = 1:nrsup
+% 			    beam_model.Res.NRd(:,:,n,m) = Rmat(MODES(n, 4:6, m));
+%           crossR(:,:,n,m) = crossm(MODES(n, 4:6, m));
+%         end
+% 		  end
+% %
+%       beam_model.Res.Kmm(1:nrsup,1:nrsup) = 0.0;
+%       beam_model.Res.Omega(1:nrsup) = 0.0;
+% 		  fprintf(fid, 'done.');
+% %
+%     end
 %
 %   update aerobeam nodes (if any)    
 %

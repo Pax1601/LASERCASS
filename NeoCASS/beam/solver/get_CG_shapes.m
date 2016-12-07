@@ -45,6 +45,7 @@ function [RMODE, RMODEN, RINDEX, EPS] = get_CG_shapes(NODE, RBE2, CG, SUPORT)
       indext = find(DOF(j,1:3));
       indexr = find(DOF(j,4:6));
       arm = crossm(CG-NODE.Coord(j,:));
+      indext
       for k=1:length(indext)
         RMODEN(DOF(j,indext(k)), indext(k)) = 1; % translation x,y,z
       end

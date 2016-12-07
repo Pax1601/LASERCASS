@@ -2934,7 +2934,7 @@ else
                     if isempty(indeq)
                         fclose(fp);error('error SET card')
                     else
-                        idSET = str2double(remain(1:indeq-1));
+                        idSET = str2double(remain(indeq+1:end))
                         if  isnan(idSET)
                             fclose(fp);error('error in SET card, no ID')
                         elseif ~isempty(find(idSET == SET.ID,1))
