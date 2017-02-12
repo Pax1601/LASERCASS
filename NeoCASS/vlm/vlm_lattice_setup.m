@@ -168,7 +168,7 @@ for s=1:noofwings
       lattice.N=[lattice.N; N2];
       lattice.DN=[lattice.DN; DN];
       lattice.S = [lattice.S, S];
-      
+            
 	  if geo.flapped(s,t)
 	  
 		  flapc = flapc +1;
@@ -176,7 +176,7 @@ for s=1:noofwings
 		  lattice.Control.Patch(flapc) = s;
 		  lattice.Control.Part(flapc) = t;
 		  lattice.Control.Hinge(flapc,:,:) = hinge;
-          if TOTAL(s,t) == 1
+          if TOTAL(s,t) == 1 || geo.flapped(s,t)==-1
               lattice.Control.DOF(flapc).data =  dofc+1:dofc + ndof;
           else
               lattice.Control.DOF(flapc).data = cdof + dofc;
@@ -333,7 +333,7 @@ function [lattice]=setrudder3(rudder,deflection,lattice,geo)
                [q4 q5]=size(nr);
                for i=1:q4
                   for j=1:q5
-                     if geo.flapped(i,j)==1
+                     if geo.flapped(i,j)==1 || geo.flapped(i,j)==-1
                         	r=r+1;   
                   	end
                      if r<rudder
@@ -597,7 +597,7 @@ end
 
 dx = (c*(1-fc(1))/nx); % panel chord at root
 
-if flapped==1
+if flapped==1 || flapped==-1
 
    fdx = (c*fc(1)/fnx);
 
@@ -639,7 +639,7 @@ cdof = [];
 %%%%%%%%%%%%%%%%%
 %Plotting hinge %
 %%%%%%%%%%%%%%%%%
-if flapped==1
+if (flapped==1) || (flapped==-1)
 
 	[flapx flapy flapz] = drawhinge(wingx, wingy, wingz, fc);
 
@@ -1217,15 +1217,18 @@ function [xa, angle] = airfoil_mean_line(foil)
     case 2
 
       STEP = 50;
-      A = load(char(foil));
+      A = load(char(foil), '-ascii');
 		  % Take the number of data points in the data file
 		  Nu = A(1,1); % for the upper surface
 		  Nl = A(1,2); % for the lower surface
       %
       % check if format is ok
       if (Nu + Nl ~= size(A,1)-1)
-        errmsg = ['Airfoil file ', char(foil), ' has no upper and lower points declaration at first line or wrong values given.'];
-        error(errmsg);        
+        fprintf('ERROR: Airfoil file %s has no upper and lower points\n declaration at first line or wrong values given.\n', char(foil));
+        fprintf('       Nu : %d\n', Nu)
+        fprintf('       Nl : %d\n', Nl)
+        fprintf('       data matrix : %dx%d\n', size(A,1)-1, size(A,2))
+        error('Aborting ...');
       end
       %
       xup = A(2:Nu+1,1);
@@ -1240,8 +1243,8 @@ function [xa, angle] = airfoil_mean_line(foil)
         % determine missing points
         X1 = setdiff(xdw, xup);
         X2 = setdiff(xup, xdw); 
-        yup = [yup; interp1(xup, yup, X1, 'cubic')];
-        ydw = [ydw; interp1(xdw, ydw, X2, 'cubic')];
+        yup = [yup; interp1(xup, yup, X1, 'pchip')];
+        ydw = [ydw; interp1(xdw, ydw, X2, 'pchip')];
         xup = [xup; X1];         
         xdw = [xdw; X2];
 		    [xup, index] = sort(xup);
@@ -1257,8 +1260,8 @@ function [xa, angle] = airfoil_mean_line(foil)
 		  Yl = ydw/(xdw(end) - xdw(1));
       %
       EP = [0:1/STEP:1];
-      Yu = interp1(Xu, Yu, EP, 'cubic')';
-      Yl = interp1(Xl, Yl, EP, 'cubic')';
+      Yu = interp1(Xu, Yu, EP, 'pchip')';
+      Yl = interp1(Xl, Yl, EP, 'pchip')';
       % Mean line
       ml = 0.5.*(Yu+Yl);
       %

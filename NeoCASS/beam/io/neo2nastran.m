@@ -237,7 +237,8 @@ if (Info.ncaero)
 	fprintf(fid,'$ Aerodynamic panels                                                      \n');
 	fprintf(fid,'$-------2-------3-------4-------5-------6-------7-------8-------9-------10\n');
 	PID = 10000;
-	caeroIDscale = 1000;
+	caeroIDscale = 10000;
+	caeroIDdelta = 1000;
 	CIDnew = 1000;
 
 	fprintf(fid,'PAERO1  %d\n', PID);
@@ -253,27 +254,36 @@ if (Info.ncaero)
 		TPR = beam_model.Aero.geo.T(iCaero);
 		SWP = beam_model.Aero.geo.SW(iCaero)*180/pi;
 
-		[P1, P2, c1, c2] = CAERO_neo2nas(DIH, SPN, CHD, CX, CY, CZ, TPR, SWP);
-
 		EID = beam_model.Aero.ID(iCaero)*caeroIDscale;
 		CP = 0;
 		IGID = 1;
-		NSPAN  = beam_model.Aero.geo.ny(iCaero);
-		NCHORD = beam_model.Aero.geo.nx(iCaero) + beam_model.Aero.geo.fnx(iCaero);
 
-		writeCAERO_NAS(fid, EID, PID, CP, NSPAN, NCHORD, IGID, P1, c1, P2, c2);
+		[P1, P2, c1, c2] = CAERO_neo2nas(DIH, SPN, CHD, CX, CY, CZ, TPR, SWP);
+
+		NSPAN  = beam_model.Aero.geo.ny(iCaero);
+		NCHORD = beam_model.Aero.geo.nx(iCaero);
 
 		if beam_model.Aero.geo.flapped(iCaero);
-			% Select the panels defining the control surface
+
+			EIDsurf = EID + caeroIDdelta;
+
 			nChordFixed = beam_model.Aero.geo.nx(iCaero);
 			nChordSurf  = beam_model.Aero.geo.fnx(iCaero);
-			surfPanels = repmat((1:nChordSurf)', [1,NSPAN]) + repmat((0:NSPAN-1)*NCHORD + nChordFixed, [nChordSurf,1]);
-			surfPanels = reshape(surfPanels, [NSPAN*nChordSurf,1]) + EID - 1;
 
-			writeGenericSet(fid, 'AELIST', EID, surfPanels);
+			c1_aft = beam_model.Aero.geo.fc(iCaero,1)*c1;
+			c2_aft = beam_model.Aero.geo.fc(iCaero,2)*c2;
 
-			point1 = P1 + [beam_model.Aero.geo.fc(iCaero)*c1;0;0];
-			point2 = P2 + [beam_model.Aero.geo.fc(iCaero)*c2;0;0];
+			writeCAERO_NAS(fid, EID, PID, CP, NSPAN, NCHORD, IGID, P1, c1-c1_aft, P2, c2-c2_aft);
+
+			point1 = P1 + [c1-c1_aft;0;0];
+			point2 = P2 + [c2-c2_aft;0;0];
+
+			writeCAERO_NAS(fid, EIDsurf, PID, CP, NSPAN, nChordSurf, IGID, point1, c1_aft, point2, c2_aft);
+
+			% Select the panels defining the control surface
+			surfPanels = EIDsurf + (1:NSPAN*nChordSurf) - 1;
+
+			writeGenericSet(fid, 'AELIST', EIDsurf, surfPanels);
 
 			[X0, R] = getSpline1ReferenceSystem(point1, point2);
 			CIDnew = CIDnew + 1;
@@ -285,11 +295,16 @@ if (Info.ncaero)
 			elseif ~isempty(beam_model.Aero.lattice_dlm)
 				index = find(beam_model.Aero.lattice_dlm.Control.Patch == iCaero);
 				LABEL = beam_model.Aero.lattice_dlm.Control.Name{index};
+			elseif isfield(beam_model.Aero.geo, 'controlName')
+				index = find(find(beam_model.Aero.geo.flapped) == iCaero);
+				LABEL = beam_model.Aero.geo.controlName{index};
 			else
 				error('lattice_vlm and lattice_dlm not defined')
 			end
 
-			writeAESURF_NAS(fid, EID, LABEL, CIDnew, EID);
+			writeAESURF_NAS(fid, EIDsurf, LABEL, CIDnew, EIDsurf);
+		else
+			writeCAERO_NAS(fid, EID, PID, CP, NSPAN, NCHORD, IGID, P1, c1, P2, c2);
 		end
 		fprintf(fid,'$\n');
 	end
@@ -298,23 +313,53 @@ if (Info.ncaero)
 	fprintf(fid,'$ Spline definition                                                       \n');
 	fprintf(fid,'$-------2-------3-------4-------5-------6-------7-------8-------9-------10\n');
 
+	splineIDdelta = caeroIDdelta;
+
 	nSpline = length(beam_model.Aero.Interp.ID);
 
 	for iSpline = 1:nSpline
 
 		EID = beam_model.Aero.Interp.ID(iSpline);
 		CAERO = beam_model.Aero.ID(beam_model.Aero.Interp.Patch(iSpline))*caeroIDscale;
-		BOX1 = CAERO + beam_model.Aero.Interp.Index(iSpline,1) - 1;
-		BOX2 = CAERO + beam_model.Aero.Interp.Index(iSpline,2) - 1;
+		BOX1_loc = beam_model.Aero.Interp.Index(iSpline,1);
+		BOX2_loc = beam_model.Aero.Interp.Index(iSpline,2);
 		SETG = beam_model.Aero.Set.ID(beam_model.Aero.Interp.Set(iSpline));
+
+		DZ = [];
+		USAGE = [];
+
+		iCaero = beam_model.Aero.Interp.Patch(iSpline);
+		if beam_model.Aero.geo.flapped(iCaero)
+
+			CAEROsurf = CAERO + caeroIDdelta;
+
+			NSPAN  = beam_model.Aero.geo.ny(iCaero);
+			nChordFixed = beam_model.Aero.geo.nx(iCaero);
+			nChordSurf  = beam_model.Aero.geo.fnx(iCaero);
+
+			caeroPanels = zeros(nChordFixed+nChordSurf, NSPAN);
+			caeroPanels(BOX1_loc:BOX2_loc) = 1;
+
+			frontPanels = find(caeroPanels(1:nChordFixed,:));
+			surfPanels = find(caeroPanels(nChordFixed+(1:nChordSurf),:));
+
+			BOX1 = CAERO + frontPanels(1) - 1;
+			BOX2 = CAERO + frontPanels(end) - 1;
+			BOX1surf = CAEROsurf + surfPanels(1) - 1;
+			BOX2surf = CAEROsurf + surfPanels(end) - 1;
+
+			flapped = true;
+		else
+			BOX1 = CAERO + BOX1_loc - 1;
+			BOX2 = CAERO + BOX2_loc - 1;
+			flapped = false;
+		end
 
 		switch beam_model.Aero.Interp.Type(iSpline)
 		case 1
-			DZ = [];
 			DTOR = [];
 			DTHX = [];
 			DTHY = [];
-			USAGE = [];
 
 			setNodes = beam_model.Aero.Set.Node(beam_model.Aero.Interp.Set(iSpline)).data;
 			ID1 = beam_model.Aero.Interp.Param(iSpline,1);
@@ -326,12 +371,33 @@ if (Info.ncaero)
 
 			writeSPLINE2_NAS(fid, EID, CAERO, BOX1, BOX2, SETG, DZ, DTOR, CIDnew, DTHX, DTHY, USAGE);
 			fprintf(fid,'$\n');
+
+			if flapped
+				writeSPLINE2_NAS(fid, EID+splineIDdelta, CAEROsurf, BOX1surf, BOX2surf, SETG, DZ, DTOR, CIDnew, DTHX, DTHY, USAGE);
+				fprintf(fid,'$\n');
+			end
+
 		case 2
-			error('Conversion of planar spline not yet implemented');
+			weight = beam_model.Aero.Interp.Param(iSpline,2);
+			switch weight
+			case 2
+				METH = 'TPS';
+			otherwise
+				METH = [];
+			end
+
+			writeSPLINE1_NAS(fid, EID, CAERO, BOX1, BOX2, SETG, DZ, METH, USAGE, [], []);
+			fprintf(fid,'$\n');
+			if flapped
+				writeSPLINE1_NAS(fid, EID+splineIDdelta, CAEROsurf, BOX1surf, BOX2surf, SETG, DZ, METH, USAGE, [], []);
+				fprintf(fid,'$\n');
+			end
+
 		otherwise
 			fprintf(' !!! WARNING spline %d has a non-recognized type\n', iSpline);
 		end
 	end
+	fprintf(fid,'$\n');
 
 	fprintf(fid,'$-------2-------3-------4-------5-------6-------7-------8-------9-------10\n');
 	fprintf(fid,'$ Interpolation set                                                       \n');

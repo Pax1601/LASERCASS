@@ -47,7 +47,7 @@
 %   Author: Luca Cavagna, Andrea Da Ronch, DIAPM
 %***********************************************************************************************************************
 
-function [displ, dwnwsh, ndispl] = set_boundary_condition(fid, geo, lattice, dlm, str_data, mode, AERO, SCALE, PLOT_RES)
+function [displ, dwnwsh, ndispl, DN] = set_boundary_condition(fid, geo, lattice, dlm, str_data, mode, AERO, SCALE, PLOT_RES)
 
 displ  = [];
 dwnwsh = [];
@@ -66,12 +66,12 @@ for n = 1 : geo.nwing
 	nxtot = geo.nx(n,:) + geo.fnx(n,:);
 	np = sum(nxtot .* nytot); % get patch number of panels
 	
-	[D_DISPL, DWN, N_DISPL] = set_patch_bc(n, dlm.aero.cref, dlm.aero.V, lattice.MID_DPOINT(counter+1:(counter + np),:), lattice.COLLOC(counter+1:(counter + np),:) ,...
+	[D_DISPL, DWN, N_DISPL, DN] = set_patch_bc(n, dlm.aero.cref, dlm.aero.V, lattice.MID_DPOINT(counter+1:(counter + np),:), lattice.COLLOC(counter+1:(counter + np),:) ,...
 	                              lattice.XYZ(counter+1:(counter + np),:,:), lattice.N(counter+1:(counter + np),:), str_data, mode, dlm.aero.k, AERO, SCALE, PLOT_RES);
 	
 	displ  = [displ; D_DISPL];
 	dwnwsh = [dwnwsh; DWN];
-  ndispl = [ndispl; N_DISPL];
+    ndispl = [ndispl; N_DISPL];
 
 	counter = counter + np;
 

@@ -67,7 +67,7 @@ lattice.gamma = [];     % sending box dihedral angle
 lattice.dx = [];        % sending box mean chord
 lattice.N = [];         % box normal
 lattice.COLLOC = [];    % boc collocation 3/4c
-lattice.XYZ = [];       % nodes
+lattice.XYZ = [];     % nodes
 lattice.DOUBLET = [];   % doublet line
 lattice.MID_DPOINT = [];% doublet midpoint 
 lattice.area = [];      % panel area
@@ -102,6 +102,7 @@ CHORDS=[];
 
 nwings = size(geo.nelem');
 
+
 for s = 1:nwings
 
 	CHORDS(s,1)=geo.c(s);
@@ -129,8 +130,6 @@ end
 flapc = 0;
 dofc = 0;
 
-
-
 %MAIN GEOMETRY SETUP LOOP, CREATES Partition QUAD PANELS, VORTICIES AND COLL-POINTS
 for s=1:nwings
    for t=1:geo.nelem(s) %setuploop
@@ -154,9 +153,8 @@ for s=1:nwings
       lattice.DOUBLET=[lattice.DOUBLET; D];
       lattice.N=[lattice.N; N];
       lattice.INT = [lattice.INT; INT(s).*ones(ndof,1)];
-
-	  if geo.flapped(s,t)
-	  
+      	  if geo.flapped(s,t)
+	          
 		  flapc = flapc +1;
 
 		  lattice.Control.Patch(flapc) = s;
@@ -167,6 +165,9 @@ for s=1:nwings
           else
               lattice.Control.DOF(flapc).data = cdof + dofc;
           end
+          
+          
+          lattice.Control
 
 	  end	  
 
@@ -564,12 +565,6 @@ if flapped==1
 end
 if flapped==0
 	[p]=flat_mesh(wingx,wingy,wingz,nx,ny,meshtype);
-    wingx
-    wingy 
-    wingz
-    nx
-    ny
-    meshtype
 	PX(:,:)=p(:,:,1);
 	PY(:,:)=p(:,:,2);
 	PZ(:,:)=p(:,:,3);

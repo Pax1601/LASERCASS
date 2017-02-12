@@ -28,7 +28,7 @@ TOLL = 1e-3;
       mass_distr(indx, 1) = opt_cg_pos(ones(length(indx), 1)/length(indx), nodes(indx), mass, CG);
       cg = sum(mass_distr(indx, 1).* nodes(indx))/sum(mass_distr(indx, 1));
       %
-      fprintf('\n\t\t  Solution discarded.');
+      fprintf('\n\t\t  Solution dicarded.');
       fprintf('\n\t\t- Optimization problem for fuselage distributed mass:');
       fprintf('\n\t\t\t- CG required: %g [m].', CG);
       fprintf('\n\t\t\t- CG trial solution: %g [m].', cg_prev);

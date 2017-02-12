@@ -70,6 +70,7 @@ function [vf, hf] = run_flutter(fid, Mhh, Chh, Khh, MFreq, MID, Qhh, Klist, Mach
 %  REFERENCES:
 %
 global fl_model;
+global beam_model;
 %
 vf = [];
 hf = [];
@@ -171,6 +172,8 @@ for n = 1:nmods
   fprintf(fid, '\n\tMode: %d.', fl_model.struct.SID(n));
 %
   index = find(fl_model.struct.SID(n) == fl_model.struct.MID);
+  
+  beam_model.Aero.state.Mach = Mach;
 % 
   [FL_FOUND, res, SVTNFL, SVQU, IMODFL, IVAR, NSTOP] = mode_sweep(n, fl_model.struct.Mhh, fl_model.struct.Chh, fl_model.struct.Khh, ...
     fl_model.aero.Qhh, fl_model.aero.Klist, fl_model.aero.rho, fl_model.ref.lref, fl_model.struct.SID(n), ...

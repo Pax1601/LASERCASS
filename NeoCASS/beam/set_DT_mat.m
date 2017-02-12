@@ -90,7 +90,7 @@ v = [];
 		N = set_N_mat(c01, c02, c03, c1, c2, c3, f1, f2, f3);
 		
 		Kel = (A * D) * N;
-        
+
 		% delete constrained dofs
 		Kff = Kel(index, index);
 		nr = length(index);

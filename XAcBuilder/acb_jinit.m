@@ -38,15 +38,13 @@ if isempty(strfind(paths, p))
     addpath(p);
     addpath(abd);
 end
-  
-
 
 % initialize AcBuilder
 try
-    jpaths = char(javaclasspath('-dynamic'))
-    p = [abd_jar filesep 'AcBuilder.jar']
+    jpaths = char(javaclasspath('-dynamic'));
+    p = [abd_jar filesep 'AcBuilder.jar'];
     if isempty(strfind(jpaths, p))
-        javaaddpath(p)
+        javaaddpath(p);
     end
 catch
     disp('acb_jinit: error - cannot initialize AcBuilder');

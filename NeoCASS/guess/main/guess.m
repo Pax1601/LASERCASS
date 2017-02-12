@@ -73,7 +73,6 @@
 function guess_model = guess(filename_geo, filename_tech, filename_stick, filename_trim, model, varargin)
 %
 global beam_model NMAX EPS
-
 fid = 1;
 %
 guess_model.GUI.model = model;

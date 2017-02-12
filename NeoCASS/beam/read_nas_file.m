@@ -725,9 +725,29 @@ else
     READ_INCLUDE = true;
     NFILE = 0;
     
+    % Get the path to the main file
+    delimiterPosition = find(filename=='/' | filename=='\');
+    if isempty(delimiterPosition)
+        mainDir = '';
+    else
+        mainDir = filename(1:delimiterPosition(end)-1);
+    end
+
     while (READ_INCLUDE)
         
         NFILE = NFILE + 1;
+
+        % If the file cannot be found check for a local path w.r.t. the directory
+        % containing the main file
+        if exist(PARAM.INCLUDE{NFILE}, 'file')
+            includedFile = PARAM.INCLUDE{NFILE};
+        else
+            includedFile = [mainDir, '/', includedFile];
+            if ~exist(includedFile, 'file')
+                error('Unable to find file %s', PARAM.INCLUDE{NFILE});
+            end
+        end
+
         fp = fopen(PARAM.INCLUDE{NFILE}, 'r');
         
         skip_line = false;
@@ -1892,7 +1912,6 @@ else
                         skip_line = false;
                         CAERO.geo.flapped(ncaero,1) = int8(num_field_parser(tline, 2));
                         if CAERO.geo.flapped(ncaero,1)
-                            
                             CAERO.geo.nc = CAERO.geo.nc +1;
                             CAERO.geo.fc(ncaero,1,1) =  num_field_parser(tline, 3);
                             CAERO.geo.fc(ncaero,1,2) =  num_field_parser(tline, 4);
@@ -2005,7 +2024,7 @@ else
                     end
                     
                 case keyword{23} % AEROS card (steady VLM)
-                    naeros
+                    
                     if naeros
                         fclose(fp);error('Multiple AEROS cards given.');
                     end
@@ -2308,10 +2327,11 @@ else
                     
                 case keyword{33} % MKAERO1
                     
-                    nmkaero = nmkaero +1;
+                    nmkaero = 1; %nmkaero +1;
                     if (nmkaero>1)
                       error('Multiple MKAERO1 card given.');
                     end
+
                     n = length(CAERO.state.Mach_qhh);
                     for i=1:8
                         
@@ -2342,7 +2362,13 @@ else
                             CAERO.state.Kfreq(n+i) = num_field_parser(tline, i+1);
                             
                         end
+                    else
+                        skip_line = true;
                     end
+
+
+                    CAERO.state.Mach_qhh = unique(CAERO.state.Mach_qhh);
+                    CAERO.state.Kfreq = unique(CAERO.state.Kfreq);
                     
                 case keyword{34} % EIGR
                     
@@ -2934,7 +2960,7 @@ else
                     if isempty(indeq)
                         fclose(fp);error('error SET card')
                     else
-                        idSET = str2double(remain(indeq+1:end))
+                        idSET = str2double(remain(1:indeq-1));
                         if  isnan(idSET)
                             fclose(fp);error('error in SET card, no ID')
                         elseif ~isempty(find(idSET == SET.ID,1))
@@ -3188,13 +3214,26 @@ else
                     
                     CAERO.Interp.ID(ninterp) = int32(num_field_parser(tline, 2));
                     CAERO.Interp.Patch(ninterp) = int32(num_field_parser(tline, 3));
-                    CAERO.Interp.Index(ninterp,1) = int32(num_field_parser(tline, 4));
-                    if CAERO.Interp.Index(ninterp,1) < 1
+
+                    index1 = num_field_parser(tline, 4);
+                    if index1==0
+                        CAERO.Interp.Index(ninterp,1) = int32(-1);
+                    else
+                        CAERO.Interp.Index(ninterp,1) = int32(index1);
+                        if CAERO.Interp.Index(ninterp,1) < 1
                         
-                        fclose(fp);error('Wrong index for first panel in interpolation set %d.', CAERO.Interp.ID(ninterp));
+                            fclose(fp);error('Wrong index for first panel in interpolation set %d.', CAERO.Interp.ID(ninterp));
                         
+                        end
                     end
-                    CAERO.Interp.Index(ninterp,2) = int32(num_field_parser(tline, 5));
+
+                    index2 = num_field_parser(tline, 5);
+                    if index2==0
+                        CAERO.Interp.Index(ninterp,2) = int32(-1);
+                    else
+                        CAERO.Interp.Index(ninterp,2) = int32(index2);
+                    end
+
                     CAERO.Interp.Set(ninterp) = int32(num_field_parser(tline, 6));
                     CAERO.Interp.Param(ninterp, 1) = int32(num_field_parser(tline, 7));
                     CAERO.Interp.Param(ninterp, 2) = int32(num_field_parser(tline, 8));
@@ -3631,9 +3670,16 @@ else
         if (length(PARAM.INCLUDE) == NFILE)
             READ_INCLUDE = false;
         else
+            % If the file cannot be found check for a local path w.r.t. the directory
+            % containing the main file
             if ~exist(PARAM.INCLUDE{NFILE+1}, 'file')
-                error(['Unable to find file %s.', PARAM.INCLUDE{NFILE+1},'.']);
+                includedFile = [mainDir, '/', PARAM.INCLUDE{NFILE+1}];
+                if ~exist(includedFile, 'file')
+                    error('Unable to find file %s', PARAM.INCLUDE{NFILE+1});
+                end
+                PARAM.INCLUDE{NFILE+1} = includedFile;
             end
+
         end
         %
     end % INCLUDE
@@ -3642,6 +3688,23 @@ else
     if (ninclude>0)
         PARAM.INCLUDE = PARAM.INCLUDE(2:end);
     end
+
+
+    % Check spline data for automatic selection of element index
+    for iInterp = 1:ninterp
+      caeroID = CAERO.Interp.Patch(iInterp);
+      caeroPosition = (CAERO.ID == caeroID);
+      if sum(caeroPosition)==0
+         error('CAERO with ID %d referenced by SPLINE %d not existent', caeroID, CAERO.Interp.ID(iInterp));
+      end
+      if CAERO.Interp.Index(iInterp, 1) == -1
+        CAERO.Interp.Index(iInterp,1) = 1;
+      end
+      if CAERO.Interp.Index(iInterp, 2) == -1
+        CAERO.Interp.Index(iInterp,2) = (sum(CAERO.geo.nx(caeroPosition,:),2) + sum(CAERO.geo.fnx(caeroPosition,:),2)) * CAERO.geo.ny(caeroPosition,1);
+      end
+    end
+   
     %*******************************************************************************
     %
     %       update geo mesh and spline sets 
@@ -5079,6 +5142,7 @@ else
             error('Control surface duplicated name given.');
         end
     end
+    CAERO.geo.controlName = CONTROL_NAME;
     %
     SOL_INDEX = find(PARAM.MSOL);
     %
@@ -5447,7 +5511,7 @@ else
     end
     
     % if no aerodynamic mesh is available, skip interpolation cards check
-    if (INFO.amesh_av_dlm || INFO.amesh_av_vlm)
+    if 1; %(INFO.amesh_av_dlm || INFO.amesh_av_vlm)
         
         if ninterp > 0
             
@@ -6009,6 +6073,9 @@ if nderext
 end
 %
 fprintf(fid,'\n\ndone.\n');
+
+
+
 %
 end % end of read file
 
