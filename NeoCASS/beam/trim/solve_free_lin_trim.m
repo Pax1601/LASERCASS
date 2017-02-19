@@ -58,11 +58,10 @@ fid = beam_model.Param.FID;
 TRIM_INDEX = 1;
 FLAG = 2;
 RES = [];
-
 %
 if nargin
     PARAM = varargin;
-    for n=1:2:length(PARAM);
+    for n=1:2:length(PARAM)
         if (strcmp(PARAM(n), 'INDEX'))
             % array with
             TRIM_INDEX = PARAM{n+1};
@@ -75,7 +74,7 @@ if nargin
             break;
         end
     end
-    for n=1:2:length(PARAM);
+    for n=1:2:length(PARAM)
         if (strcmp(PARAM(n), 'RES'))
             RES = PARAM{n+1};
             break;
@@ -100,8 +99,6 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
         dotpos = strfind(beam_model.Param.FILE,'.');
         outf = [beam_model.Param.FILE(1:dotpos-1), '_man_', num2str(beam_model.Aero.Trim.ID(index)),'.txt'];
         %
-        fprintf('Ole')
-        beam_model.Aero.Trim.Type(index)
         switch (beam_model.Aero.Trim.Type(index))
             
             case 0
@@ -144,25 +141,20 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
         [beam_model.Aero.state.alpha, beam_model.Aero.state.betha, beam_model.Aero.state.P, beam_model.Aero.state.Q, beam_model.Aero.state.R] = ...
             get_state_trim_vars(beam_model.Aero.Trim.FM);
         beam_model.Aero.state.alpha = D2R(beam_model.Aero.state.alpha);
-        beam_model.Aero.state.alpha
         beam_model.Aero.state.betha = D2R(beam_model.Aero.state.betha);
         % make sure angles are converted
         beam_model.Aero.Trim.FM.Value(2) = D2R(beam_model.Aero.Trim.FM.Value(2));
         beam_model.Aero.Trim.FM.Value(3) = D2R(beam_model.Aero.Trim.FM.Value(3));
         % set Tornado state struct
-        if isempty(beam_model.Aero.state.Mach)
-            beam_model.Aero.state.ALT = beam_model.Aero.Trim.ALT(index);
-            [beam_model.Aero.state.rho, p, T, a, mu] = ISA_h(beam_model.Aero.state.ALT);
-            beam_model.Aero.state.AS = beam_model.Aero.Trim.Mach(index) * a;
-            beam_model.Aero.state.Mach(1) = beam_model.Aero.Trim.Mach(index);
-        end
-  
+        beam_model.Aero.state.ALT = beam_model.Aero.Trim.ALT(index);
+        [beam_model.Aero.state.rho, p, T, a, mu] = ISA_h(beam_model.Aero.state.ALT);
+        beam_model.Aero.state.AS = beam_model.Aero.Trim.Mach(index) * a;
+        beam_model.Aero.state.Mach(1) = beam_model.Aero.Trim.Mach(index);
     else
         error('Unable to find the required TRIM set %d.', TRIM_INDEX);
     end
     
     if nc
-              
         beam_model.Aero.Trim.CS = get_control_surf_trim_params(beam_model.Aero.geo.nc, beam_model.Aero.Trim.NC(index), ...
             beam_model.Aero.Trim.Param(index).data, beam_model.Aero.Trim.Value(index).data, beam_model.Aero.lattice.Control);
     end
@@ -296,7 +288,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
         end
         
         %   RHS
-        if ~isempty(beam_model.RBE2)
+        if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
             K = RBE2Assembly(beam_model.RBE2,K);
             M = RBE2Assembly(beam_model.RBE2,M);
         end
@@ -317,7 +309,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
         %   Stiffness matrix
         if (~isempty(beam_model.Param.SUPORT))
             dummy = beam_model.Node;
-            if ~isempty(beam_model.RBE2)
+            if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
                 dummy.DOF = dummy.DOF2;
             end
             [D, Kll, Klr, Krr, Krl, rdof, ldof, KEPS] = get_suport_shapes(K, dummy, beam_model.Param.SUPORT, beam_model.Param.EPS);
@@ -431,7 +423,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
         %   Total external forces (Applied loads + Follower + reference rigid aero condition)
         F = F + F_flw + Fa0;
         fprintf(fid,'done.');
-        if ~isempty(beam_model.RBE2)
+        if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
             F = RBE2Assembly2(beam_model.RBE2,F);
         end
         %
@@ -599,7 +591,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
         %   Assembly derivatives
         Kax  =  -[Fa_ALPHA, Fa_BETA, Fa_P, Fa_Q, Fa_R, FCtot];
         KaxDOF = Kax;
-        if ~isempty(beam_model.RBE2)
+        if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
             Kax = RBE2Assembly2(beam_model.RBE2,Kax);
         end
         Kaxl = Kax(ldof,:);
@@ -674,7 +666,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
         fprintf(fid,'\ndone.');
         %
         QaaDOF = Qaa;
-        if ~isempty(beam_model.RBE2)
+        if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
             Qaa = RBE2Assembly(beam_model.RBE2,Qaa);
         end
         Qaall = Qaa(ldof, ldof);
@@ -720,7 +712,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
     if FLAG ~=1
         beam_model.Res.Struct.M = M;
         beam_model.Res.Struct.K = K;
-        if ~isempty(beam_model.RBE2)
+        if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
             Fa02 = RBE2Assembly2(beam_model.RBE2,Fa0);
         else
             Fa02 = Fa0;
@@ -959,7 +951,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
                 SOL(ldof,1) = DMODE(length(rdof)+1:end,mindex(k));
                 SOL(rdof,1) = DMODE(1:length(rdof),mindex(k));
                 %
-                if ~isempty(beam_model.RBE2.ID)
+                if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
                     SOL = RBE2disp(beam_model.RBE2,SOL,ndof2);
                 end
                 
@@ -1012,7 +1004,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
     UL = -AMLR * UDD(:,ntrim) - ARLR * UR - ALX * UX(:,ntrim) + UINTL;
     %
     SOL =  zeros(size(K,1),1); SOL(rdof,1) = UR; SOL(ldof,1) = UL;
-    if ~isempty(beam_model.RBE2)
+    if ~isempty(beam_model.RBE2) && ~isempty(beam_model.RBE2.ID)
         SOL = RBE2disp(beam_model.RBE2,SOL,ndof);
     end
     gdef = zeros(beam_model.Info.ngrid, 6);
@@ -1178,5 +1170,4 @@ end
 %
 fclose(outp);
 %
-
 end

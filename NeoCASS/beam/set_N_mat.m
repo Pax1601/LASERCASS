@@ -76,7 +76,7 @@ JII(1) = dot(NIIp, x);
 JII(2) = dot(NIIp, y);
 JII(3) = dot(NIIp, z);
 NIIp = NIIp ./ norm(JII);
-                                 
+
 x = [c1(1) c2(1) c3(1)];
 y = [c1(2) c2(2) c3(2)];
 z = [c1(3) c2(3) c3(3)];
@@ -91,6 +91,7 @@ PpII(3) = dot(NIIp, z);
 % FIRST section
 % translation
 % node 1
+
 N(1:3,1:3) = diag([NIp(1) NIp(1) NIp(1)]);
 N(1:3,4:6) = -crossm(NIp(1) .* f1) + crossm(PpI .* NI(1));
 % node 2 

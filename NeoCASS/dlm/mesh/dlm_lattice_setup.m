@@ -102,7 +102,6 @@ CHORDS=[];
 
 nwings = size(geo.nelem');
 
-
 for s = 1:nwings
 
 	CHORDS(s,1)=geo.c(s);
@@ -130,6 +129,8 @@ end
 flapc = 0;
 dofc = 0;
 
+
+
 %MAIN GEOMETRY SETUP LOOP, CREATES Partition QUAD PANELS, VORTICIES AND COLL-POINTS
 for s=1:nwings
    for t=1:geo.nelem(s) %setuploop
@@ -153,8 +154,9 @@ for s=1:nwings
       lattice.DOUBLET=[lattice.DOUBLET; D];
       lattice.N=[lattice.N; N];
       lattice.INT = [lattice.INT; INT(s).*ones(ndof,1)];
-      	  if geo.flapped(s,t)
-	          
+
+	  if geo.flapped(s,t)
+	  
 		  flapc = flapc +1;
 
 		  lattice.Control.Patch(flapc) = s;
@@ -165,9 +167,6 @@ for s=1:nwings
           else
               lattice.Control.DOF(flapc).data = cdof + dofc;
           end
-          
-          
-          lattice.Control
 
 	  end	  
 

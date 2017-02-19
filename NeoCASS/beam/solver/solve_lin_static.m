@@ -52,15 +52,18 @@ global beam_model;
 
 fid = beam_model.Param.FID;
 
-if (~isempty(find(beam_model.Param.MSOL == 101)))
+if (~isempty(find(beam_model.Param.SOL == 101)))
 
 		fprintf(fid,'\nSolving linear static analysis...');
 
 		% assembly stifness matrix
 		fprintf(fid, '\n\tAssemblying stiffness matrix...');
 
-		K = st_lin_matrix(beam_model.Info, beam_model.Node.DOF, beam_model.Node.R, beam_model.Node.Coord, beam_model.Bar, beam_model.Beam);
+		%K = st_lin_matrix(beam_model.Info, beam_model.Node.DOF, beam_model.Node.R, beam_model.Node.Coord, beam_model.Bar, beam_model.Beam);
 
+        [K] = st_lin_matrix(beam_model.Info, beam_model.Node.DOF, beam_model.Node.R, beam_model.Node.Coord, beam_model.Bar, beam_model.Beam, beam_model.Celas);
+
+        
 		fprintf(fid, 'done.');
 
 		K_rank = 1/condest(K);

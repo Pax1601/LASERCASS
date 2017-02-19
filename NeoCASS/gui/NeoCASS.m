@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Copyright (C) 2008 - 2011 
-% 
+% Copyright (C) 2008 - 2011
+%
 % Sergio Ricci (sergio.ricci@polimi.it)
 %
 % Politecnico di Milano, Dipartimento di Ingegneria Aerospaziale
 % Via La Masa 34, 20156 Milano - ITALY
-% 
+%
 % This file is part of NeoCASS Software (www.neocass.org)
 %
 % NeoCASS is free software; you can redistribute it and/or
@@ -20,8 +20,8 @@
 % details.
 %
 % You should have received a copy of the GNU General Public
-% License along with NeoCASS; see the file GNU GENERAL 
-% PUBLIC LICENSE.TXT.  If not, write to the Free Software 
+% License along with NeoCASS; see the file GNU GENERAL
+% PUBLIC LICENSE.TXT.  If not, write to the Free Software
 % Foundation, 59 Temple Place -Suite 330, Boston, MA
 % 02111-1307, USA.
 %
@@ -57,11 +57,11 @@ function varargout = NeoCASS(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @NeoCASS_OpeningFcn, ...
-                   'gui_OutputFcn',  @NeoCASS_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @NeoCASS_OpeningFcn, ...
+    'gui_OutputFcn',  @NeoCASS_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -115,14 +115,14 @@ switch status
         set(handles.figure1, 'units', 'pixel');
         opos = get(handles.figure1, 'position');
         set(handles.figure1, 'position', [opos(1:2) 548 201]);
-
+        
         % Load splash page
         neocass_splash;
         
         % Show NeoCASS version
         fprintf(1,'\n - %s\n',get_neocass_version('NeoCASS'));
         fprintf(1, '\n - Initializing NeoCASS GUI database...');
-                
+        
         % Definition of global variables
         global enabled_gui;
         enabled_gui = true;
@@ -135,17 +135,17 @@ switch status
         
         global enabled_codes;
         enabled_codes = zeros(1,8);
-
+        
     case -1
         
         % Init gui parameters to avoid warning
         init_gui_params('neocass_gui_param.mat');
-                
+        
 end
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = NeoCASS_OutputFcn(hObject, eventdata, handles) 
+function varargout = NeoCASS_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -153,11 +153,11 @@ function varargout = NeoCASS_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-        
+
 switch handles.CheckStatus
     
     case 0
-
+        
         % Switch off push button to open technology file
         set(handles.editguess,'Enable','Off');
         set(handles.openguess,'Enable','Off');
@@ -180,12 +180,12 @@ switch handles.CheckStatus
         
         % Switch off Start Button for Run solvers
         set(handles.Main_Run_pushbutton6start,'Enable','Off');
-
+        
     case -1
         
         % Quit
         close_gui(hObject);
-
+        
 end
 
 % ------------ end of NeoCASS controls initialization ---------------
@@ -208,11 +208,11 @@ if strcmp(sizeinput_pathname,neocass_path)
 end
 
 if (aircraft_filterindex ~= 0)
-
+    
     filename = [aircraft_pathname, aircraft_filename];
-
+    
     fprintf(1, '\n - GUESS aircraft filename: %s. \n', filename);
-
+    
     path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
     gui_param.guess.file.aircraft = filename;
     
@@ -255,7 +255,7 @@ if (aircraft_filterindex ~= 0)
     end
     
     save_gui_params('neocass_gui_param.mat', gui_param);
-
+    
 end
 
 
@@ -268,14 +268,14 @@ path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.m
 filename = gui_param.guess.file.aircraft;
 
 if length(filename)
-  command = neocass_xml_editor_path;
-  if ~isempty(command)
-    [o1, void] = system([command, ' ', filename]);
-  else
-    fprintf(1, '\n - XML editor not set. \n');
-  end
+    command = neocass_xml_editor_path;
+    if ~isempty(command)
+        [o1, void] = system([command, ' ', filename]);
+    else
+        fprintf(1, '\n - XML editor not set. \n');
+    end
 else
-  fprintf(1, '\n - No aircraft .xml file given. \n');
+    fprintf(1, '\n - No aircraft .xml file given. \n');
 end
 
 % --- Executes on button press in Main_File_openstates.
@@ -304,7 +304,7 @@ end
 
 save_gui_params('neocass_gui_param.mat', gui_param);
 
-  
+
 % --- Executes on button press in Main_File_editstates.
 function Main_File_editstates_Callback(hObject, eventdata, handles)
 % hObject    handle to Main_File_editstates (see GCBO)
@@ -313,14 +313,14 @@ function Main_File_editstates_Callback(hObject, eventdata, handles)
 path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 filename = gui_param.guess.file.state;
 if length(filename)
-  command = neocass_xml_editor_path;
-  if ~isempty(command)
-    [o1, void] = system([command, ' ', filename]);
-  else
-    fprintf(1, '\n - XML editor not set. \n');
-  end
+    command = neocass_xml_editor_path;
+    if ~isempty(command)
+        [o1, void] = system([command, ' ', filename]);
+    else
+        fprintf(1, '\n - XML editor not set. \n');
+    end
 else
-  fprintf(1, '\n - No state .xml file given. \n');
+    fprintf(1, '\n - No state .xml file given. \n');
 end
 
 
@@ -353,17 +353,17 @@ if strcmp(sizeinput_pathname,neocass_path)
 end
 
 if (tech_filterindex ~= 0)
-
-  filename = [tech_pathname, tech_filename];
-
-  fprintf(1, '\n - GUESS technology filename: %s. \n', filename);
-
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-
-  gui_param.guess.file.technology = filename;
-
-  save_gui_params('neocass_gui_param.mat', gui_param);
-
+    
+    filename = [tech_pathname, tech_filename];
+    
+    fprintf(1, '\n - GUESS technology filename: %s. \n', filename);
+    
+    path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+    
+    gui_param.guess.file.technology = filename;
+    
+    save_gui_params('neocass_gui_param.mat', gui_param);
+    
 end
 
 % --- Executes on button press in Main_File_settingsguess.
@@ -376,14 +376,14 @@ path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.m
 filename = gui_param.guess.file.technology;
 
 if length(filename)
-  command = neocass_xml_editor_path;
-  if ~isempty(command)
-    [o1, void] = system([command, ' ', filename]);
-  else
-    fprintf(1, '\n - XML editor not set. \n');
-  end
+    command = neocass_xml_editor_path;
+    if ~isempty(command)
+        [o1, void] = system([command, ' ', filename]);
+    else
+        fprintf(1, '\n - XML editor not set. \n');
+    end
 else
-  fprintf(1, '\n - No technology .xml file given. \n');
+    fprintf(1, '\n - No technology .xml file given. \n');
 end
 
 
@@ -400,34 +400,34 @@ if ~guess_pathname
 end
 
 formats = { '*.inc', 'GUESS file (*.inc)';...
-            '*.dat', 'GUESS file (*.dat)';...
-            '*.*', 'All files (*.*)' };
+    '*.dat', 'GUESS file (*.dat)';...
+    '*.*', 'All files (*.*)' };
 
 guess_pathname = sizeinput_pathname;
-        
+
 [stick_filename, stick_pathname, stick_filterindex] = uiputfile(formats, 'Select output filename', guess_pathname);
 
 guess_pathname = stick_pathname;
 
 
 if (stick_filterindex ~= 0)
-
+    
     stick_filename = uiputext(stick_filename, stick_filterindex, formats);
     
     stick_filename = [stick_pathname, stick_filename];
-
+    
     fprintf(1, '\n - GUESS output stick filename: %s. \n', stick_filename);
-
+    
     path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
     gui_param.guess.file.stick = stick_filename;
     save_gui_params('neocass_gui_param.mat', gui_param);
-
+    
     aircraft_filename = gui_param.guess.file.aircraft;
     % state_filename = gui_param.guess.file.state;
     tech_filename = gui_param.guess.file.technology;
     trim_filename = gui_param.guess.file.trim;
     model = gui_param.guess.model;
-
+    
     if ( ~isempty(aircraft_filename))
         if (~isempty(tech_filename))
             init_guess_model;   % initialize GUESS model struct
@@ -438,7 +438,7 @@ if (stick_filterindex ~= 0)
     else
         fprintf('\n - No aircraft geometry .xml file given. \n');
     end
-
+    
 end
 
 
@@ -457,8 +457,8 @@ if ~smartcad_pathname
 end
 
 formats = { '*.inc', 'Solver input data file (*.inc)';...
-            '*.dat', 'Solver input data file (*.dat)';...
-            '*.*', 'All files (*.*)' };
+    '*.dat', 'Solver input data file (*.dat)';...
+    '*.*', 'All files (*.*)' };
 
 smartcad_pathname = guess_pathname;
 
@@ -470,7 +470,7 @@ smartcad_pathname = neocass_pathname;
 path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 
 if (neocass_filterindex ~= 0)
-
+    
     neocass_filename = uiputext(neocass_filename, neocass_filterindex, formats);
     
     filename = [neocass_pathname, neocass_filename];
@@ -499,8 +499,8 @@ if ~smartcad_pathname
 end
 
 formats = { '*.dat', 'SMARTCAD include file (*.dat)';...
-            '*.dat', 'SMARTCAD append file (*.dat)';...
-            '*.*', 'All files (*.*)'};
+    '*.dat', 'SMARTCAD append file (*.dat)';...
+    '*.*', 'All files (*.*)'};
 
 if ~strcmp(guess_pathname, neocass_path)
     smartcad_pathname = guess_pathname;
@@ -531,7 +531,7 @@ if (neocass_filterindex ~= 0)
             % flist = {dlist(I).name}';
             flist = sort({dlist_inc.name, dlist_dat.name})';
             sfile = select_list(flist, text);
-            fp = fopen(filename, 'w'); 
+            fp = fopen(filename, 'w');
             fprintf(fp, '$ SMARTCAD cards included by NeoCASS GUI (%s)', datestr(now));
             fprintf(fp, '\n$-------2-------3-------4-------5-------6-------7-------8-------9-------10\n');
             for i = 1:length(sfile),
@@ -554,7 +554,7 @@ if (neocass_filterindex ~= 0)
             else
                 fprintf(1, '\n - SMARTCAD file: %s. \n', filename);
                 gui_param.solver.file.FILE = filename;
-
+                
                 if (isunix)
                     command = ['cp ',gui_param.guess.file.stick,' ', filename];
                 else
@@ -566,9 +566,9 @@ if (neocass_filterindex ~= 0)
                 fclose(fp);
                 
             end
-
+            
     end
-
+    
 else
     gui_param.solver.file.FILE = '';
 end
@@ -599,10 +599,10 @@ smartcad_pathname = neocass_pathname;
 global beam_model;
 
 if (neocass_filterindex ~= 0)
-
+    
     neocass_init;
     filename = [neocass_pathname, neocass_filename];
-
+    
     fprintf(1, 'SMARTCAD filename %s. \n', filename);
     %
     beam_model = load_nastran_model(filename);
@@ -640,21 +640,21 @@ formats = { '*.dat; *.inc', 'SMARTCAD file (*.dat; *.inc)'};
 [neocass_filename, neocass_pathname, neocass_filterindex] = uigetfile(formats, 'Edit SMARTCAD files');
 
 if (neocass_filterindex ~= 0)
-
-  filename = ['"', neocass_pathname, neocass_filename, '"'];
-
-  command = neocass_text_editor_path;
-  if isempty(command)
-    command = 'edit';
-    command = [command, ' ', filename];
-    eval(command);
-  else
-    command = [command, ' ', filename];
-    system(command);
-  end
- 
+    
+    filename = ['"', neocass_pathname, neocass_filename, '"'];
+    
+    command = neocass_text_editor_path;
+    if isempty(command)
+        command = 'edit';
+        command = [command, ' ', filename];
+        eval(command);
+    else
+        command = [command, ' ', filename];
+        system(command);
+    end
+    
 else
-  fprintf(1, '\n - No SMARTCAD input file given. \n');
+    fprintf(1, '\n - No SMARTCAD input file given. \n');
 end
 
 % --- Executes on button press in Main_File_checkbox1guess.
@@ -668,7 +668,7 @@ function Main_File_checkbox1VLM_Callback(hObject, eventdata, handles)
 global enabled_codes;
 enabled_codes(7) = get(hObject,'Value')
 
-if (enabled_codes(7) == 0) 
+if (enabled_codes(7) == 0)
     set(handles.Main_Run_pushbutton6vlm,'Enable','Off');
 else
     set(handles.Main_Run_pushbutton6vlm,'Enable','On');
@@ -689,7 +689,7 @@ function Main_File_checkbox2static_Callback(hObject, eventdata, handles)
 
 global enabled_codes;
 enabled_codes(1) = get(hObject,'Value');
-if (enabled_codes(1) == 0) 
+if (enabled_codes(1) == 0)
     set(handles.Main_Run_pushbutton2static,'Enable','Off');
 else
     set(handles.Main_Run_pushbutton2static,'Enable','On');
@@ -709,7 +709,7 @@ function Main_File_checkbox3modal_Callback(hObject, eventdata, handles)
 global enabled_codes;
 enabled_codes(2) = get(hObject,'Value');
 
-if (enabled_codes(2) == 0) 
+if (enabled_codes(2) == 0)
     set(handles.Main_Run_pushbutton3modal,'Enable','Off');
 else
     set(handles.Main_Run_pushbutton3modal,'Enable','On');
@@ -729,7 +729,7 @@ function Main_File_checkbox4staer_Callback(hObject, eventdata, handles)
 global enabled_codes;
 enabled_codes(3) = get(hObject,'Value');
 
-if (enabled_codes(3) == 0) 
+if (enabled_codes(3) == 0)
     set(handles.Main_Run_pushbutton4staer,'Enable','Off');
 else
     set(handles.Main_Run_pushbutton4staer,'Enable','On');
@@ -749,7 +749,7 @@ function Main_File_checkbox5flutter_Callback(hObject, eventdata, handles)
 global enabled_codes;
 enabled_codes(4) = get(hObject,'Value');
 
-if (enabled_codes(4) == 0) 
+if (enabled_codes(4) == 0)
     set(handles.Main_Run_pushbutton5flutter,'Enable','Off');
 else
     set(handles.Main_Run_pushbutton5flutter,'Enable','On');
@@ -777,7 +777,7 @@ end
 %global enabled_codes;
 %enabled_codes(7) = get(hObject,'Value');
 %
-%if (enabled_codes(7) == 0) 
+%if (enabled_codes(7) == 0)
 %    set(handles.Main_Run_pushbutton6vlm,'Enable','Off');
 %else
 %    set(handles.Main_Run_pushbutton6vlm,'Enable','On');
@@ -960,37 +960,48 @@ function Main_Settings_popupmenu2str_Callback(hObject, eventdata, handles)
 Structural_model = get(hObject,'Value');
 
 if (Structural_model == 1)
-  set(handles.Main_Settings_edit1,'Value',1);
-  set(handles.Main_Settings_edit1,'Enable','Off');
-  set(handles.Main_Settings_text3,'Enable','Off');
-  set(handles.Main_Settings_text2,'Enable','Off');
-  set(handles.Main_Settings_text4,'Enable','Off');
-  set(handles.Main_Settings_text5,'Enable','Off');
-  set(handles.Main_Settings_editniter,'Enable','Off');
-  set(handles.Main_Settings_editnstep,'Enable','Off');
-  set(handles.Main_Settings_editrestol,'Enable','Off');
+    set(handles.Main_Settings_edit1,'Value',1);
+    set(handles.Main_Settings_edit1,'Enable','Off');
+    set(handles.Main_Settings_text3,'Enable','Off');
+    set(handles.Main_Settings_text2,'Enable','Off');
+    set(handles.Main_Settings_text4,'Enable','Off');
+    set(handles.Main_Settings_text5,'Enable','Off');
+    set(handles.Main_Settings_editniter,'Enable','Off');
+    set(handles.Main_Settings_editnstep,'Enable','Off');
+    set(handles.Main_Settings_editrestol,'Enable','Off');
 end
 if (Structural_model == 2)
-  set(handles.Main_Settings_edit1,'Value',1);
-  set(handles.Main_Settings_edit1,'Enable','Off');
-  set(handles.Main_Settings_text3,'Enable','Off');
-  set(handles.Main_Settings_text2,'Enable','On');
-  set(handles.Main_Settings_text4,'Enable','On');
-  set(handles.Main_Settings_text5,'Enable','On');
-  set(handles.Main_Settings_editniter,'Enable','On');
-  set(handles.Main_Settings_editnstep,'Enable','On');
-  set(handles.Main_Settings_editrestol,'Enable','On');
+    set(handles.Main_Settings_edit1,'Value',1);
+    set(handles.Main_Settings_edit1,'Enable','Off');
+    set(handles.Main_Settings_text3,'Enable','Off');
+    set(handles.Main_Settings_text2,'Enable','On');
+    set(handles.Main_Settings_text4,'Enable','On');
+    set(handles.Main_Settings_text5,'Enable','On');
+    set(handles.Main_Settings_editniter,'Enable','On');
+    set(handles.Main_Settings_editnstep,'Enable','On');
+    set(handles.Main_Settings_editrestol,'Enable','On');
 end
 if (Structural_model == 3)
-  set(handles.Main_Settings_edit1,'Enable','On');
-  set(handles.Main_Settings_text3,'Enable','On');
-  set(handles.Main_Settings_edit1,'Value',1);
-  set(handles.Main_Settings_text2,'Enable','Off');
-  set(handles.Main_Settings_text4,'Enable','Off');
-  set(handles.Main_Settings_text5,'Enable','Off');
-  set(handles.Main_Settings_editniter,'Enable','Off');
-  set(handles.Main_Settings_editnstep,'Enable','Off');
-  set(handles.Main_Settings_editrestol,'Enable','Off');
+    set(handles.Main_Settings_edit1,'Enable','On');
+    set(handles.Main_Settings_text3,'Enable','On');
+    set(handles.Main_Settings_edit1,'Value',1);
+    set(handles.Main_Settings_text2,'Enable','Off');
+    set(handles.Main_Settings_text4,'Enable','Off');
+    set(handles.Main_Settings_text5,'Enable','Off');
+    set(handles.Main_Settings_editniter,'Enable','Off');
+    set(handles.Main_Settings_editnstep,'Enable','Off');
+    set(handles.Main_Settings_editrestol,'Enable','Off');
+end
+if (Structural_model == 4)
+    set(handles.Main_Settings_edit1,'Value',1);
+    set(handles.Main_Settings_edit1,'Enable','Off');
+    set(handles.Main_Settings_text3,'Enable','Off');
+    set(handles.Main_Settings_text2,'Enable','Off');
+    set(handles.Main_Settings_text4,'Enable','Off');
+    set(handles.Main_Settings_text5,'Enable','Off');
+    set(handles.Main_Settings_editniter,'Enable','Off');
+    set(handles.Main_Settings_editnstep,'Enable','On');
+    set(handles.Main_Settings_editrestol,'Enable','Off');
 end
 
 path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
@@ -998,13 +1009,15 @@ path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.m
 gui_param.solver.param.MODEL_TYPE = Structural_model;
 
 switch(Structural_model)
-  
-  case 1
-    fprintf(1, '\n - Model type chosen: linear beam model. \n');
-  case 2
-    fprintf(1, '\n - Model type chosen: non-linear beam model. \n');
-  case 3
-    fprintf(1, '\n - Model type chosen: linear equivalent plate model. \n');
+    
+    case 1
+        fprintf(1, '\n - Model type chosen: linear beam model. \n');
+    case 2
+        fprintf(1, '\n - Model type chosen: non-linear beam model. \n');
+    case 3
+        fprintf(1, '\n - Model type chosen: linear equivalent plate model. \n');
+    case 4
+        fprintf(1, '\n - Model type chosen: linear beam with Updated Lagrangian iteration. \n');
 end
 
 save_gui_params('neocass_gui_param.mat', gui_param);
@@ -1032,7 +1045,7 @@ function Main_Settings_checkbox1inter_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of
-% 
+%
 interstatus = get(hObject,'Value');
 autostatus = get(handles.Main_Settings_checkbox2auto,'Value');
 if interstatus,
@@ -1050,7 +1063,7 @@ function Main_Settings_checkbox2auto_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of
-% 
+%
 % If the automatic checkbox is selected all enabled_codes are started
 % pressing start button
 global enabled_codes;
@@ -1092,23 +1105,27 @@ path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.m
 STR_MODEL = gui_param.solver.param.MODEL_TYPE;
 
 if enabled_codes(1)
-
-  switch(STR_MODEL)
     
-    case 1
-
-      solve_lin_static;
-
-    case 2
-
-      solve_nlin_static;
-
-    case 3
-
-      fprintf(1, '\n - Plate model not available yet. \n');
-
+    switch(STR_MODEL)
+        
+        case 1
+            
+            solve_lin_static;
+            
+        case 2
+            
+            solve_nlin_static;
+            
+        case 3
+            
+            fprintf(1, '\n - Plate model not available yet. \n');
+            
+        case 4
+            
+            solve_up_lagr_static;
+            
     end
-
+    
 end
 
 % --- Executes on button press in Main_Run_pushbutton3modal.
@@ -1123,19 +1140,19 @@ path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.m
 STR_MODEL = gui_param.solver.param.MODEL_TYPE;
 
 if enabled_codes(2)
-
-  switch(STR_MODEL)
     
-    case {1,2}
-
-      solve_eig;
-
-    case 3
-
-      fprintf(1, '\n - Plate model not available yet. \n');
-
+    switch(STR_MODEL)
+        
+        case {1,2}
+            
+            solve_eig;
+            
+        case 3
+            
+            fprintf(1, '\n - Plate model not available yet. \n');
+            
     end
-
+    
 end
 
 % --- Executes on button press in Main_Run_pushbutton4staer.
@@ -1150,7 +1167,7 @@ path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.m
 STR_MODEL = gui_param.solver.param.MODEL_TYPE;
 
 if enabled_codes(3)
-
+    
     trimI = ManeuverSelect;
     pause(1);
     if isempty(trimI)
@@ -1171,9 +1188,13 @@ if enabled_codes(3)
                 
                 fprintf(1, '\n - Plate model not available yet. \n');
                 
+            case 4
+                
+                solve_free_up_lagr_trim(trimI);
+                
         end
     end
-
+    
 end
 
 % --- Executes on button press in Main_Run_pushbutton5flutter.
@@ -1188,19 +1209,19 @@ path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.m
 STR_MODEL = gui_param.solver.param.MODEL_TYPE;
 
 if enabled_codes(4)
-
-  switch(STR_MODEL)
     
-    case {1,2}
-
-      solve_linflutt;
-
-    case 3
-
-      fprintf(1, '\n - Plate model not available yet. \n');
-
+    switch(STR_MODEL)
+        
+        case {1,2}
+            
+            solve_linflutt;
+            
+        case 3
+            
+            fprintf(1, '\n - Plate model not available yet. \n');
+            
     end
-
+    
 end
 
 % --- Executes on button press in Main_Run_pushbutton6vlm.
@@ -1215,9 +1236,9 @@ enabled_codes;
 
 
 if enabled_codes(7)
-  solve_vlm_rigid;
+    solve_vlm_rigid;
 elseif enabled_codes(8)
-  solve_dynder;
+    solve_dynder;
 end
 
 % --- Executes on button press in Main_Run_pushbutton6start.
@@ -1234,17 +1255,17 @@ function Main_Results_plotmodel_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global beam_model;
 
-try 
-  beam_model.Info.ncaero;
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  if (beam_model.Info.ncaero)  
-    aero_value = [gui_param.plot.WAKE_PLOT gui_param.plot.NORM_PLOT 0]; 
-    plot_beam_model(1, 'aero_param', aero_value);
-  else
-  plot_beam_model(1);
-  end
+try
+    beam_model.Info.ncaero;
+    path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+    if (beam_model.Info.ncaero)
+        aero_value = [gui_param.plot.WAKE_PLOT gui_param.plot.NORM_PLOT 0];
+        plot_beam_model(1, 'aero_param', aero_value);
+    else
+        plot_beam_model(1);
+    end
 catch
-  fprintf(1, '\n - No beam model loaded. \n');
+    fprintf(1, '\n - No beam model loaded. \n');
 end
 
 % --- Executes on button press in Main_Results_plotdefo.
@@ -1255,20 +1276,20 @@ function Main_Results_plotdefo_Callback(hObject, eventdata, handles)
 
 global beam_model;
 
-try 
-  beam_model.Res.SOL;
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  if (beam_model.Info.ncaero)  
-    aero_value = [gui_param.plot.WAKE_PLOT gui_param.plot.NORM_PLOT gui_param.plot.CONT_PLOT]; 
-
-    plot_beam_defo(2, gui_param.plot.SCALE, 'aero_param', aero_value, 'set', gui_param.plot.SET);
-
-  else
-    plot_beam_defo(2, gui_param.plot.SCALE, 'set', gui_param.plot.SET);
-  end
-
+try
+    beam_model.Res.SOL;
+    path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+    if (beam_model.Info.ncaero)
+        aero_value = [gui_param.plot.WAKE_PLOT gui_param.plot.NORM_PLOT gui_param.plot.CONT_PLOT];
+        
+        plot_beam_defo(2, gui_param.plot.SCALE, 'aero_param', aero_value, 'set', gui_param.plot.SET);
+        
+    else
+        plot_beam_defo(2, gui_param.plot.SCALE, 'set', gui_param.plot.SET);
+    end
+    
 catch
-  fprintf(1, '\n - No output results available. \n');
+    fprintf(1, '\n - No output results available. \n');
 end
 
 
@@ -1280,26 +1301,26 @@ function Main_Results_plotmodes_Callback(hObject, eventdata, handles)
 
 global beam_model;
 
-try 
-  beam_model.Res.SOL;
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  QUART_FRAMES = floor(gui_param.plot.NFRAMES/4);
-  scale1 = [0:QUART_FRAMES];
-  scale2 = [QUART_FRAMES-1:-1:1];
-  scale3 = [0:-1:-QUART_FRAMES];
-  scale4 = [-QUART_FRAMES+1:0];
-  scale = (gui_param.plot.SCALE/QUART_FRAMES) .* [scale1, scale2, scale3, scale4];
-
-  if (beam_model.Info.ncaero)  
-    aero_value = [gui_param.plot.WAKE_PLOT gui_param.plot.NORM_PLOT gui_param.plot.CONT_PLOT]; 
-
-    animate_beam_modes(gui_param.plot.SET, scale, 'aero_param', aero_value);
-  else
-    animate_beam_modes(gui_param.plot.SET, scale);
-  end
-
+try
+    beam_model.Res.SOL;
+    path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+    QUART_FRAMES = floor(gui_param.plot.NFRAMES/4);
+    scale1 = [0:QUART_FRAMES];
+    scale2 = [QUART_FRAMES-1:-1:1];
+    scale3 = [0:-1:-QUART_FRAMES];
+    scale4 = [-QUART_FRAMES+1:0];
+    scale = (gui_param.plot.SCALE/QUART_FRAMES) .* [scale1, scale2, scale3, scale4];
+    
+    if (beam_model.Info.ncaero)
+        aero_value = [gui_param.plot.WAKE_PLOT gui_param.plot.NORM_PLOT gui_param.plot.CONT_PLOT];
+        
+        animate_beam_modes(gui_param.plot.SET, scale, 'aero_param', aero_value);
+    else
+        animate_beam_modes(gui_param.plot.SET, scale);
+    end
+    
 catch
-  fprintf(1, '\n - No output results available. \n');
+    fprintf(1, '\n - No output results available. \n');
 end
 
 % --- Executes on button press in Main_Results_saveall.
@@ -1315,7 +1336,7 @@ if ~smartcad_pathname
 end
 
 formats = { '*.mat', 'NeoCASS project file (*.mat)';...
-            '*.*', 'All files (*.*)'};
+    '*.*', 'All files (*.*)'};
 
 [filename, path, filterindex] = uiputfile(formats, 'Save NeoCASS file', smartcad_pathname);
 
@@ -1347,18 +1368,18 @@ function Main_Results_checkboxpcont_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of Main_Results_checkboxpcont
 
-  value = get(hObject,'Value');
+value = get(hObject,'Value');
 
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 
-  gui_param.plot.CONT_PLOT = value;
-  save_gui_params('neocass_gui_param.mat', gui_param);
+gui_param.plot.CONT_PLOT = value;
+save_gui_params('neocass_gui_param.mat', gui_param);
 
-  if (value)
+if (value)
     fprintf(1, '\n - Contour plot enabled. \n');
-  else
+else
     fprintf(1, '\n - Contour plot disabled. \n');
-  end
+end
 
 % --- Executes on button press in Main_Results_checkboxpnorms.
 function Main_Results_checkboxpnorms_Callback(hObject, eventdata, handles)
@@ -1368,19 +1389,19 @@ function Main_Results_checkboxpnorms_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of Main_Results_checkboxpnorms
 
-  value = get(hObject,'Value');
+value = get(hObject,'Value');
 
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 
-  gui_param.plot.NORM_PLOT = value;
+gui_param.plot.NORM_PLOT = value;
 
-  save_gui_params('neocass_gui_param.mat', gui_param);
+save_gui_params('neocass_gui_param.mat', gui_param);
 
-  if (value)
+if (value)
     fprintf(1, '\n - Normals plot enabled. \n');
-  else
+else
     fprintf(1, '\n - Normals plot disabled. \n');
-  end
+end
 
 % --- Executes on button press in Main_Results_checkboxwake.
 function Main_Results_checkboxwake_Callback(hObject, eventdata, handles)
@@ -1390,19 +1411,19 @@ function Main_Results_checkboxwake_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of Main_Results_checkboxwake
 
-  value = get(hObject,'Value');
+value = get(hObject,'Value');
 
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 
-  gui_param.plot.WAKE_PLOT = value;
+gui_param.plot.WAKE_PLOT = value;
 
-  save_gui_params('neocass_gui_param.mat', gui_param);
+save_gui_params('neocass_gui_param.mat', gui_param);
 
-  if (value)
+if (value)
     fprintf(1, '\n - Wake plot enabled. \n');
-  else
+else
     fprintf(1, '\n - Wake plot disabled. \n');
-  end
+end
 
 
 
@@ -1414,16 +1435,16 @@ function Main_Results_editselset_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of Main_Results_editselset as text
 %        str2double(get(hObject,'String')) returns contents of Main_Results_editselset as a double
 
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  value = int32(abs(str2double(get(hObject,'String'))));
-  if value == 0
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+value = int32(abs(str2double(get(hObject,'String'))));
+if value == 0
     fprintf(1, '\n - Null set index given. Value set to 1 by default. \n');
     gui_param.plot.SET = int32(1);
-  else
+else
     gui_param.plot.SET = value;
-  end
-  fprintf(1, '\n - Output set selected: %d. \n', gui_param.plot.SET);
-  save_gui_params('neocass_gui_param.mat', gui_param);
+end
+fprintf(1, '\n - Output set selected: %d. \n', gui_param.plot.SET);
+save_gui_params('neocass_gui_param.mat', gui_param);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -1447,17 +1468,17 @@ function Main_Results_editsetscale_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Main_Results_editsetscale as text
 %        str2double(get(hObject,'String')) returns contents of Main_Results_editsetscale as a double
-  
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  value = abs(str2double(get(hObject,'String')));
-  if value == 0
+
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+value = abs(str2double(get(hObject,'String')));
+if value == 0
     fprintf(1, '\n - Null scale factor given. Value set to 1.0 by default. \n');
     gui_param.plot.SCALE = 1.0;
-  else
+else
     gui_param.plot.SCALE = value;
-  end
-  fprintf(1, '\n - Scale factor: %g. \n', gui_param.plot.SCALE);
-  save_gui_params('neocass_gui_param.mat', gui_param);
+end
+fprintf(1, '\n - Scale factor: %g. \n', gui_param.plot.SCALE);
+save_gui_params('neocass_gui_param.mat', gui_param);
 
 % --- Executes during object creation, after setting all properties.
 function Main_Results_editsetscale_CreateFcn(hObject, eventdata, handles)
@@ -1481,16 +1502,16 @@ function Main_Results_editnframes_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of Main_Results_editnframes as text
 %        str2double(get(hObject,'String')) returns contents of Main_Results_editnframes as a double
 
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  value = abs(str2double(get(hObject,'String')));
-  if value == 0
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+value = abs(str2double(get(hObject,'String')));
+if value == 0
     fprintf(1, '\n - Null total frames. Value set to 10 by default. \n');
     gui_param.plot.NFRAMES = 10;
-  else
+else
     gui_param.plot.NFRAMES = value;
-  end
-  fprintf(1, '\n - Total frames: %d. \n', gui_param.plot.NFRAMES);
-  save_gui_params('neocass_gui_param.mat', gui_param);
+end
+fprintf(1, '\n - Total frames: %d. \n', gui_param.plot.NFRAMES);
+save_gui_params('neocass_gui_param.mat', gui_param);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -1511,17 +1532,17 @@ function Main_Results_pushbuttonplotguessres_Callback(hObject, eventdata, handle
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-  global guess_model;
+global guess_model;
 
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  set = gui_param.plot.SET;
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+set = gui_param.plot.SET;
 
-  try
+try
     guess_model.geo;
     plot_guess_model(set, 2, guess_model);
-  catch
+catch
     fprintf(1,'\n - GUESS output set not available. \n');
-  end
+end
 
 
 % --- Executes on button press in Main_File_pushbuttonloadall.
@@ -1533,12 +1554,12 @@ function Main_File_pushbuttonloadall_Callback(hObject, eventdata, handles)
 [filename, path, filterindex] = uigetfile('*.mat', 'Select NeoCASS file');
 
 if (filterindex ~= 0)
-
+    
     saveall = load(fullfile(path, filename));
     
     init_gui_params('neocass_gui_param.mat');
     neocass_init;
-
+    
     fprintf(1, '\n - Loading NeoCASS database from %s file...', [path,filename]);
     gui_param = saveall.gui_param;
     save_gui_params('neocass_gui_param.mat', gui_param);
@@ -1551,7 +1572,7 @@ if (filterindex ~= 0)
     enable_solver(handles);
     %
     fprintf(1, 'done. \n');
-
+    
 end
 
 
@@ -1563,11 +1584,11 @@ function Main_Results_editcol_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Main_Results_editcol as text
 %        str2double(get(hObject,'String')) returns contents of Main_Results_editcol as a double
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 
-  gui_param.plot.COL = int32(str2double(get(hObject,'String')));
-  fprintf(1, '\n - Transfer matrix column: %d \n', gui_param.plot.COL);
-  save_gui_params('neocass_gui_param.mat', gui_param);
+gui_param.plot.COL = int32(str2double(get(hObject,'String')));
+fprintf(1, '\n - Transfer matrix column: %d \n', gui_param.plot.COL);
+save_gui_params('neocass_gui_param.mat', gui_param);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -1591,11 +1612,11 @@ function Main_Results_editrow_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of Main_Results_editrow as text
 %        str2double(get(hObject,'String')) returns contents of Main_Results_editrow as a double
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 
-  gui_param.plot.ROW = int32(str2double(get(hObject,'String')));
-  fprintf(1, '\n - Transfer matrix row: %d \n', gui_param.plot.ROW);
-  save_gui_params('neocass_gui_param.mat', gui_param);
+gui_param.plot.ROW = int32(str2double(get(hObject,'String')));
+fprintf(1, '\n - Transfer matrix row: %d \n', gui_param.plot.ROW);
+save_gui_params('neocass_gui_param.mat', gui_param);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -1620,17 +1641,17 @@ function Main_Results_pushbuttonplotqhh_Callback(hObject, eventdata, handles)
 global dlm_model;
 
 try
-  dlm_model.data;
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  row = gui_param.plot.ROW;
-  col = gui_param.plot.COL;
-  set = gui_param.plot.SET;
-
-  plot_dlm_qhh(dlm_model, row, col, set, 2);
-
+    dlm_model.data;
+    path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+    row = gui_param.plot.ROW;
+    col = gui_param.plot.COL;
+    set = gui_param.plot.SET;
+    
+    plot_dlm_qhh(dlm_model, row, col, set, 2);
+    
 catch
-  fprintf(1, '\n - No Aerodynamic transfer matrix available. \n');
-
+    fprintf(1, '\n - No Aerodynamic transfer matrix available. \n');
+    
 end
 
 % --- Executes on button press in Main_Results_pushbuttonplotflutter.
@@ -1643,16 +1664,16 @@ global fl_model;
 global beam_model;
 
 try
-  fl_model.Res;
-  beam_model.Aero.state.Mach;
-  beam_model.Res.Omega;
-  path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
-  set = gui_param.plot.SET;
-  plot_vg_diags(2, fl_model.Res, set, beam_model.Res.Omega./(2*pi), beam_model.Aero.state.Mach, fl_model.param.linestyle);
-
+    fl_model.Res;
+    beam_model.Aero.state.Mach;
+    beam_model.Res.Omega;
+    path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
+    set = gui_param.plot.SET;
+    plot_vg_diags(2, fl_model.Res, set, beam_model.Res.Omega./(2*pi), beam_model.Aero.state.Mach, fl_model.param.linestyle);
+    
 catch
-  fprintf(1, '\n - No flutter result available. \n');
-
+    fprintf(1, '\n - No flutter result available. \n');
+    
 end
 
 % --- Executes on button press in Main_Results_pushbuttonplotflutter.
@@ -1672,9 +1693,9 @@ fprintf(1,'\n - Cleaning NeoCASS GUI scratch file...');
 path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
 
 if isunix
-  command = ['rm -f ', path, 'neocass_gui_param.mat'];
+    command = ['rm -f ', path, 'neocass_gui_param.mat'];
 else
-  command = ['del ', path, 'neocass_gui_param.mat'];
+    command = ['del ', path, 'neocass_gui_param.mat'];
 end
 system(command);
 fprintf(1,'done. \n');

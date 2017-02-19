@@ -59,7 +59,7 @@ RES_TOL = beam_model.Param.RES_TOL;
 % load step amplitude
 DSCALE = 1 / NSTEP;
 
-if (~isempty(find(beam_model.Param.MSOL == 600)))
+if (~isempty(find(beam_model.Param.SOL == 600)))
 
 		fprintf(fid,'\nSolving non-linear static analysis...');
 
@@ -202,7 +202,7 @@ if (~isempty(find(beam_model.Param.MSOL == 600)))
 				% assembly BAR internal forces
 				[beam_model.Res.Bar.CStrains, beam_model.Res.Bar.CForces, beam_model.Res.Bar.CStresses, beam_model.Res.Bar.CSM] = ...
            get_bar_force_strain_NL(nbar, beam_model.Bar, beam_model.PBar, beam_model.Mat, beam_model.Node, beam_model.Res.NDispl, NR, BARR, BARPO, BARKR); % ok
-
+beam_model.Res.Bar.CForces
 				% assembly BEAM internal forces
 				[beam_model.Res.Beam.CStrains, beam_model.Res.Beam.CForces, beam_model.Res.Beam.CStresses, beam_model.Res.Beam.CSM] = ...
            get_bar_force_strain_NL(nbeam, beam_model.Beam, beam_model.PBeam, beam_model.Mat, beam_model.Node, beam_model.Res.NDispl, NR, BEAMR, BEAMPO, BEAMKR); % ok

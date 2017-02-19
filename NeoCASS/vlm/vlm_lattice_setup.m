@@ -168,7 +168,7 @@ for s=1:noofwings
       lattice.N=[lattice.N; N2];
       lattice.DN=[lattice.DN; DN];
       lattice.S = [lattice.S, S];
-            
+      
 	  if geo.flapped(s,t)
 	  
 		  flapc = flapc +1;

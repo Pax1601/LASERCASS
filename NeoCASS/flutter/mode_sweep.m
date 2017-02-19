@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Copyright (C) 2008 - 2011
-%
+% Copyright (C) 2008 - 2011 
+% 
 % Sergio Ricci (sergio.ricci@polimi.it)
 %
 % Politecnico di Milano, Dipartimento di Ingegneria Aerospaziale
 % Via La Masa 34, 20156 Milano - ITALY
-%
+% 
 % This file is part of NeoCASS Software (www.neocass.org)
 %
 % NeoCASS is free software; you can redistribute it and/or
@@ -20,8 +20,8 @@
 % details.
 %
 % You should have received a copy of the GNU General Public
-% License along with NeoCASS; see the file GNU GENERAL
-% PUBLIC LICENSE.TXT.  If not, write to the Free Software
+% License along with NeoCASS; see the file GNU GENERAL 
+% PUBLIC LICENSE.TXT.  If not, write to the Free Software 
 % Foundation, 59 Temple Place -Suite 330, Boston, MA
 % 02111-1307, USA.
 %
@@ -61,7 +61,7 @@
 %               SIGMA E DELTAOMEGA.
 
 function [FL_DET, risultati, SVTNFL, SVQU, IMODFL, IWAR, NSTOP] = ...
-    mode_sweep(nm, Mhh, Chh, Khh, AER, Kfreq, rho, chord, ISWP, IVMODS, OMEP, SVQU, IMODFL);
+          mode_sweep(nm, Mhh, Chh, Khh, AER, Kfreq, rho, chord, ISWP, IVMODS, OMEP, SVQU, IMODFL);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -79,8 +79,6 @@ FL_DET = false;
 risultati = [];
 
 global fl_model;
-global beam_model;
-
 %
 NKfreq = length(Kfreq);
 %
@@ -168,288 +166,209 @@ TN = SVTN;
 
 % Iterative tracking
 
-waith = waitbar(0,'Please wait...');
+
 while (velcyc==1);
-    
-    waitbar(V / VMAX, waith)
-    if V > 0
-        temp_model = beam_model;
+%-------------------- Cycle starts if in=40 ---------------------------
 
-        beam_model.Aero.state.rho = rho;
-        beam_model.Aero.state.AS = V;        
-        beam_model.Param.MSOL = 144;
-        beam_model.Param.SOL = 144;
-        beam_model.Aero.Trim.Select(1) = 1;
-        beam_model.Aero.Trim.ID = 1;
-        beam_model.Aero.Trim.Type(1) = 1;
-        beam_model.Aero.Trim.CID = 0;
-        beam_model.Aero.Trim.FM.Fixed = [];
-        beam_model.Aero.Trim.FM.Value = [];
-        beam_model.Aero.Trim.CS.Fixed = [];
-        beam_model.Aero.Trim.CS.Value = [];
-        beam_model.Aero.Trim.Link = [];
-        beam_model.Aero.Trim.NC = 13;
-        beam_model.Aero.Trim.Symm = [];
-        beam_model.Aero.Trim.Param(1).data{1, 1} = 'SIDES' ;
-        beam_model.Aero.Trim.Param(1).data{1, 2} = 'ROLL' ;
-        beam_model.Aero.Trim.Param(1).data{1, 3} = 'PITCH' ;
-        beam_model.Aero.Trim.Param(1).data{1, 4} = 'YAW' ;
-        beam_model.Aero.Trim.Param(1).data{1, 5} = 'URDD2' ;
-        beam_model.Aero.Trim.Param(1).data{1, 6} = 'URDD3' ;
-        beam_model.Aero.Trim.Param(1).data{1, 7} = 'URDD4' ;
-        beam_model.Aero.Trim.Param(1).data{1, 8} = 'URDD5' ;
-        beam_model.Aero.Trim.Param(1).data{1, 9} = 'URDD6' ;
-        beam_model.Aero.Trim.Param(1).data{1, 10} = 'CLIMB' ;
-        beam_model.Aero.Trim.Param(1).data{1, 11} = 'BANK' ;
-        beam_model.Aero.Trim.Param(1).data{1, 12} = 'HEAD' ;
-        beam_model.Aero.Trim.Param(1).data{1, 13} = 'THRUST' ;
-
-        beam_model.Aero.Trim.Value(1).data(1, 1) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 2) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 3) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 4) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 5) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 6) = 9.81 ;
-        beam_model.Aero.Trim.Value(1).data(1, 7) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 8) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 9) = 0 ;
-        beam_model.Aero.Trim.Value(1).data(1, 10) = 0;
-        beam_model.Aero.Trim.Value(1).data(1, 11) = 0;
-        beam_model.Aero.Trim.Value(1).data(1, 12) = 0;
-        beam_model.Aero.Trim.Value(1).data(1, 13) = 0;
-
-
-        beam_model.Aero.Trim.Ext = [];
-        beam_model.Aero.Trim.MINDEX = [];
-        beam_model.Aero.Trim.Label_Select{1, 1} = 'Cruise/Climb';
-        beam_model.Aero.Trim.MasterSurf{1, 1} = 'elev1r';
-        beam_model.Aero.Trim.MasterSurf{1, 2} = 'elev2r';
-
-        fid = beam_model.Param.FID;
-        [CAERO.lattice_vlm, CAERO.ref] = vlm_lattice_setup(beam_model.Param.FID, beam_model.Aero.geo, ...
-            beam_model.Aero.state, beam_model.Aero.ref);
-        CAERO.lattice_vlm.Control = beam_model.Aero.lattice_dlm.Control;
-
-        beam_model.Aero.lattice_vlm = CAERO.lattice_vlm;
-
-        solve_free_lin_trim([1]);
-
-        p0dS = beam_model.Res.Aero.F0_DTrim;
-
-        beam_model = temp_model;
-
-        NMODES = size(beam_model.Res.NDispl, 3);
-
-        K0A = zeros(NMODES, NMODES);
-
-        for j = 1: length(beam_model.Aero.lattice.N)
-            K0A = K0A + dot(p0dS(j, :)', beam_model.Aero.lattice.N(j, :)') * beam_model.Aero.Phid{j}' * beam_model.Aero.Nvar{j};     
-        end
-
-        Khh = Khh + K0A;
+  if (in == 40)
+    ISTEP = ISTEP + 1;
+    V = V + DV;
+    if (V > VMAX)
+      V = VMAX;
+      ISTOP = 1;
     end
-    
-    %-------------------- Cycle starts if in=40 ---------------------------
-    
-    if (in == 40)
-        ISTEP = ISTEP + 1;
-        V = V + DV;
-        if (V > VMAX)
-            V = VMAX;
-            ISTOP = 1;
-        end
-    end
-    %-------------------- Cycle starts if in=45 ---------------------------
-    if ((in == 45)||(in == 40))
-        ITER = 0;
-        METODO = 1;
-    end
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %      SVQU(12) = AIR DENSITY
-    %      DINPRS   = DYNAMIC PRESSURE
-    %      CFREQ    = COMPLEX FREQUENCY
-    %      FREQ     = NATURAL PULSATION
-    %      VALFRE   = ACTUAL REDUCED FREQUENCY VALUE
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %-------------------- Cycle starts if in=50 ---------------------------
-    CheckExit = 0;
-    DINPRS  = 0.5*SVQU(12)*(V*V);
-    CFREQ   = TN(nmodc1); % get eigenvalue
-    FREQ  = imag(CFREQ);  % extract pulsation
-    VALFRE  = FREQ*chord/V; % reduced freq
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %    CHOSES IF INTERPOLATION/EXTRAPOLATION IS NECESSARY
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    if ((VALFRE < Kfreq(1))||(VALFRE > Kfreq(NKfreq)))
-        TIPINT = 'E';
-    else
-        TIPINT = 'I';
-    end
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %      EVALUATES AERODYNAMIC INTERPOLATED FORCES
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  end
+%-------------------- Cycle starts if in=45 ---------------------------
+  if ((in == 45)||(in == 40))
+    ITER = 0;
+    METODO = 1;
+  end
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %      SVQU(12) = AIR DENSITY
+  %      DINPRS   = DYNAMIC PRESSURE
+  %      CFREQ    = COMPLEX FREQUENCY
+  %      FREQ     = NATURAL PULSATION
+  %      VALFRE   = ACTUAL REDUCED FREQUENCY VALUE
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------- Cycle starts if in=50 ---------------------------
+  CheckExit = 0;
+  DINPRS  = 0.5*SVQU(12)*(V*V);
+  CFREQ   = TN(nmodc1); % get eigenvalue
+  FREQ  = imag(CFREQ);  % extract pulsation
+  VALFRE  = FREQ*chord/V; % reduced freq
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %    CHOSES IF INTERPOLATION/EXTRAPOLATION IS NECESSARY
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  if ((VALFRE < Kfreq(1))||(VALFRE > Kfreq(NKfreq)))
+      TIPINT = 'E';    
+  else
+      TIPINT = 'I';    
+  end
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %      EVALUATES AERODYNAMIC INTERPOLATED FORCES
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     [FORINT, DERINT] = aero_interp(AER, METODO, VALFRE, Kfreq);
     CFREQ2 = CFREQ * CFREQ;
     CFREQ  = CFREQ + CFREQ; % trick used to have 2*CFREQ which multiplies Mass matrix
     
     C2 = DINPRS*chord/V; % 0.5 * RHOREF * CREF * VEF
     C3 = (.5)*VALFRE;    % K /2
-    C4 = 2*DINPRS/V;     % RHOREF * VREF
-    
+    C4 = 2*DINPRS/V;     % RHOREF * VREF 
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %      ASSEMBLES COEFFICIENT MATRIX
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+
     % Chooses solution method
-    
+
     switch(METODO)
-        
-        case{1}
-            
-            % ----------------------- METHOD 1 -------------------------------------
-            for I = 1:nmodc
-                
-                S1 = 0+i*0;
-                S2 = 0+i*0;
-                S4 = 0+i*0;
-                
-                for K = 1:nmodc
-                    
-                    TNT = TN(K); % current eigenvector
-                    RIG = Khh(I,K);
-                    STDAMP = Chh(I,K);
-                    
-                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    %      COEFFICIENT MATRIX IS BUILT COUNTING ALSO DAMPING
-                    %      TERM (STDAMP)
-                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    
-                    CT = - AERSCA*DINPRS*FORINT(I,K) + Mhh(I,K)*CFREQ2 + (RIG+i*STDAMP);
-                    
-                    S2 = S2+DERINT(I,K)*TNT;
-                    S4 = S4+Mhh(I,K)*TNT;
-                    COEF(I,K) = CT;
-                    
-                    S1 = S1 + CT*TNT; % residual
-                    
-                end;
-                
-                S4 = S4*CFREQ;
-                
-                COEF(I,nmodc1) = S4;
-                COEF(I,nmodc2) = (-imag(S4)+i*real(S4)) - AERSCA*C2*S2; % F/S derivative
-                COEF(I,nmodc3) = -S1; % residual
-                
-            end;
-            
-            S1 = 1+i*0;
-            %       normalization condition
+      
+      case{1}
+
+        % ----------------------- METHOD 1 -------------------------------------
+        for I = 1:nmodc
+
+            S1 = 0+i*0;
+            S2 = 0+i*0;
+            S4 = 0+i*0;
+
             for K = 1:nmodc
+
+                TNT = TN(K); % current eigenvector
+                RIG = Khh(I,K);
+                STDAMP = Chh(I,K);
                 
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                %      COEFFICIENT MATRIX IS BUILT COUNTING ALSO DAMPING
+                %      TERM (STDAMP)
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                CT = - AERSCA*DINPRS*FORINT(I,K) + Mhh(I,K)*CFREQ2 + (RIG+i*STDAMP);
+
+                S2 = S2+DERINT(I,K)*TNT;
+                S4 = S4+Mhh(I,K)*TNT;
+                COEF(I,K) = CT;
+
+                S1 = S1 + CT*TNT; % residual
+
+            end;
+
+            S4 = S4*CFREQ;
+
+            COEF(I,nmodc1) = S4;
+            COEF(I,nmodc2) = (-imag(S4)+i*real(S4)) - AERSCA*C2*S2; % F/S derivative
+            COEF(I,nmodc3) = -S1; % residual
+
+        end;
+
+        S1 = 1+i*0;
+%       normalization condition
+        for K = 1:nmodc
+
+            TNT = TN(K);
+            COEF(nmodc1,K) = TNT + TNT;
+            S1 = S1 - TNT*TNT;
+
+        end;
+
+        COEF(nmodc1,nmodc1) = 0+i*0;
+        COEF(nmodc1,nmodc2) = 0+i*0;
+        COEF(nmodc1,nmodc3) = S1;
+
+
+        %
+        %  ----------------------- METHOD 2 -------------------------------------
+        %
+%       update residual and keep jacobian constant
+      case{2}
+      
+        for I = 1:nmodc
+
+            S1 = 0+i*0;
+
+            for K = 1:nmodc
+
                 TNT = TN(K);
-                COEF(nmodc1,K) = TNT + TNT;
-                S1 = S1 - TNT*TNT;
-                
+                RIG = Khh(I,K);
+                STDAMP = Chh(I,K);
+                CT = - AERSCA*DINPRS*FORINT(I,K) + Mhh(I,K)*CFREQ2+ (RIG+i*STDAMP);
+                S1 = S1 + CT*TNT;
+
             end;
-            
-            COEF(nmodc1,nmodc1) = 0+i*0;
-            COEF(nmodc1,nmodc2) = 0+i*0;
-            COEF(nmodc1,nmodc3) = S1;
-            
-            
-            %
-            %  ----------------------- METHOD 2 -------------------------------------
-            %
-            %       update residual and keep jacobian constant
-        case{2}
-            
-            for I = 1:nmodc
-                
-                S1 = 0+i*0;
-                
-                for K = 1:nmodc
-                    
-                    TNT = TN(K);
-                    RIG = Khh(I,K);
-                    STDAMP = Chh(I,K);
-                    CT = - AERSCA*DINPRS*FORINT(I,K) + Mhh(I,K)*CFREQ2+ (RIG+i*STDAMP);
-                    S1 = S1 + CT*TNT;
-                    
-                end;
-                
-                COEF(I,nmodc3) = -S1;
-                
-            end;
-            
-            S1 = 1+i*0;
-            
+
+            COEF(I,nmodc3) = -S1;
+
+        end;
+
+        S1 = 1+i*0;
+
+        for K=1:nmodc
+
+            TNT = TN(K);
+
+            S1 = S1 - TNT*TNT;
+
+        end;
+
+        COEF(nmodc1,nmodc3) = S1;
+
+        %
+        %----------------------- METHOD 3 -------------------------------------
+        %
+
+      case{3}
+      
+        for I=1:nmodc
+
+            S1 = 0+i*0;
+            S2 = 0+i*0;
+            S4 = 0+i*0;
+
             for K=1:nmodc
-                
+
                 TNT = TN(K);
-                
-                S1 = S1 - TNT*TNT;
-                
-            end;
-            
-            COEF(nmodc1,nmodc3) = S1;
-            
-            %
-            %----------------------- METHOD 3 -------------------------------------
-            %
-            
-        case{3}
-            
-            for I=1:nmodc
-                
-                S1 = 0+i*0;
-                S2 = 0+i*0;
-                S4 = 0+i*0;
-                
-                for K=1:nmodc
-                    
-                    TNT = TN(K);
-                    RIG = Khh(I,K);
-                    STDAMP = Chh(I,K);
-                    
-                    CT = - AERSCA*DINPRS*FORINT(I,K) + Mhh(I,K)*CFREQ2+(RIG+i*STDAMP);
-                    S2 = S2 + DERINT(I,K)*TNT;
-                    S4 = S4 + Mhh(I,K)*TNT;
-                    COEF(I,K) = CT;
-                    CT = FORINT(I,K);
-                    S1 = S1 + CT*TNT;
-                    
-                end
-                
-                S4 = S4*CFREQ;
-                COEF(I,nmodc1) = S4;
-                COEF(I,nmodc2) = (-imag(S4)+i*real(S4)) - AERSCA*C2*S2;
-                S1=C4*(S1-C3*S2);
-                COEF(I,nmodc3) = AERSCA*S1;
-                
-            end;
-            
-            for K=1:nmodc
-                
-                TNT = TN(K);
-                COEF(nmodc1,K) = TNT + TNT;
-                
-            end;
-            
-            COEF(nmodc1,nmodc1) = 0+i*0;
-            COEF(nmodc1,nmodc2) = 0+i*0;
-            COEF(nmodc1,nmodc3) = 0+i*0;
-            
+                RIG = Khh(I,K);
+                STDAMP = Chh(I,K);
+
+                CT = - AERSCA*DINPRS*FORINT(I,K) + Mhh(I,K)*CFREQ2+(RIG+i*STDAMP);
+                S2 = S2 + DERINT(I,K)*TNT;
+                S4 = S4 + Mhh(I,K)*TNT;
+                COEF(I,K) = CT;
+                CT = FORINT(I,K);
+                S1 = S1 + CT*TNT;
+
+            end
+
+            S4 = S4*CFREQ;
+            COEF(I,nmodc1) = S4;
+            COEF(I,nmodc2) = (-imag(S4)+i*real(S4)) - AERSCA*C2*S2;
+            S1=C4*(S1-C3*S2);
+            COEF(I,nmodc3) = AERSCA*S1;
+
+        end;
+
+        for K=1:nmodc
+
+            TNT = TN(K);
+            COEF(nmodc1,K) = TNT + TNT;
+
+        end;
+
+        COEF(nmodc1,nmodc1) = 0+i*0;
+        COEF(nmodc1,nmodc2) = 0+i*0;
+        COEF(nmodc1,nmodc3) = 0+i*0;
+
     end;
-    
+
     %------------------------------------
-    
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %     COEFFICIENT MATRIX FACTORIZATION
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    
+
+
     if ((METODO == 1)||(METODO == 3))
         
         [COEF1,PERM,KSTOP] = comp_mat_fac(COEF,nmodc,nmodc1);
@@ -462,45 +381,45 @@ while (velcyc==1);
             return
         end
     end
-    
+
     L = LV(METODO);
     INIDO = INI(METODO);
     for N = INIDO:3
-        
+
         NGLN = nmodc + N;
-        
+
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %  SOLVES COMPLEX SISTEM (nmodc order) GETTING  DELTA#Q AS
         %  FUNCTIONS OF DELTASIGMA AND DELTA OMEGA; SOLUTION IS THEN MOVED
         %  IN THE COLUMN OF KNOWN TERMS...
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         [COEF(:,NGLN)] = comp_linsys_solver(COEF,COEF(:,NGLN),nmodc,nmodc1,PERM);
-        
+       
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %  SOLVES THE ADDED EQUATION AS A SYSTEM OF TWO REAL EQUATIONS WHERE DELTASIGMA
-        %  AND DELTAOMEGA ARE UNKNOWNS, BY SUBSTISTUTION OF DELTAQ OBTAINED BY COMPLEX_LINEAR_SOLVER
+        %  AND DELTAOMEGA ARE UNKNOWNS, BY SUBSTISTUTION OF DELTAQ OBTAINED BY COMPLEX_LINEAR_SOLVER 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         TEMP1 = real(COEF(nmodc1,NGLN));
         TEMP2 = imag(COEF(nmodc1,NGLN));
-        
+
         for J = 1:nmodc
-            
+
             TEMP1 = TEMP1 - real(COEF(nmodc1,J))*real(COEF(J,NGLN))+ imag(COEF(nmodc1,J))*imag(COEF(J,NGLN));
             TEMP2 = TEMP2-imag(COEF(nmodc1,J))*real(COEF(J,NGLN))- real(COEF(nmodc1,J))*imag(COEF(J,NGLN));
-            
+
         end;
-        
+
         L = L+1;
         A(L) = TEMP1;
         L = L + 1;
         A(L) = TEMP2;
-        
-        
-        
+
+
+
     end;
-    
+
     A11 = A(1);
     A21 = A(2);
     A12 = A(3);
@@ -508,8 +427,8 @@ while (velcyc==1);
     A13 = A(5);
     A23 = A(6);
     %-----------------
-    
-    
+
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %     IF METHOD IS 2 DISCRIMINANT IS MAINTAINED CONSTANT;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -522,32 +441,32 @@ while (velcyc==1);
         %     CHECKS THAT DISCRIMINANT VALUES ARE NOT TOO LITTLE TO CAUSE
         %     ZERO DIVISION ERRORS;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         if ( abs(DISCR) >= EPS )
-            
-        else
-            
+
+            else
+
             IWAR = 7;
             NSTOP = 'DISCR.';
             return;
         end;
     end;
-    
+
     TEMP1 = (A13*A22-A23*A12)/DISCR;
     TEMP2 = (A23*A11-A13*A21)/DISCR;
-    
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %      TEMP1 AND TEMP2 CONTAINS DELTASIGMA AND DELTAOMEGA RESPECTIVELY,
     %      USED DURING SOLUTION METHOD 1 AND 2. WHEN METHOD 3 IS USED,
     %      SIGMA AND OMEGA DERIVATIVES WITH RESPECT TO VELOCITY ARE HERE
     %      PLACED;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+
     CT = (TEMP1+i*TEMP2);
-    
+
     if (METODO < 3)
-        
-        
+
+
     else
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %      WHEN METHOD IS 3, LOOKS FOR A POINT AT VELOCITY V + DV
@@ -559,40 +478,40 @@ while (velcyc==1);
         %      SUBSTITUTED AND FINAL DELTAQ VALUE IS CALCULATED;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end;
-    
+
     TN(nmodc1) = TN(nmodc1) + CT;
-    
+
     for J=1:nmodc
-        
+
         TEM1 = real(COEF(J,nmodc1))*TEMP1 + real(COEF(J,nmodc2))*TEMP2;
         TEM2 = imag(COEF(J,nmodc1))*TEMP1 + imag(COEF(J,nmodc2))*TEMP2;
         CT = -(TEM1+i*TEM2) + COEF(J,nmodc3);
-        
+
         if (METODO < 3)
-            
+
         else
-            
+
             SVDR(J) = CT;
             CT = CT*DV;
-            
+
         end;
-        
+
         TN(J) = TN(J) + CT;
-        
+
     end;
     %---------------------- End of iterative procedure --------------------
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %      SAVES DATA FOR METHOD 3
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+
     if (METODO == 3)
-        
-        SVQU(1) = real(SVTN(nmodc+1)); % get previous damping
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %     SOLUTION AT NEW VELOCITY HAS BEEN CORRECTED, THUS DATA ARE
-        %     SAVED AND METHOD 1 IS RESTORED. VELOCITY IS SET = V+DV;
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+         SVQU(1) = real(SVTN(nmodc+1)); % get previous damping
+
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %     SOLUTION AT NEW VELOCITY HAS BEEN CORRECTED, THUS DATA ARE 
+         %     SAVED AND METHOD 1 IS RESTORED. VELOCITY IS SET = V+DV;
+         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         SVQU(3) = V;
         SVQU(4) = V/FKTS;
@@ -620,228 +539,228 @@ while (velcyc==1);
         
         SVQU(7) = TEMP1/PP2*FKTS;
         SVQU(8) = (TEMP2-SVQU(6)*TEMP1)/FREQ*FKTS;
-        
+ 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %     CSAVE CONTAINS THE LAST ELEMENT OF SOLUTION VECTOR AND IS
-        %     USED AS TERM OF COMPARISON WHED DOUBLING STEP;
+        %     USED AS TERM OF COMPARISON WHED DOUBLING STEP; 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-        CSAVE = TN(nmodc1);
-        
-        %        risultati(ISTEP,:)=[VALFRE, SVQU(3), 2*SVQU(6)*PP2, SVQU(5), SVQU(1), SVQU(2), SVQU(8)/FKTS, SVQU(7)/FKTS];
+    
+        CSAVE = TN(nmodc1);      
+      
+%        risultati(ISTEP,:)=[VALFRE, SVQU(3), 2*SVQU(6)*PP2, SVQU(5), SVQU(1), SVQU(2), SVQU(8)/FKTS, SVQU(7)/FKTS];
         risultati(ISTEP,:)=[VALFRE, SVQU(3), 2*SVQU(6), SVQU(5), SVQU(1), SVQU(2), SVQU(8)/FKTS, SVQU(7)/FKTS];
-        
+
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %      WHEN V < 0 or > VMAX ROUTINE IS ENDED;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
-        if (V <= 0)||(ISTOP == 1)
-            velcyc == 0;
-            return;
-        end;
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %      STARTS A NEW CYCLE SETTING METHOD = 1 AND V= V+DV;
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        velcyc == 1;
-        in = 40;
-        CheckExit=1;
-        
+            if (V <= 0)||(ISTOP == 1)
+                velcyc == 0;
+                return;
+            end;
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %      STARTS A NEW CYCLE SETTING METHOD = 1 AND V= V+DV;
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            velcyc == 1;
+            in = 40;
+            CheckExit=1;
+       
     end;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %      THIS CONDITION IS ALWAYS TRUE WHEN SWEEP IS STARTED EXCEPT AT
     %      FIRST STEP;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    
-    
+
+
+
     if (CheckExit<1)
         
         %------------------- Check after each iteration step --------------
         if (MAXIT == MAXITS)
-            
+        
         else
-            
+
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %      AT FIRST STEP, ERROR CHECK IS DONE ON TOLL PARAMETER;
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            
+
             if (ERROR < TOLL)
                 
                 IDUETR = 3;
-                
+
             end;
-            
+
             if (ERROR >= TOLL)
-                
-                IDUETR = 2;
-                
+
+               IDUETR = 2;
+
             end;
-            
+
             METODO = IDUETR - METODO;
-            
-            
+
+
             if (METODO == 2)
-                
+
                 in = 50;
                 CheckExit = 1;
-                
+               
             end;
         end;
     end;
-    
+
     if (CheckExit<1)
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %      CONVERGENCY CRITERION: VARIABLE INCREASE,
         %      COMPARISON IS BETWEEN TWO COMPLEX NUMBERS;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         ERROR = abs(TN(nmodc1));
         error = abs((TEMP1+i*TEMP2));
         ERROR = abs((TEMP1+i*TEMP2))/ERROR;
-        
+
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %      IF PERCENTAGE VARIATION IS LESS THAN A PRE-DEFINED VALUE,
         %      METHOD IS SWITCHED TO 3 TO START WITH A NEW SWEEP;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         %--------------------------- Check % Error -------------------------------
-        
+
         if (ERROR >= ERR)
-            
+
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %      IF ERROR CRITERION IS NOT SATISFIED, ITERATION NUMBER
             %      IS INCREASED, AND A NEW CALCULATION STEP IS TAKEN
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            
+
             ITER = ITER + 1;
-            
+
             if ( ITER < MAXIT );
-                
+
                 in = 50;
                 CheckExit = 1;
-                
+
             else
-                
+
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 %      IF MAXIMUM OTERATIONS NUMBER IS REACHED AND
                 %      CONVERGENCE CRITERION IS NOT YET SATISFIED, VELOCITY
                 %      IS HALVED AND VELOCITY STEP IS CHECKED...
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                
+
                 DV = .5*DV;
-                
+
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 %      IF DV IS LESS THAN ACCEPTABLE ROUTINE ENDS
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                
+
                 if (abs(DV) >= DVMIN)
                     %disp('DV >= DVMIN');
                 else
-                    
-                    
+
+
                     IWAR = 8;
                     NSTOP = 'DISTEP';
                     velcyc = 0;
                     return;
                 end;
-                
+
                 V = V - DV;
-                
+
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 %      NEW VELOCITY SET. CALCULATES MODE...
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 for I=1:nmodc1
-                    
+
                     TN(I) = SVDR(I)*DV + SVTN(I);
-                    
+
                 end;
-                
+
                 in = 45;
                 CheckExit = 1;
-                
+
             end;
         end;
     end;
     %------------------------------ Check Damping -------------------------
-    
+
     if (CheckExit<1)
         if (ERROR < ERR)
-            
+           
             METODO = 3;
-            
+
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %      IF VELOCITY IS LESS THAN A PRE DEFINED VALUE, FLUTTER
             %      VELOCITY IS NOT CALCULATED;
             %      CHECKS DAMPING SINGUM
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            
+
             SIGOLD = real(SVTN(nmodc1));
             SIGNEW = real(TN(nmodc1));
-            
+
             if ((SIGNEW > 0)&&(SIGOLD < 0)&&(IMOD ~= IMODFL))
-                
+
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 %      FLUTTER VELOCITY EVALUATED BY LINEAR INTERPOLATION.
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                
+
                 VOLD = SVQU(3);
                 VNEW = V;
                 DELTAV = VNEW - VOLD;
                 DELTAS = SIGNEW - SIGOLD;
-                
+
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                 %     CHECKING INCREMENTS (IF TOO LITTLE)
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                
+
                 if (DELTAV < EPS)
-                    
+
                     IWAR = 9;
                     return;
                 end;
-                
+
                 if (abs(DELTAS) < EPS)
-                    
+
                     IWAR = 10;
                     return;
                 end;
-                
+
                 if ((IWAR == 9)||(IWAR == 10))
-                    
+
                 else
-                    
+
                     VFLINT = (-SIGOLD+DELTAS*VOLD/DELTAV)*(DELTAV/DELTAS);
-                    
+
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     %      CHECKS IF FLUTTER VELOCITY IS LESS THAN THE LAST FLUTTER VELOCITY OBTAINED;
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    
-                    if (VFLINT < SVQU(13))
+
+                    if (VFLINT < SVQU(13)) 
                         SVQU(13) = VFLINT; % save minimum fl speed
                     end
-                    
+                        
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                     %      SAVES NEW FLUTTER VELOCITY AND INTERPOLATES
                     %      PULSATION AND MODE AT FLUTTER;
                     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                    
+
                     OMEOLD = imag(SVTN(nmodc1));
                     OMENEW = imag(TN(nmodc1));
                     DELTAO = OMENEW - OMEOLD;
                     OMEFLT = OMEOLD + DELTAO*VFLINT/DELTAV - DELTAO*VOLD/DELTAV;
                     for I = 1:nmodc
-                        
+
                         DELTAQ = TN(I) - SVTN(I);
                         SVTNFL(I) = SVTN(I) + DELTAQ*VFLINT/DELTAV - DELTAQ*VOLD/DELTAV;
-                        
+
                     end;
-                    
+
                     SVTNFL(nmodc1) = (OMEFLT+i*VFLINT);
                     IMODFL = IMOD;
                     FL_DET = true;
-                    
+
                 end;
-                
+
             end;
         end;
         
@@ -860,36 +779,36 @@ while (velcyc==1);
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         ERROR = abs(CSAVE-TN(nmodc1))/abs(TN(nmodc1));
-        
+
         if ((ERROR < DOUBLING)&&(MAXIT == MAXITS))
-            
+
             DV = DV + DV;
-            
+
         end;
-        
+
         if (abs(DV) > DVMAX)
-            
+
             DV = ISGDV*DVMAX;
-            
+
         end;
-        
+
         MAXIT = MAXITS;
-        
+
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % WHEN NEW DV HAS BEEN STATED; A CORRECTOR STEP IS TAKEN TO IMPROVE
         % SOLUTION;
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
+
         in = 50;
         CheckExit = 1;
-        
+
     end;
-    
+
     %-------------------------- Check 3 End -------------------------------
-    
+
     %----------- Damping check end + Predictor/Corrector -----------------
-    
+
     %------------- Various Check End ---- End 'While ~= CheckExit -------
 end
-close(waith)
+
 end

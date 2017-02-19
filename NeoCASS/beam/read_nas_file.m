@@ -1912,6 +1912,7 @@ else
                         skip_line = false;
                         CAERO.geo.flapped(ncaero,1) = int8(num_field_parser(tline, 2));
                         if CAERO.geo.flapped(ncaero,1)
+                            
                             CAERO.geo.nc = CAERO.geo.nc +1;
                             CAERO.geo.fc(ncaero,1,1) =  num_field_parser(tline, 3);
                             CAERO.geo.fc(ncaero,1,2) =  num_field_parser(tline, 4);
@@ -2408,12 +2409,12 @@ else
                 case keyword{35} % GRAV
                     
                     ngrav = ngrav + 1;
-                    GRAV.ID(ngrav) = int32(num_field_parser(tline, 2));
-                    GRAV.CID(ngrav) = int32(num_field_parser(tline, 3));
-                    GRAV.Mag(ngrav) = num_field_parser(tline, 4);
-                    GRAV.Orient(1, ngrav) = num_field_parser(tline, 5);
-                    GRAV.Orient(2, ngrav) = num_field_parser(tline, 6);
-                    GRAV.Orient(3, ngrav) = num_field_parser(tline, 7);
+                    GRAV.ID(ngrav) = int32(num_field_parser(tline, 2))
+                    GRAV.CID(ngrav) = int32(num_field_parser(tline, 3))
+                    GRAV.Mag(ngrav) = num_field_parser(tline, 4)
+                    GRAV.Orient(1, ngrav) = num_field_parser(tline, 5)
+                    GRAV.Orient(2, ngrav) = num_field_parser(tline, 6)
+                    GRAV.Orient(3, ngrav) = num_field_parser(tline, 7)
                     
                 case keyword{36} % MSELECT
                     
@@ -5980,26 +5981,26 @@ if ~isempty(SURFDEF.ID)
     end
     SURFDEF = rmfield(SURFDEF,'Label');
 end
-% Check dynamic loads
-if (PARAM.LOAD)
-  if ~all(ismember(PARAM.LOAD,DEXTLOAD.ID))
-    fprintf('\n\t\t The selected DEXTLOAD input %d does not exist.', ...
-    PARAM.LOAD(find(ismember(PARAM.LOAD,DEXTLOAD.ID)==0)));
-    error('Error in LOAD= card.')
-  else
-    for i=1:ndload
-      index = find(DEXTLOAD.Node(i) == NODE.ID);
-      if (isempty(index))
-        error(['Node ID ', num2str(DEXTLOAD.Node(i)),' in DEXTLOAD card ', num2str(DEXTLOAD.ID(i)),'does not exist.']);
-      end
-      if (NODE.DOF(index, DEXTLOAD.NDOF(i))==0)
-        error(['Node ', num2str(DEXTLOAD.Node(i)),' has no DOF ', DEXTLOAD.NDOF(i),'.']);
-      end
-      DEXTLOAD.Node(i) = index;
-    end
-    PARAM.LOAD = find(PARAM.LOAD == DEXTLOAD.ID);
-  end
-end
+% % Check dynamic loads
+% if (PARAM.LOAD)
+%   if ~all(ismember(PARAM.LOAD,DEXTLOAD.ID))
+%     fprintf('\n\t\t The selected DEXTLOAD input %d does not exist.', ...
+%     PARAM.LOAD(find(ismember(PARAM.LOAD,DEXTLOAD.ID)==0)));
+%     error('Error in LOAD= card.')
+%   else
+%     for i=1:ndload
+%       index = find(DEXTLOAD.Node(i) == NODE.ID);
+%       if (isempty(index))
+%         error(['Node ID ', num2str(DEXTLOAD.Node(i)),' in DEXTLOAD card ', num2str(DEXTLOAD.ID(i)),'does not exist.']);
+%       end
+%       if (NODE.DOF(index, DEXTLOAD.NDOF(i))==0)
+%         error(['Node ', num2str(DEXTLOAD.Node(i)),' has no DOF ', DEXTLOAD.NDOF(i),'.']);
+%       end
+%       DEXTLOAD.Node(i) = index;
+%     end
+%     PARAM.LOAD = find(PARAM.LOAD == DEXTLOAD.ID);
+%   end
+% end
 % Check gust load set
 if ~isempty(PARAM.GUST)
     if ~all(ismember(PARAM.GUST,GUST.ID))
@@ -6073,9 +6074,6 @@ if nderext
 end
 %
 fprintf(fid,'\n\ndone.\n');
-
-
-
 %
 end % end of read file
 
@@ -6094,7 +6092,8 @@ if length(line) < FIELD * (index-1)
 else
     
     minc = min(length(line), index * FIELD);
-    field = strtok(line((index-1) * FIELD+1:minc));
+      
+    field = strtok(line(((index-1) * FIELD + 1):minc));
     
     if ~isempty(field)
         
@@ -6107,6 +6106,7 @@ else
     end
     
 end
+
 
 end
 %*******************************************************************************
@@ -6134,6 +6134,7 @@ else
     end
     
 end
+
 
 end
 %*******************************************************************************

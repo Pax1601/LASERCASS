@@ -1,0 +1,91 @@
+
+FLIGHT CONDITION
+
+ Speed:    17.015 [m/s].
+ Mach:     0.05 [-].
+ Density:  1.225 [kg/m^3].
+ Altitude: 0 [m].
+
+ATTITUDE
+
+ X acc:      UNKNOWN.
+ Y acc:      0 [m/s^2].
+ Z acc:      0 [m/s^2].
+ P-DOT:      0 [rad/s^2].
+ Q-DOT:      0 [rad/s^2].
+ R-DOT:      0 [rad/s^2].
+ Alpha:      UNKNOWN.
+ Sideslip:   0 [deg].
+ Roll rate:  0 [-] (p*BREF/(2VREF)).
+ Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ Yaw rate:   0 [-] (r*BREF/(2VREF)).
+
+TRIM PROBLEM
+
+ Number of unknowns:          3.
+ Number of equations allowed: 3.
+ Method: linear system solution.
+
+REFERENCE VALUES
+
+ Reference chord:   1.5 [m].
+ Reference span:    25 [m].
+ Reference surface: 37.5 [m^2].
+ Reference point for moments: 0,0,0 [m].
+ Reference point for rates and stability: 0,0,0 [m].
+
+MASTER CONTROLS
+
+ elev1r: UNKNOWN.
+
+RIGID TRIM RESULTS
+
+ - X acc:      -5.83845e-09 [m/s^2].
+ - Y acc:      0 [m/s^2].
+ - Z acc:      6.081 [m/s^2].
+ - P-DOT:      0 [rad/s^2].
+ - Q-DOT:      0 [rad/s^2].
+ - R-DOT:      0 [rad/s^2].
+
+ - Alpha:      2.50684 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -1.75421 [deg].
+
+ Reference intercepts
+
+ - Cy0: -1.56321e-19.
+ - Cz0: -1.57405e-18.
+ - Cl0: 1.36999e-19.
+ - Cm0: -1.86642e-20.
+ - Cn0: 2.37112e-24.
+
+ Reference hinge intercepts
+
+ - elev1r: -1.74686e-23.
+
+ELASTIC TRIM RESULTS
+
+ - X acc:      -6.54219e-09 [m/s^2].
+ - Y acc:      0 [m/s^2].
+ - Z acc:      6.081 [m/s^2].
+ - P-DOT:      0 [rad/s^2].
+ - Q-DOT:      0 [rad/s^2].
+ - R-DOT:      0 [rad/s^2].
+
+ - Alpha:      0.0683093 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -1.75437 [deg].
+
+ Reference intercepts
+
+ - Cy0: -1.56207e-19.
+ - Cz0: -2.12673e-16.
+ - Cl0: 1.369e-19.
+ - Cm0: 8.73974e-18.
+ - Cn0: 1.31537e-23.

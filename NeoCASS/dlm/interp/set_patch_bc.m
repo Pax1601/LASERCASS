@@ -47,7 +47,7 @@
 %   Author: Luca Cavagna, Andrea Da Ronch, DIAPM
 %***********************************************************************************************************************
 
-function [D_DISPL, dwn, N_DISPL, DN] = set_patch_bc(pind, cref, V, midpoint, colloc, aero_node, normal, str_data, mode, k_list, AERO, ...
+function [D_DISPL, dwn, N_DISPL] = set_patch_bc(pind, cref, V, midpoint, colloc, aero_node, normal, str_data, mode, k_list, AERO, ...
                                                 SCALE, PLOT_RES)
 	% get total number of active modes
 	NMODES = size(mode, 3);

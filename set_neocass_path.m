@@ -79,7 +79,7 @@ rehash;
   for k = 1:n
     fn  = deblank(subdirs{1,k});                         
     if ~isequal(fn(end),'.')                             
-      if subdirs{4,k}==1                                
+      if subdirs{5,k}==1                                
         pathn2 = fullfile(pathn,fn);
         dirlist = list_subdir_m(pathn2,dirlist);      
       end

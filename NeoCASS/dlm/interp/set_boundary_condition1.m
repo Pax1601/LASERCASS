@@ -47,7 +47,7 @@
 %   Author: Luca Cavagna
 %***********************************************************************************************************************
 
-function [ddispl, dwn, ndispl, DN_exp] = set_boundary_condition1(fid, geo, lattice, dlm, NODE, mode, AERO, SCALE, PLOT_RES)
+function [ddispl, dwn, ndispl] = set_boundary_condition1(fid, geo, lattice, dlm, NODE, mode, AERO, SCALE, PLOT_RES)
 
   fprintf(fid, '\n - Assemblying boundary displacements and downwash...');
   offset = 100;
@@ -116,10 +116,9 @@ function [ddispl, dwn, ndispl, DN_exp] = set_boundary_condition1(fid, geo, latti
 		for (k = 1:nk) 
 			dwn(:, m, k) = 1i .* CNDISPL .* (k_list(k) / cref) + DN;
 		end
-%   
-    DN_exp(m, :) = DN'; 
+%
 	end % mode loop
-
+%  
 
   ddispl = ddispl(1:lattice.np,:,:);
   dwn = dwn(1:lattice.np,:,:);
