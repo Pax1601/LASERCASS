@@ -44,8 +44,11 @@
 %
 %***********************************************************************************************************************
 
-function SOL = store_trim_sol(fid, UDD, UX, NAME)
+function SOL = store_trim_sol(fid, UDD, UX, NAME, print)
 
+  if nargin == 4
+      print = 1;
+  end
 
   SOL = [];
   SOL.Control = [];
@@ -56,18 +59,20 @@ function SOL = store_trim_sol(fid, UDD, UX, NAME)
   SOL.Q = UX(4);
   SOL.R = UX(5);
   nc = 0;
-  fprintf(fid,'\n - X acc:      %g [m/s^2].', SOL.ACC(1));
-  fprintf(fid,'\n - Y acc:      %g [m/s^2].', SOL.ACC(2));
-  fprintf(fid,'\n - Z acc:      %g [m/s^2].', SOL.ACC(3));
-  fprintf(fid,'\n - P-DOT:      %g [rad/s^2].', SOL.ACC(4));
-  fprintf(fid,'\n - Q-DOT:      %g [rad/s^2].', SOL.ACC(5));
-  fprintf(fid,'\n - R-DOT:      %g [rad/s^2].\n', SOL.ACC(6));
+  if (print ~= 0)
+      fprintf(fid,'\n - X acc:      %g [m/s^2].', SOL.ACC(1));
+      fprintf(fid,'\n - Y acc:      %g [m/s^2].', SOL.ACC(2));
+      fprintf(fid,'\n - Z acc:      %g [m/s^2].', SOL.ACC(3));
+      fprintf(fid,'\n - P-DOT:      %g [rad/s^2].', SOL.ACC(4));
+      fprintf(fid,'\n - Q-DOT:      %g [rad/s^2].', SOL.ACC(5));
+      fprintf(fid,'\n - R-DOT:      %g [rad/s^2].\n', SOL.ACC(6));
 
-  fprintf(fid,'\n - Alpha:      %g [deg].', SOL.Alpha);
-  fprintf(fid,'\n - Sideslip:   %g [deg].', SOL.Betha);
-  fprintf(fid,'\n - Roll rate:  %g [-] (p*BREF/(2VREF)).', SOL.P);
-  fprintf(fid,'\n - Pitch rate: %g [-] (q*CREF/(2VREF)).', SOL.Q);
-  fprintf(fid,'\n - Yaw rate:   %g [-] (r*BREF/(2VREF)).', SOL.R);
+      fprintf(fid,'\n - Alpha:      %g [deg].', SOL.Alpha);
+      fprintf(fid,'\n - Sideslip:   %g [deg].', SOL.Betha);
+      fprintf(fid,'\n - Roll rate:  %g [-] (p*BREF/(2VREF)).', SOL.P);
+      fprintf(fid,'\n - Pitch rate: %g [-] (q*CREF/(2VREF)).', SOL.Q);
+      fprintf(fid,'\n - Yaw rate:   %g [-] (r*BREF/(2VREF)).', SOL.R);
+  end
   for n=6:size(UX,1)
     nc = nc+1;
     SOL.Control(nc) = rad2deg(UX(n)); 

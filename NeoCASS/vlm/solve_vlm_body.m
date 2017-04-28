@@ -92,6 +92,7 @@ if (nbody)
 end
 %   Boundary conditions
 DWN = rigid_body_vlm_rhs(state, geo, COLLOC, NORM);
+
 SOL = GAMMA_MAT \ DWN;
 %   VLM forces
 if ~isempty(lattice)

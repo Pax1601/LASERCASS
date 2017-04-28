@@ -1,0 +1,268 @@
+
+Solving static unrestrained trim with Updated Lagrangian method (ID 1)...
+
+
+- Setting internal database...done.
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...done.
+ - Alpha perturbation...done.
+ - Sideslip perturbation...done.
+ - Angular velocities...done.
+ - Controls...done.
+done.
+Solving rigid aircraft trim condition...
+ - X acc:      0.0509918 [m/s^2].
+ - Y acc:      -5.45751e-09 [m/s^2].
+ - Z acc:      1.27923 [m/s^2].
+ - P-DOT:      4.66272e-10 [rad/s^2].
+ - Q-DOT:      -0.187836 [rad/s^2].
+ - R-DOT:      -3.61247e-09 [rad/s^2].
+
+ - Alpha:      0.461546 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -0.00353603 [deg].
+done.
+Solving deformable aircraft trim condition...
+ - X acc:      0.0509918 [m/s^2].
+ - Y acc:      -5.45751e-09 [m/s^2].
+ - Z acc:      1.27923 [m/s^2].
+ - P-DOT:      4.66272e-10 [rad/s^2].
+ - Q-DOT:      -0.187836 [rad/s^2].
+ - R-DOT:      -3.61247e-09 [rad/s^2].
+
+ - Alpha:      0.503161 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -0.197625 [deg].
+done.
+ - Updating vlm model in Aero.lattice_defo...done.
+ - Solution summary exported to C:\Users\dpass\Documents\LASERCASS_WORK\HALE_simple\assembly_static_man_1.txt file.
+Iteration completed.
+
+
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...done.
+ - Alpha perturbation...done.
+ - Sideslip perturbation...done.
+ - Angular velocities...done.
+ - Controls...done.
+done.
+Solving rigid aircraft trim condition...
+ - X acc:      -0.00570091 [m/s^2].
+ - Y acc:      -1.34669e-09 [m/s^2].
+ - Z acc:      -0.147244 [m/s^2].
+ - P-DOT:      2.41204e-09 [rad/s^2].
+ - Q-DOT:      0.0202661 [rad/s^2].
+ - R-DOT:      -3.91011e-09 [rad/s^2].
+
+ - Alpha:      -0.0534291 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   0.00391046 [deg].
+done.
+Solving deformable aircraft trim condition...
+ - X acc:      -0.00570091 [m/s^2].
+ - Y acc:      -1.34669e-09 [m/s^2].
+ - Z acc:      -0.147244 [m/s^2].
+ - P-DOT:      2.41204e-09 [rad/s^2].
+ - Q-DOT:      0.0202661 [rad/s^2].
+ - R-DOT:      -3.91011e-09 [rad/s^2].
+
+ - Alpha:      -0.0582135 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   0.0254008 [deg].
+done.
+ - Updating vlm model in Aero.lattice_defo...done.
+ - Solution summary exported to C:\Users\dpass\Documents\LASERCASS_WORK\HALE_simple\assembly_static_man_1.txt file.
+Iteration completed.
+
+
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...done.
+ - Alpha perturbation...done.
+ - Sideslip perturbation...done.
+ - Angular velocities...done.
+ - Controls...done.
+done.
+Solving rigid aircraft trim condition...
+ - X acc:      0.000634529 [m/s^2].
+ - Y acc:      -1.54576e-09 [m/s^2].
+ - Z acc:      0.0158487 [m/s^2].
+ - P-DOT:      1.27164e-09 [rad/s^2].
+ - Q-DOT:      -0.00226484 [rad/s^2].
+ - R-DOT:      -4.01463e-09 [rad/s^2].
+
+ - Alpha:      0.00573376 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -0.000202468 [deg].
+done.
+Solving deformable aircraft trim condition...
+ - X acc:      0.000634529 [m/s^2].
+ - Y acc:      -1.54576e-09 [m/s^2].
+ - Z acc:      0.0158487 [m/s^2].
+ - P-DOT:      1.27164e-09 [rad/s^2].
+ - Q-DOT:      -0.00226484 [rad/s^2].
+ - R-DOT:      -4.01463e-09 [rad/s^2].
+
+ - Alpha:      0.00624922 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -0.00257048 [deg].
+done.
+ - Updating vlm model in Aero.lattice_defo...done.
+ - Solution summary exported to C:\Users\dpass\Documents\LASERCASS_WORK\HALE_simple\assembly_static_man_1.txt file.
+Iteration completed.
+
+
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...done.
+ - Alpha perturbation...done.
+ - Sideslip perturbation...done.
+ - Angular velocities...done.
+ - Controls...done.
+done.
+Solving rigid aircraft trim condition...
+ - X acc:      -7.06186e-05 [m/s^2].
+ - Y acc:      -1.6279e-09 [m/s^2].
+ - Z acc:      -0.00177203 [m/s^2].
+ - P-DOT:      1.41902e-09 [rad/s^2].
+ - Q-DOT:      0.000251951 [rad/s^2].
+ - R-DOT:      -4.05826e-09 [rad/s^2].
+
+ - Alpha:      -0.000641345 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   2.59832e-05 [deg].
+done.
+Solving deformable aircraft trim condition...
+ - X acc:      -7.06186e-05 [m/s^2].
+ - Y acc:      -1.6279e-09 [m/s^2].
+ - Z acc:      -0.00177203 [m/s^2].
+ - P-DOT:      1.41902e-09 [rad/s^2].
+ - Q-DOT:      0.000251951 [rad/s^2].
+ - R-DOT:      -4.05826e-09 [rad/s^2].
+
+ - Alpha:      -0.000698971 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   0.000289907 [deg].
+done.
+ - Updating vlm model in Aero.lattice_defo...done.
+ - Solution summary exported to C:\Users\dpass\Documents\LASERCASS_WORK\HALE_simple\assembly_static_man_1.txt file.
+Iteration completed.
+
+
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...done.
+ - Alpha perturbation...done.
+ - Sideslip perturbation...done.
+ - Angular velocities...done.
+ - Controls...done.
+done.
+Solving rigid aircraft trim condition...
+ - X acc:      7.85912e-06 [m/s^2].
+ - Y acc:      -1.59349e-09 [m/s^2].
+ - Z acc:      0.000197117 [m/s^2].
+ - P-DOT:      1.38878e-09 [rad/s^2].
+ - Q-DOT:      -2.80409e-05 [rad/s^2].
+ - R-DOT:      -4.02306e-09 [rad/s^2].
+
+ - Alpha:      7.13388e-05 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -2.85248e-06 [deg].
+done.
+Solving deformable aircraft trim condition...
+ - X acc:      7.85912e-06 [m/s^2].
+ - Y acc:      -1.59349e-09 [m/s^2].
+ - Z acc:      0.000197117 [m/s^2].
+ - P-DOT:      1.38878e-09 [rad/s^2].
+ - Q-DOT:      -2.80409e-05 [rad/s^2].
+ - R-DOT:      -4.02306e-09 [rad/s^2].
+
+ - Alpha:      7.7749e-05 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -3.22202e-05 [deg].
+done.
+ - Updating vlm model in Aero.lattice_defo...done.
+ - Solution summary exported to C:\Users\dpass\Documents\LASERCASS_WORK\HALE_simple\assembly_static_man_1.txt file.
+Iteration completed.
+
+
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...

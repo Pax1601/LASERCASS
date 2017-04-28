@@ -43,40 +43,49 @@
 %  Any usage without an explicit authorization may be persecuted.
 %
 %***********************************************************************************************************************
-%	
+%
 %   Author: Luca Cavagna, Pierangelo Masarati, DIAPM
 %***********************************************************************************************************************
-function NDEFO = get_defo_normal(COLLOC, VORTEX, DELTAN, span)
+function NDEFO = get_defo_normal(COLLOC, VORTEX, PNODE, DELTAN, span)
 
-np = size(COLLOC,1);
-REF_P = zeros(3,3);
-NDEFO = zeros(np, 3);
-% determine new normal by the cross product of panel diagonals
-r1 = zeros(1,3);
-r2 = zeros(1,3);
-Z  = zeros(1,3);
-Y  = zeros(1,3);
+normals = cross(permute(PNODE(:,1,:) - PNODE(:,3,:), [1,3,2]), ...
+                permute(PNODE(:,2,:) - PNODE(:,4,:), [1,3,2]), 2);
+normals = normals ./ (sqrt(sum(normals.^2, 2)) * ones(1,3));
 
-for n = 1:np
+normals = normals + DELTAN;
 
-	r1(1:3) = VORTEX(n, 4, 1:3);
-    r2(1:3) = VORTEX(n, 5, 1:3);
-    
-    r1 = COLLOC(n, 1:3) - r1;
-    r2 = COLLOC(n, 1:3) - r2;
-    %
-    Z = cross(r1,r2);
-    if span<0
-      Z = -Z;
-    end
-    Z = Z ./ norm(Z) ;
-    Y = cross(Z ,[1, 0 , 0]);
-    Y = Y ./ norm(Y);
-    X = cross(Y, Z);
-    X = X ./ norm(X);
-    REF_P = [X(1) Y(1) Z(1); X(2) Y(2) Z(2); X(3) Y(3) Z(3)]; % local panel reference frame
-% 	NDEFO(n, 1:3) = Z + (REF_P * DELTAN(n,:)')';
-    NDEFO(n, 1:3) = Z + DELTAN(n,:);
-end
+NDEFO = normals;
+
+% np = size(COLLOC,1);
+% REF_P = zeros(3,3);
+% NDEFO = zeros(np, 3);
+% 
+% % determine new normal by the cross product of panel diagonals
+% r1 = zeros(1,3);
+% r2 = zeros(1,3);
+% Z  = zeros(1,3);
+% Y  = zeros(1,3);
+% 
+% for n = 1:np
+% 
+% 	r1(1:3) = VORTEX(n, 4, 1:3);
+%     r2(1:3) = VORTEX(n, 5, 1:3);
+%     
+%     r1 = COLLOC(n, 1:3) - r1;
+%     r2 = COLLOC(n, 1:3) - r2;
+%     %
+%     Z = cross(r1,r2);
+%     if span<0
+%       Z = -Z;
+%     end
+%     Z = Z ./ norm(Z) ;
+%     Y = cross(Z ,[1, 0 , 0]);
+%     Y = Y ./ norm(Y);
+%     X = cross(Y, Z);
+%     X = X ./ norm(X);
+%     REF_P = [X(1) Y(1) Z(1); X(2) Y(2) Z(2); X(3) Y(3) Z(3)]; % local panel reference frame
+% % 	NDEFO(n, 1:3) = Z + (REF_P * DELTAN(n,:)')';
+%     NDEFO(n, 1:3) = Z + DELTAN(n,:);
+% end
 
 end

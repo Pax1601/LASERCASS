@@ -130,8 +130,8 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
 		fprintf(fid, 'done.');
     % stiffness matrix
 		fprintf(fid, '\n - Assemblying stiffness matrix...');
-		K = st_lin_matrix(beam_model.Info, beam_model.Node.DOF, beam_model.Node.R, beam_model.Node.Coord, beam_model.Bar, beam_model.Beam);
-		fprintf(fid, 'done.');
+		[K] = st_lin_matrix(beam_model.Info, beam_model.Node.DOF, beam_model.Node.R, beam_model.Node.Coord, beam_model.Bar, beam_model.Beam, beam_model.Celas);
+        fprintf(fid, 'done.');
 		K_rank = 1/condest(K);
 		if (K_rank < 10*eps)
 			fprintf(fid, '\n !! Stiffness matrix is nearly singular. Make sure enough contraints are set to avoid null-energy mechanisms. !!\n');
@@ -180,7 +180,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
       % run aerodynamic solver
 
       [Fa(:,2), beam_model.Res.Aero] = gf_aero_nodal(beam_model.Info, beam_model.Node.DOF, beam_model.Node, ...
-                                         NODEPOS, beam_model.Res.NRd, beam_model.Aero);
+                                         beam_model.Res.NDispl(:, 1:3), beam_model.Res.NRd, beam_model.Aero);
       FAERO(N-1,:) = beam_model.Res.Aero.FORCES;
       % set external forces
       Fext = F + (1 - ALPHA) .* Fa(:,1) + ALPHA .* Fa(:,2);

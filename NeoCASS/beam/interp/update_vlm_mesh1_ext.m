@@ -46,52 +46,48 @@
 %	
 %   Author: Luca Cavagna, Pierangelo Masarati, DIAPM
 %***********************************************************************************************************************
+% Given structural master node position and rotation, updates VLM mesh
 
-function [Kp] = set_Kp_mat(f1, f2, f3, PRESTRESS, R1, R2)
+function lattice_defo = update_vlm_mesh1_ext(NODE, DISPL, geo, lattice_vlm, Interp, state, ref, ID)
+%
+lattice_defo = lattice_vlm;
+%
+ngrid = size(NODE.Coord, 1);
+np = length(lattice_defo.COLLOC);
+COLLOC_C = zeros(np, 3);
+N = zeros(np, 3);
+NODE_C = zeros(np, 5, 3);
+VORTEX_C = zeros(np, 8, 3);
+%
+[COLLOC_D, NODE_D, VORTEX_D] = deform_vlm_mesh1(NODE, DISPL, Interp.Ic, Interp.In, Interp.Iv);
 
-Kp = zeros(18,18);
+% new colloc position
+COLLOC_C = lattice_vlm.COLLOC + COLLOC_D;
 
+% new node position
+NODE_C = lattice_vlm.XYZ + NODE_D;
 
-% COLLOC 1
-eta = -1/sqrt(3);
-NI = [(0.5 * eta * (eta-1)) (1-eta^2) (0.5 * eta * (eta+1))];
+% new vortex position
+VORTEX_C = lattice_vlm.VORTEX + VORTEX_D;
 
-% COLLOC 2
-eta = +1/sqrt(3);
-NII = [(0.5 * eta * (eta-1)) (1-eta^2) (0.5 * eta * (eta+1))];
-
-
-
-% PRESTRESS CONTRIBUTION
-tI0 = PRESTRESS(1, 1:3);
-tII0 = PRESTRESS(2, 1:3);
-
-Kp(4:6,1:3) = crossm(tI0) * (eye(3) * (NI(1) - 1));
-Kp(4:6,4:6) = -crossm(tI0 .* NI(1)) * crossm(diag([f1, f2, f3]));
-
-Kp(4:6,7:9) = crossm(tI0 .* NI(2));
-Kp(4:6,10:12) = -crossm(tI0 .* NI(2)) * crossm(diag([f1, f2, f3]));
-
-Kp(4:6,13:15) = crossm(tI0 .* NI(3));
-Kp(4:6,16:18) = -crossm(tI0 .* NI(3)) * crossm(diag([f1, f2, f3]));
-
-
-Kp(10:12,1:3) = -crossm(tI0 .* NI(1)) + crossm(tII0 .* NII(1));
-Kp(10:12,4:6) = crossm(tI0 .* NI(1)) * crossm(diag([f1, f2, f3])) - crossm(tII0 .* NII(1)) * crossm(diag([f1, f2, f3]));
-
-Kp(10:12,7:9) = -crossm(tI0) * (eye(3) * (NI(2) - 1)) + crossm(tII0) * (eye(3) * (NII(2) - 1));
-Kp(10:12,10:12) = crossm(tI0 .* NI(2)) * crossm(diag([f1, f2, f3])) - crossm(tII0 .* NII(2)) * crossm(diag([f1, f2, f3]));
-
-Kp(10:12,13:15) = -crossm(tI0 .* NI(3)) + crossm(tII0 .* NII(3));
-Kp(10:12,16:18) = crossm(tI0 .* NI(3)) * crossm(diag([f1, f2, f3])) - crossm(tII0 .* NII(3)) * crossm(diag([f1, f2, f3]));
-
-
-Kp(16:18,1:3) = crossm(tII0 .* NII(1));
-Kp(16:18,4:6) = -crossm(tII0 .* NII(1)) * crossm(diag([f1, f2, f3]));
-
-Kp(16:18,7:9) = crossm(tII0 .* NII(2));
-Kp(16:18,10:12) = -crossm(tII0 .* NII(2)) * crossm(diag([f1, f2, f3]));
-
-Kp(16:18,13:15) = crossm(tII0) * (eye(3) * (NII(3) - 1));
-Kp(16:18,16:18) = -crossm(tII0 .* NII(3)) * crossm(diag([f1, f2, f3]));
-
+% determine new flat plate normal
+N = zeros(size(COLLOC_C));
+for nID = 1 : length(ID)
+  nPT = find(lattice_vlm.DOF(nID,:,1));
+  for nn = nPT
+    N(lattice_vlm.DOF(nID,nn,1):lattice_vlm.DOF(nID,nn,2),:) = get_defo_normal( ...
+      COLLOC_C(lattice_vlm.DOF(nID,nn,1):lattice_vlm.DOF(nID,nn,2),:),...
+      VORTEX_C(lattice_vlm.DOF(nID,nn,1):lattice_vlm.DOF(nID,nn,2),:,:),...
+      NODE_C(lattice_vlm.DOF(nID,nn,1):lattice_vlm.DOF(nID,nn,2),:,:),...
+      lattice_vlm.DN(lattice_vlm.DOF(nID,nn,1):lattice_vlm.DOF(nID,nn,2),:), geo.b(nID));
+  end
+end
+% set defo lattice struct
+lattice_defo.COLLOC = COLLOC_C; 
+lattice_defo.VORTEX = VORTEX_C;
+lattice_defo.N = N;
+lattice_defo.XYZ = NODE_C;
+% determine new wake shape
+lattice_defo = defo_wakesetup(lattice_defo, state, ref);
+end
+%***********************************************************************************************************************

@@ -103,6 +103,9 @@ function [STRAIN, FORCE, CStresses, SafeM] = get_bar_force_strain_NL(nbar, Bar, 
 		STRAIN(1, 4:6, n) = ( (BARR(:, :, 4, n))' * Gmat (gI) * ( NID1 * r1 + NID2 * r2 + NID3 * r3) )'     + KR(1,:,n);
 		STRAIN(2, 4:6, n) = ( (BARR(:, :, 5, n))' * Gmat (gII) * ( NIID1 * r1 + NIID2 * r2 + NIID3 * r3) )' + KR(2,:,n);
 
+        
+
+
 		FORCE(1,:, n) = ( Bar.D(:,:,1,n) * STRAIN(1,:,n)' )';
 		FORCE(2,:, n) = ( Bar.D(:,:,2,n) * STRAIN(2,:,n)' )';
     F = [FORCE(1,:,n), FORCE(2,:,n)]';

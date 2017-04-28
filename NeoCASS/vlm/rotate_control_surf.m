@@ -220,7 +220,7 @@ end
 	 
 lattice.VORTEX=[tempV1 VORTEX tempV2];
 
-NDEFO = get_defo_normal(lattice.COLLOC(control_dof, 1:3), lattice.VORTEX(control_dof, :, 1:3), lattice.DN(control_dof, 1:3),span);
+NDEFO = get_defo_normal(lattice.COLLOC(control_dof, 1:3), lattice.VORTEX(control_dof, :, 1:3), lattice.XYZ(control_dof,:,1:3), lattice.DN(control_dof, 1:3),span);
 
 lattice.N(control_dof, 1:3) = NDEFO;	 	
 		

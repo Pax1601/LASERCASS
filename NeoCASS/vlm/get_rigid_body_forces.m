@@ -65,7 +65,6 @@ MIDV = zeros(a, 3);
 MIDV = [v1, v2, v3];
 
 ARM = MIDV - repmat(geo.ref_point, a, 1); % get arm matrix for moment calculations around aircraft CG (aero forces are supposed to be in c/4 vortex midpoint)
-
 Mp = zeros(a, 3);
 Mp = cross(ARM, Fp, 2); % panels moment
 
@@ -73,10 +72,10 @@ Ftot = sum(Fp, 1);
 Mtot(1, :) = sum(Mp, 1);
 
 ARM = MIDV - repmat(geo.CG, a, 1); % get arm matrix for moment calculations around aircraft CG (aero forces are supposed to be in c/4 vortex midpoint)
-
 Mp_cg = zeros(a, 3);
 Mp_cg = cross(ARM, Fp, 2); % panels moment
 
 Mtot(2, :) = sum(Mp_cg, 1);
+
 
 end

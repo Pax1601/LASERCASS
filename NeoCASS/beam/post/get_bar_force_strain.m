@@ -99,10 +99,10 @@ function [CForces, CStrains, CStresses, SafeM] = get_bar_force_strain(nbar, Bar,
 
 		CForces(1, :, n) = F(1:6)';
 		CForces(2, :, n) = F(7:12)';
-    p = Bar.PID(n);
+        p = Bar.PID(n);
 
-    [CStresses.Norm(n,:), CStresses.Shear(n,:), SafeM.Tmax_Norm(n), SafeM.Tmin_Norm(n), SafeM.SM_Norm(n), ...
-          SafeM.Tmax_Shear(n), SafeM.Tmin_Shear(n), SafeM.SM_Shear(n), SafeM.SM_SBuck(n), SafeM.SM_PBuck(n)] = stress_recovery(F, p, PBar, Mat, FUSE_DP);
+        [CStresses.Norm(n,:), CStresses.Shear(n,:), SafeM.Tmax_Norm(n), SafeM.Tmin_Norm(n), SafeM.SM_Norm(n), ...
+              SafeM.Tmax_Shear(n), SafeM.Tmin_Shear(n), SafeM.SM_Shear(n), SafeM.SM_SBuck(n), SafeM.SM_PBuck(n)] = stress_recovery(F, p, PBar, Mat, FUSE_DP);
 
 	end
 

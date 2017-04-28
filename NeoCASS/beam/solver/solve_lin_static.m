@@ -160,7 +160,7 @@ save p2.mat SOL
 
 save sol.mat SOL
 
-
+    save('linear.mat', 'beam_model');
 	else
 
 		error('SOL 101 must be given in input file to run linear static analysis.');

@@ -189,7 +189,7 @@ if (~isempty(find(beam_model.Param.SOL == 600)))
 				[DS, DR] = get_nodal_displ(ngrid, beam_model.Node.DOF, SOL); % ok
 				% find displacements and rotations
 				beam_model.Res.NDispl = beam_model.Res.NDispl + DS; % add to previous newton step solution
-				
+                
 				% Total Lagrangian node coords
 				NODEPOS = beam_model.Node.Coord(:, 1:3) + beam_model.Res.NDispl(:,1:3);
 				% update node rotations
@@ -202,7 +202,6 @@ if (~isempty(find(beam_model.Param.SOL == 600)))
 				% assembly BAR internal forces
 				[beam_model.Res.Bar.CStrains, beam_model.Res.Bar.CForces, beam_model.Res.Bar.CStresses, beam_model.Res.Bar.CSM] = ...
            get_bar_force_strain_NL(nbar, beam_model.Bar, beam_model.PBar, beam_model.Mat, beam_model.Node, beam_model.Res.NDispl, NR, BARR, BARPO, BARKR); % ok
-beam_model.Res.Bar.CForces
 				% assembly BEAM internal forces
 				[beam_model.Res.Beam.CStrains, beam_model.Res.Beam.CForces, beam_model.Res.Beam.CStresses, beam_model.Res.Beam.CSM] = ...
            get_bar_force_strain_NL(nbeam, beam_model.Beam, beam_model.PBeam, beam_model.Mat, beam_model.Node, beam_model.Res.NDispl, NR, BEAMR, BEAMPO, BEAMKR); % ok
@@ -264,7 +263,10 @@ beam_model.Res.Bar.CForces
 
 		error('SOL 600 must be given in input file to run non-linear static analysis.');
 
-	end		
+end		
 		
+
+save('nonlinear.mat', 'beam_model');
+
 end		
 %***********************************************************************************************************************

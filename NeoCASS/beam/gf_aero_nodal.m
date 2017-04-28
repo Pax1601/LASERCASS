@@ -86,7 +86,8 @@ ngrid = INFO.ngrid;
 if ncaero
 
  	% update deformed mesh
-	lattice_defo = update_vlm_mesh(NODE, NODEPOS, NODER, AERO);
+	lattice_defo = update_vlm_mesh1(NODE, NODEPOS, AERO);
+
 	% set rigid body boundary conditions
 	RHS = rigid_body_vlm_rhs(AERO.state, AERO.geo, lattice_defo);
     np = length(RHS);

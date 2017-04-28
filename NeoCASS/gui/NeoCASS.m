@@ -997,11 +997,11 @@ if (Structural_model == 4)
     set(handles.Main_Settings_edit1,'Enable','Off');
     set(handles.Main_Settings_text3,'Enable','Off');
     set(handles.Main_Settings_text2,'Enable','Off');
-    set(handles.Main_Settings_text4,'Enable','Off');
-    set(handles.Main_Settings_text5,'Enable','Off');
+    set(handles.Main_Settings_text4,'Enable','On');
+    set(handles.Main_Settings_text5,'Enable','On');
     set(handles.Main_Settings_editniter,'Enable','Off');
     set(handles.Main_Settings_editnstep,'Enable','On');
-    set(handles.Main_Settings_editrestol,'Enable','Off');
+    set(handles.Main_Settings_editrestol,'Enable','On');
 end
 
 path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
@@ -1276,7 +1276,7 @@ function Main_Results_plotdefo_Callback(hObject, eventdata, handles)
 
 global beam_model;
 
-try
+% try
     beam_model.Res.SOL;
     path = neoguiscratchpath(); gui_param = load(fullfile(path, 'neocass_gui_param.mat'));
     if (beam_model.Info.ncaero)
@@ -1288,9 +1288,9 @@ try
         plot_beam_defo(2, gui_param.plot.SCALE, 'set', gui_param.plot.SET);
     end
     
-catch
-    fprintf(1, '\n - No output results available. \n');
-end
+% catch
+%     fprintf(1, '\n - No output results available. \n');
+% end
 
 
 % --- Executes on button press in Main_Results_plotmodes.

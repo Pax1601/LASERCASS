@@ -313,6 +313,7 @@ if (~isempty(find(beam_model.Param.MSOL == 144)))
                 dummy.DOF = dummy.DOF2;
             end
             [D, Kll, Klr, Krr, Krl, rdof, ldof, KEPS] = get_suport_shapes(K, dummy, beam_model.Param.SUPORT, beam_model.Param.EPS);
+
             nr = find(KEPS < beam_model.Param.EPS);
             if (~isempty(nr))
                 fprintf(fid, '\nWarning: %d SUPORT rigid modes exceed deformation energy tolerance %g.', length(nr), beam_model.Param.EPS);

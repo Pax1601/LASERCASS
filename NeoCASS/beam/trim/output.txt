@@ -1,0 +1,79 @@
+
+Solving static unrestrained trim with Updated Lagrangian method (ID 1)...
+
+
+- Setting internal database...done.
+- Building aero-structural interpolation matrices...
+	 - Method: 1.
+	 - Assemblying collocation points interpolation matrix...done.
+	 - Assemblying nodes interpolation matrix...done.
+	 - Assemblying vorticies interpolation matrix...done.
+	 - Assemblying vortices midpoint interpolation matrix...done.
+  done.
+
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 6 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...done.
+ - Alpha perturbation...done.
+ - Sideslip perturbation...done.
+ - Angular velocities...done.
+ - Controls...done.
+done.
+Solving rigid aircraft trim condition...
+ - X acc:      2.78949e-08 [m/s^2].
+ - Y acc:      3.03245e-31 [m/s^2].
+ - Z acc:      0.981 [m/s^2].
+ - P-DOT:      -6.18576e-32 [rad/s^2].
+ - Q-DOT:      7.63124e-47 [rad/s^2].
+ - R-DOT:      2.01148e-31 [rad/s^2].
+
+ - Alpha:      0.380347 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -0.463186 [deg].
+done.
+Solving deformable aircraft trim condition...
+ - X acc:      3.43528e-08 [m/s^2].
+ - Y acc:      3.03245e-31 [m/s^2].
+ - Z acc:      0.981 [m/s^2].
+ - P-DOT:      -6.18576e-32 [rad/s^2].
+ - Q-DOT:      7.63124e-47 [rad/s^2].
+ - R-DOT:      2.01148e-31 [rad/s^2].
+
+ - Alpha:      0.470203 [deg].
+ - Sideslip:   0 [deg].
+ - Roll rate:  0 [-] (p*BREF/(2VREF)).
+ - Pitch rate: 0 [-] (q*CREF/(2VREF)).
+ - Yaw rate:   0 [-] (r*BREF/(2VREF)).
+ - Control elev1r:   -0.771161 [deg].
+done.
+ - Updating vlm model in Aero.lattice_defo...done.
+ - Solution summary exported to C:\Users\dpass\Documents\LASERCASS_WORK\HALE_simple\assembly_static_man_1.txt file.
+Iteration completed.
+
+
+- Building aero-structural interpolation matrices...
+	 - Method: 1.
+	 - Assemblying collocation points interpolation matrix...done.
+	 - Assemblying nodes interpolation matrix...done.
+	 - Assemblying vorticies interpolation matrix...done.
+	 - Assemblying vortices midpoint interpolation matrix...done.
+  done.
+
+- Assemblying stiffness matrix...done.
+- Assemblying mass matrix...done.
+- Assemblying linear aerodynamic influence matrix...done.
+- Setting system rhs...
+     External forces...done.
+- Setting SUPORT matrix...
+Warning: 3 SUPORT rigid modes exceed deformation energy tolerance 0.001.done.
+Generating aerodynamic database...
+ - Linearization point...

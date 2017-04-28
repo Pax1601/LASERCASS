@@ -56,7 +56,6 @@ invD = zeros(panel_n, panel_n, k_n, Mach_n);
 
 for m = 1 : Mach_n
 	for k = 1 : k_n
-
 		% get modal CP
 		% panel - mode - k - Mach 
 		% change sign to determine pressure coefficient defined as (P_upper - P_lower) / q

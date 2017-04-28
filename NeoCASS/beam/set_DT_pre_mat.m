@@ -88,7 +88,7 @@ v = [];
 
 		D = st_D_global(BAR.D(:,:,1,n), BARR(:,:,4,n), BAR.D(:,:,2,n), BARR(:,:,5,n));
 		N = set_N_mat(c01, c02, c03, c1, c2, c3, f1, f2, f3);
-		Kp = set_Kp_mat(f1, f2, f3, PRESTRESS(:, :, n))
+		Kp = set_Kp_mat(f1, f2, f3, PRESTRESS(:, :, n), BARR(:,:,4,n), BARR(:,:,5,n));
 		Kel = (A * D) * N + Kp;
 
 		% delete constrained dofs

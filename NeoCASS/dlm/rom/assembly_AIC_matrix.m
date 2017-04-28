@@ -306,8 +306,12 @@ else % No symmetry enabled
                 DELTA_P = (lattice.ref_sys(:,:,sset(s)) * DELTA_P')';
                 [D1rs, D2rs] = Fhandle(dlm_model.aero.M(m), dlm_model.aero.beta(m), sset(s), sset, dlm_model.aero.k, lattice, dlm_model, DELTA_P);
                 % Store matrix elements
+                
+                
                 D1(:, sset(s), 1:kc) = reshape(D1rs,msset,1,kc);
                 D2(:, sset(s), 1:kc) = reshape(D2rs,msset,1,kc);
+                
+
                 
                 %           end
                 %             toc

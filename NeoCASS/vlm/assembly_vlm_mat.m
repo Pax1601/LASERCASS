@@ -55,6 +55,8 @@ GAMMA_P = [];
 GAMMA_I = [];
 HEIGHT = 2 * double(symmxy);
 
+
+
 [np vor_length dim] = size(lattice.VORTEX);
 										   
 switch vor_length 

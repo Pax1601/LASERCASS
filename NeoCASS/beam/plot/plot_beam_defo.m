@@ -218,13 +218,14 @@ for nsh = 1:NSHAPES
             plot3(COLLOC(:,1),COLLOC(:,2),COLLOC(:,3),'bx',  'MarkerSize', 2, 'MarkerFaceColor','b');
             axis equal;
         else
-            ntrim = size(beam_model.Res.CS.Value,1);
-            beam_model.Aero.lattice = beam_model.Aero.lattice_vlm;
-            beam_model.Aero.lattice_vlm = rotate_control_surf(beam_model.Aero.ref, beam_model.Aero.state, beam_model.Aero.geo, ...
-                beam_model.Aero.lattice_vlm, beam_model.Res.CS.Value(ntrim,:), ...
-                beam_model.Aero.lattice_vlm.Control.Hinge,beam_model.Aero.ID);
-            
             if isempty(beam_model.Aero.lattice_defo)
+                ntrim = size(beam_model.Res.CS.Value,1);
+                beam_model.Aero.lattice = beam_model.Aero.lattice_vlm;
+                beam_model.Aero.lattice_vlm = rotate_control_surf(beam_model.Aero.ref, beam_model.Aero.state, beam_model.Aero.geo, ...
+                    beam_model.Aero.lattice_vlm, beam_model.Res.CS.Value(ntrim,:), ...
+                    beam_model.Aero.lattice_vlm.Control.Hinge,beam_model.Aero.ID);
+            
+            
                 if (beam_model.Info.spline_type==1)
                     lattice_defo = update_vlm_mesh1(beam_model.Node, scale.*ndispl2dof(beam_model.Node.DOF, beam_model.Res.NDispl), beam_model.Aero);
                 else
@@ -449,7 +450,7 @@ v1 = mean(x1,2);
 v2 = mean(x2,2);
 v3 = mean(x3,2);
 
-plot3(v1, v2, v3,'bo',  'MarkerSize', 1, 'MarkerFaceColor','b');
+plot3(v1, v2, v3,'bo',  'MarkerSize', 6, 'MarkerFaceColor','b');
 
 if WAKE_PLOT
     

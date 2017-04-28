@@ -42,8 +42,9 @@ v = [];
 % assembly follower forces contributions
 [iflw, jflw, vflw] = set_DFLW_mat(LOADS, INFO, FLW, NODER, DOF, SOL, SCALE);
 
+
 i = [ir; ia; it; iflw];
 j = [jr; ja; jt; jflw];
-v = [vr;-va; vt; vflw];
+v = [vr; -va; vt; vflw];
 
 end
